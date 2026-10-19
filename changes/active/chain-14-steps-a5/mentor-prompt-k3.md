@@ -1,0 +1,5 @@
+# Prompt lượt K3 — sửa OS-BERT-60202 ở A5Step05_BenefitMapping (rev 147)
+
+Turn K3 — runtime regression on rev 147. Calling A5Chain_DryRun (from RunChainTests) now throws in A5Step05_BenefitMapping: `OS-BERT-60202 Index 1 is out of range` (OSList.get_Item). Turn J-b changed two things in that action: the redirect condition (Substr(Ctx.LossTypeValue, 0, 3) = "ACC") and the redirect log line ("<Category> → 500 (redirect tai nạn — mất sub-limit/count/copay của <MappedCode>)"). Report every expression in A5Step05_BenefitMapping (and any helper it calls) that indexes a list with a literal or computed index ([1], [Index], CurrentRowNumber + 1, etc.) — in particular in the redirect branch and in the per-line log assign — and which list it indexes. Fix the out-of-range access: inside the ForEach use the loop's Current record (Ctx.Lines.Current / the local line variable), never Lines[n] with a stale or +1 index; if the redirect branch reads the mapped code from a lookup list, guard it with Length > 0 / use the aggregate's Current row. Change nothing else. Then validate.
+
+Report: the offending expression, the fix, validation error count.
