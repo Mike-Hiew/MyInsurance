@@ -1,6 +1,13 @@
-# Agentic Health Claim — BnK Solution × OutSystems ODC
+<p align="center">
+  <img src="docs/assets/brand/banner.svg" alt="My Insurance — Agentic Health Claim Adjudication. Crafted by BnK Solution, built on OutSystems." width="100%">
+</p>
 
-**OutSystems Partner Hackathon APAC 2026 — submission repository**
+<p align="center">
+  <b>OutSystems Partner Hackathon APAC 2026 — submission repository</b><br>
+  <sub>OutSystems ODC · Agent Workbench · BnK IDP · 6 cooperating AI agents</sub>
+</p>
+
+# Agentic Health Claim — BnK Solution × OutSystems ODC
 
 A health-insurance reimbursement claim goes from **photographed documents to a payment decision**, driven by cooperating AI agents on **OutSystems ODC + Agent Workbench**. **BnK IDP** is the real document-reading engine, and a person steps in only where judgement is needed.
 
@@ -10,10 +17,10 @@ A health-insurance reimbursement claim goes from **photographed documents to a p
 
 ## What runs on the ODC tenant (`bnk-dev`)
 
-| App | Title | Who uses it | What it does |
-|---|---|---|---|
-| `ClaimMVP` | **My Insurance BackOffice** | Claim officers, approvers | Work list, AI work card, IDP extraction, R1–R9 cross-document checks, 14-step adjudication chain + payout waterfall, 4-condition auto-approval gate, four-eyes approval, technical trace (`AgentRun`) |
-| `MyInsurance` | **My Insurance Portal** | Customers | Submit a claim with photos, track status, supplement missing documents, read the decision letter, AI assistant, EN/VI and VND/USD display |
+| | App | Title | Who uses it | What it does |
+|---|---|---|---|---|
+| <img src="docs/assets/brand/myinsurance-backoffice-mark.svg" alt="My Insurance BackOffice" width="56"> | `ClaimMVP` | **My Insurance BackOffice** | Claim officers, approvers | Work list, AI work card, IDP extraction, R1–R9 cross-document checks, 14-step adjudication chain + payout waterfall, 4-condition auto-approval gate, four-eyes approval, technical trace (`AgentRun`) |
+| <img src="docs/assets/brand/myinsurance-portal-mark.svg" alt="My Insurance Portal" width="56"> | `MyInsurance` | **My Insurance Portal** | Customers | Submit a claim with photos, track status, supplement missing documents, read the decision letter, AI assistant, EN/VI and VND/USD display |
 
 **Agents (Agent Workbench):** AG-0 Orchestrator · AG-1 Intake (IDP + document checklist) · AG-2 Adjudication (calls the chain as a tool, explains each step) · AG-3 Clinical (NOTREL / NOTCOV recommendations with evidence) · AG-4 Fraud-signal (hospital lookup, duplicates, impossible dates) · AG-5 Customer communication (result / decline letters). Every hand-off is written to `AgentRun`.
 
@@ -43,6 +50,7 @@ A health-insurance reimbursement claim goes from **photographed documents to a p
 | `docs/10-worklog/` | Plans and daily summaries (how the build progressed) |
 | `src/external-logic/` | C# External Logic libraries for ODC: `IdpUpload` (multipart upload to BnK IDP) and `IdpTables` (table parsing), with unit/acceptance tests and a mock IDP server |
 | `src/ui-assets/` | CSS, icon font and images used in the ODC theme (AI orb, AI chat panel, tokens) |
+| `docs/assets/brand/` | Banner and logos used in this README (app marks and BnK badge taken from the live apps, official OutSystems logo) |
 | `demo-data/` | **Synthetic** claim documents for the demo and tests, each with an `_KY-VONG.md` (expected outcome) file |
 
 ---
