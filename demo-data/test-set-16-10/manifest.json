@@ -1,0 +1,198 @@
+[
+ {
+  "id": "TC01",
+  "title": "An · Viêm amidan · sạch, đủ 3 chứng từ → tự duyệt",
+  "member": "Nguyễn Văn An",
+  "loss": "Ngoại trú",
+  "facility": "BỆNH VIỆN ĐA KHOA QUỐC TẾ VINMEC",
+  "date_from": "14/10/2026",
+  "date_to": "14/10/2026",
+  "dx": "Viêm amidan cấp",
+  "icd": "J03.9",
+  "upload_first": [
+   "TC01-phieu-kham-T1-03.png",
+   "TC01-bang-ke-T1-01.png",
+   "TC01-don-thuoc-T1-02.png"
+  ],
+  "upload_later": [],
+  "lines_total": 514000,
+  "printed_total": 514000,
+  "folder": "TC01-an-viem-amidan-sach"
+ },
+ {
+  "id": "TC02",
+  "title": "Hà · Viêm phế quản · sạch, thành viên thứ 2 → tự duyệt",
+  "member": "Phạm Thu Hà",
+  "loss": "Ngoại trú",
+  "facility": "BỆNH VIỆN ĐA KHOA MEDLATEC",
+  "date_from": "13/10/2026",
+  "date_to": "13/10/2026",
+  "dx": "Viêm phế quản cấp",
+  "icd": "J20.9",
+  "upload_first": [
+   "TC02-phieu-kham-T1-03.png",
+   "TC02-bang-ke-T1-01.png"
+  ],
+  "upload_later": [],
+  "lines_total": 522000,
+  "printed_total": 522000,
+  "folder": "TC02-ha-viem-phe-quan-sach"
+ },
+ {
+  "id": "TC03",
+  "title": "An · Viêm dạ dày · vượt trần khám/XN 1,5tr + vitamin không kê đơn",
+  "member": "Nguyễn Văn An",
+  "loss": "Ngoại trú",
+  "facility": "BỆNH VIỆN ĐA KHOA HỒNG NGỌC - PHÚC TRƯỜNG MINH",
+  "date_from": "10/10/2026",
+  "date_to": "10/10/2026",
+  "dx": "Viêm dạ dày",
+  "icd": "K29.7",
+  "upload_first": [
+   "TC03-phieu-kham-T1-03.png",
+   "TC03-bang-ke-T1-01.png",
+   "TC03-don-thuoc-T1-02.png"
+  ],
+  "upload_later": [],
+  "lines_total": 2630000,
+  "printed_total": 2630000,
+  "folder": "TC03-an-viem-da-day-vuot-tran-thuoc-bo"
+ },
+ {
+  "id": "TC04",
+  "title": "Hà · Viêm kết mạc · thiếu phiếu khám + giấy lạ → bổ sung sau",
+  "member": "Phạm Thu Hà",
+  "loss": "Ngoại trú",
+  "facility": "BỆNH VIỆN ĐA KHOA QUỐC TẾ VINMEC",
+  "date_from": "11/10/2026",
+  "date_to": "11/10/2026",
+  "dx": "Viêm kết mạc",
+  "icd": "H10.9",
+  "upload_first": [
+   "TC04-bang-ke-T1-01.png",
+   "giay-la-khong-phai-chung-tu.jpg"
+  ],
+  "upload_later": [
+   "TC04-phieu-kham-T1-03.png"
+  ],
+  "lines_total": 395000,
+  "printed_total": 395000,
+  "folder": "TC04-ha-viem-ket-mac-thieu-phieu-kham"
+ },
+ {
+  "id": "TC05",
+  "title": "An · Nha khoa trám răng · ảnh chụp điện thoại (nghiêng, mờ nhẹ)",
+  "member": "Nguyễn Văn An",
+  "loss": "Nha khoa",
+  "facility": "BỆNH VIỆN HỮU NGHỊ VIỆT ĐỨC",
+  "date_from": "09/10/2026",
+  "date_to": "09/10/2026",
+  "dx": "Sâu ngà răng",
+  "icd": "K02.1",
+  "upload_first": [
+   "TC05-phieu-kham-T1-03.jpg",
+   "TC05-bang-ke-T1-01.jpg"
+  ],
+  "upload_later": [],
+  "lines_total": 650000,
+  "printed_total": 650000,
+  "folder": "TC05-an-nha-khoa-tram-rang-anh-chup"
+ },
+ {
+  "id": "TC06",
+  "title": "Hà · Tai nạn bong gân · có phiếu X-quang (T2-02)",
+  "member": "Phạm Thu Hà",
+  "loss": "Tai nạn",
+  "facility": "BỆNH VIỆN HỮU NGHỊ VIỆT ĐỨC",
+  "date_from": "12/10/2026",
+  "date_to": "12/10/2026",
+  "dx": "Bong gân cổ chân trái",
+  "icd": "S93.4",
+  "upload_first": [
+   "TC06-phieu-kham-T1-03.png",
+   "TC06-bang-ke-T1-01.png",
+   "TC06-ket-qua-cls-T2-02.png"
+  ],
+  "upload_later": [],
+  "lines_total": 655000,
+  "printed_total": 655000,
+  "folder": "TC06-ha-tai-nan-bong-gan-xquang"
+ },
+ {
+  "id": "TC07",
+  "title": "An · Nội trú viêm phổi 3 ngày · 4,78tr > ngưỡng → người duyệt",
+  "member": "Nguyễn Văn An",
+  "loss": "Nội trú",
+  "facility": "BỆNH VIỆN ĐA KHOA MEDLATEC",
+  "date_from": "05/10/2026",
+  "date_to": "08/10/2026",
+  "dx": "Viêm phổi",
+  "icd": "J18.9",
+  "upload_first": [
+   "TC07-bang-ke-T1-01.png",
+   "TC07-bao-cao-y-te-T2-03.png"
+  ],
+  "upload_later": [],
+  "lines_total": 4780000,
+  "printed_total": 4780000,
+  "folder": "TC07-an-noi-tru-viem-phoi-3-ngay"
+ },
+ {
+  "id": "TC08",
+  "title": "Hà · Thai sản khám thai · tổng bảng kê lệch 200.000 so với dòng",
+  "member": "Phạm Thu Hà",
+  "loss": "Thai sản",
+  "facility": "BỆNH VIỆN ĐA KHOA HỒNG NGỌC - PHÚC TRƯỜNG MINH",
+  "date_from": "08/10/2026",
+  "date_to": "08/10/2026",
+  "dx": "Thai 12 tuần, theo dõi thai kỳ",
+  "icd": "Z34.0",
+  "upload_first": [
+   "TC08-phieu-kham-T1-03.png",
+   "TC08-bang-ke-T1-01.png"
+  ],
+  "upload_later": [],
+  "lines_total": 870000,
+  "printed_total": 1070000,
+  "folder": "TC08-ha-thai-san-kham-thai-lech-tong"
+ },
+ {
+  "id": "TC09",
+  "title": "Chọn An nhưng chứng từ ghi TRẦN VĂN BÌNH + phòng khám ngoài danh mục",
+  "member": "Nguyễn Văn An",
+  "loss": "Ngoại trú",
+  "facility": "PHÒNG KHÁM ĐA KHOA QUỐC TẾ VICTORIA HEALTHCARE",
+  "date_from": "07/10/2026",
+  "date_to": "07/10/2026",
+  "dx": "Tăng huyết áp vô căn",
+  "icd": "I10",
+  "upload_first": [
+   "TC09-phieu-kham-T1-03.png",
+   "TC09-bang-ke-T1-01.png"
+  ],
+  "upload_later": [],
+  "lines_total": 540000,
+  "printed_total": 540000,
+  "folder": "TC09-an-sai-ten-co-so-ngoai-danh-muc"
+ },
+ {
+  "id": "TC10",
+  "title": "An · Nộp lại đúng bộ TC01 (cùng người, cùng cơ sở, cùng ngày) → AG-4 trùng",
+  "member": "Nguyễn Văn An",
+  "loss": "Ngoại trú",
+  "facility": "BỆNH VIỆN ĐA KHOA QUỐC TẾ VINMEC",
+  "date_from": "14/10/2026",
+  "date_to": "14/10/2026",
+  "dx": "Viêm amidan cấp",
+  "icd": "J03.9",
+  "upload_first": [
+   "TC10-phieu-kham-T1-03.png",
+   "TC10-bang-ke-T1-01.png",
+   "TC10-don-thuoc-T1-02.png"
+  ],
+  "upload_later": [],
+  "lines_total": 514000,
+  "printed_total": 514000,
+  "folder": "TC10-an-nop-trung-tc01"
+ }
+]

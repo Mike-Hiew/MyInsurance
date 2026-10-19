@@ -1,0 +1,231 @@
+/* ===== AI Orb button — CSS thuần, không cần JS ===== */
+.ai-orb {
+  --orb-size: 56px;
+  --orb-speed: 1;
+  --orb-glow: .55;        /* độ sáng quầng: 0 = tắt, 1 = mạnh nhất */
+  --orb-glow-boost: 1;
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  flex: none;
+  width: var(--orb-size);
+  height: var(--orb-size);
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  line-height: 0;
+  overflow: visible;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 calc(var(--orb-size) * .14) calc(var(--orb-size) * .38) calc(var(--orb-size) * -.12) rgba(0, 150, 160, .5);
+  transition: transform .28s cubic-bezier(.3, 1.6, .5, 1), box-shadow .28s ease;
+}
+.ai-orb:hover {
+  transform: scale(1.07);
+  box-shadow: 0 calc(var(--orb-size) * .16) calc(var(--orb-size) * .5) calc(var(--orb-size) * -.08) rgba(22, 220, 168, .6);
+}
+.ai-orb:active { transform: scale(.93); }
+.ai-orb:focus-visible { outline: 2px solid #00AFA8; outline-offset: 4px; }
+
+/* Quầng phát sáng phía sau quả cầu: xoay màu + "thở" */
+.ai-orb::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--orb-size) * -.22);
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(from 0deg, #16DCA8, #00AFA8 25%, #3E8BFF 50%, #23E2A3 75%, #16DCA8);
+  filter: blur(calc(var(--orb-size) * .2));
+  opacity: var(--orb-glow);
+  animation:
+    ai-orb-spin calc(6s / var(--orb-speed)) linear infinite,
+    ai-orb-breathe calc(3.2s / var(--orb-speed)) ease-in-out infinite;
+}
+.ai-orb:hover { --orb-glow-boost: 1.5; }
+
+/* Lõi cầu: cắt tròn mọi lớp chất lỏng bên trong */
+.ai-orb__core {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(50% at 50% 50%);
+  background: radial-gradient(circle at 50% 30%, #c8fff1 0%, #3fd6c0 40%, #0a86ad 76%, #073f78 100%);
+}
+/* Bóng đổ khối cầu (tối dần ở mép) */
+.ai-orb__core::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, transparent 55%, rgba(4, 30, 80, .4) 100%);
+  pointer-events: none;
+}
+
+/* Lớp xoáy màu nền: hồng – tím – xanh xoay chậm */
+.ai-orb__swirl {
+  --orb-blur: calc(var(--orb-size) * .11);
+  position: absolute;
+  inset: -30%;
+  display: block;
+  background: conic-gradient(from 0deg, #16DCA8, #00AFA8 20%, #0A84B2 40%, #0B1650 60%, #1d6fd6 80%, #16DCA8);
+  filter: blur(var(--orb-blur));
+  animation:
+    ai-orb-spin calc(9s / var(--orb-speed)) linear infinite,
+    ai-orb-hue calc(9s / var(--orb-speed)) ease-in-out infinite;
+}
+
+/* Mặt "chất lỏng": khối vuông bo góc lớn xoay tròn => mép trên thành con sóng */
+.ai-orb__wave {
+  position: absolute;
+  left: -60%;
+  top: 40%;
+  display: block;
+  width: 220%;
+  height: 220%;
+  border-radius: 43%;
+  background: linear-gradient(180deg, rgba(120, 240, 214, .8) 0%, rgba(30, 200, 190, .6) 16%, rgba(20, 140, 200, .45) 32%, rgba(10, 70, 150, .35) 50%);
+  box-shadow: 0 0 calc(var(--orb-size) * .03) calc(var(--orb-size) * .018) rgba(220, 255, 246, .9);
+  animation:
+    ai-orb-spin calc(7s / var(--orb-speed)) linear infinite,
+    ai-orb-tide calc(9s / var(--orb-speed)) ease-in-out infinite;
+}
+/* Lớp sóng phía sau, mờ hơn, lệch nhịp => tạo chiều sâu */
+.ai-orb__wave--back {
+  border-radius: 40%;
+  opacity: .45;
+  box-shadow: none;
+  animation:
+    ai-orb-spin-rev calc(11s / var(--orb-speed)) linear infinite,
+    ai-orb-tide calc(9s / var(--orb-speed)) ease-in-out calc(-1.2s / var(--orb-speed)) infinite;
+}
+
+/* Logo BnK ở giữa: xoay quanh trục dọc như đồng xu, nghỉ rồi xoay tiếp */
+.ai-orb__logo {
+  position: absolute;
+  inset: 23%;
+  display: block;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -2 62 65'%3E%3Cdefs%3E%3ClinearGradient id='kg' x1='.12' y1='.92' x2='.9' y2='.12'%3E%3Cstop offset='0' stop-color='%2316DCA8'/%3E%3Cstop offset='.5' stop-color='%2300AFA8'/%3E%3Cstop offset='1' stop-color='%230A84B2'/%3E%3C/linearGradient%3E%3ClinearGradient id='ks' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='.5' stop-color='%23fff' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/linearGradient%3E%3CclipPath id='kc'%3E%3Cpath d='M31.5 3.5 L56 17 L56 46.5 L31 60 L7 46.5 L7 17 Z'/%3E%3C/clipPath%3E%3Cstyle%3E%40keyframes bq%7B0%25,100%25%7Bopacity:1%7D50%25%7Bopacity:.35%7D%7D%40keyframes bsh%7B0%25,55%25%7Btransform:translateX(0)%7D100%25%7Btransform:translateX(90px)%7D%7D.bq%7Banimation:bq 2.4s ease-in-out infinite%7D.bsh%7Banimation:bsh 3.6s ease-in-out infinite%7D%3C/style%3E%3C/defs%3E%3Cpath d='M31.5 3.5 L56 17 L56 46.5 L31 60 L7 46.5 L7 17 Z' fill='url(%23kg)' stroke='url(%23kg)' stroke-width='3.2' stroke-linejoin='round'/%3E%3Cg clip-path='url(%23kc)'%3E%3Cpath class='bsh' d='M-6 -6 L10 -6 L-14 70 L-30 70 Z' fill='url(%23ks)'/%3E%3C/g%3E%3Cpath d='M22 18 H40 L34 27.8 L42.2 37.6 C42.8 39 42.9 40.5 42.9 41.5 C42.9 46.4 37.6 49.8 31.8 49.8 C26 49.8 22 46 22 40.5 Z' fill='%23fff'/%3E%3Crect x='28.2' y='18' width='1.7' height='23' fill='%230F7471'/%3E%3Crect x='28' y='32.9' width='5' height='1.7' fill='%230F7471'/%3E%3Crect x='28' y='35.9' width='5' height='1.7' fill='%230F7471'/%3E%3Crect class='bq' x='5' y='2' width='6' height='6' rx='.6' fill='%231BAECD'/%3E%3Crect class='bq' style='animation-delay:-.5s' x='13' y='4' width='5' height='4' rx='.6' fill='%2300BCA7'/%3E%3Crect class='bq' style='animation-delay:-1s' x='19' y='2' width='7' height='6' rx='.6' fill='%23008AA9'/%3E%3Crect class='bq' style='animation-delay:-1.5s' x='14' y='0' width='2' height='2' rx='.6' fill='%234FBF7A'/%3E%3Crect class='bq' style='animation-delay:-.7s' x='1' y='8' width='2' height='2' rx='.6' fill='%235DAA66'/%3E%3Crect class='bq' style='animation-delay:-1.2s' x='10' y='9' width='5' height='6' rx='.6' fill='%230D85A8'/%3E%3Crect class='bq' style='animation-delay:-.3s' x='17' y='9' width='3' height='3' rx='.6' fill='%232FC29A'/%3E%3Crect class='bq' style='animation-delay:-.9s' x='3' y='12' width='5' height='4' rx='.6' fill='%235DAA66'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter:
+    drop-shadow(0 0 calc(var(--orb-size) * .05) rgba(255, 255, 255, .55))
+    drop-shadow(0 calc(var(--orb-size) * .02) calc(var(--orb-size) * .04) rgba(4, 30, 80, .45));
+  transform: perspective(calc(var(--orb-size) * 3)) rotateY(0deg);
+  animation: ai-orb-coin calc(6s / var(--orb-speed)) cubic-bezier(.6, 0, .3, 1) infinite;
+}
+/* Đang xử lý: logo xoay liên tục */
+.ai-orb.is-thinking .ai-orb__logo { animation: ai-orb-coin-loop calc(4s / var(--orb-speed)) linear infinite; }
+/* Tuỳ chọn: xoay phẳng (như bánh xe) thay vì lật đồng xu */
+.ai-orb--logo-flat .ai-orb__logo { transform: none; animation: ai-orb-spin calc(8s / var(--orb-speed)) linear infinite; }
+
+/* Lớp kính: viền sáng, phản quang góc trên, bóng trong */
+.ai-orb__gloss {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 calc(var(--orb-size) * .022) rgba(255, 255, 255, .5),
+    inset 0 calc(var(--orb-size) * -.09) calc(var(--orb-size) * .16) rgba(6, 50, 110, .32),
+    inset 0 calc(var(--orb-size) * .07) calc(var(--orb-size) * .12) rgba(255, 255, 255, .32);
+}
+.ai-orb__gloss::before {          /* vệt cong phản quang */
+  content: "";
+  position: absolute;
+  inset: 7%;
+  border-radius: 50%;
+  border: calc(var(--orb-size) * .045) solid transparent;
+  border-top-color: rgba(255, 255, 255, .8);
+  transform: rotate(-38deg);
+  filter: blur(calc(var(--orb-size) * .014));
+}
+.ai-orb__gloss::after {           /* quầng sáng mềm */
+  content: "";
+  position: absolute;
+  top: 9%;
+  left: 17%;
+  width: 36%;
+  height: 20%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0));
+  transform: rotate(-32deg);
+}
+
+/* Trạng thái AI đang xử lý: chảy nhanh hơn + vòng sóng lan ra */
+.ai-orb.is-thinking { --orb-speed: 2.6; --orb-glow-boost: 1.75; }
+.ai-orb.is-thinking::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--orb-size) * -.08);
+  border-radius: 50%;
+  border: 2px solid rgba(35, 226, 163, .6);
+  animation: ai-orb-ping 1.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ai-orb-spin     { to { transform: rotate(360deg); } }
+@keyframes ai-orb-spin-rev { to { transform: rotate(-360deg); } }
+@keyframes ai-orb-coin {
+  0%, 45%   { transform: perspective(calc(var(--orb-size) * 3)) rotateY(0deg); }
+  75%, 100% { transform: perspective(calc(var(--orb-size) * 3)) rotateY(360deg); }
+}
+@keyframes ai-orb-coin-loop {
+  from { transform: perspective(calc(var(--orb-size) * 3)) rotateY(0deg); }
+  to   { transform: perspective(calc(var(--orb-size) * 3)) rotateY(360deg); }
+}
+@keyframes ai-orb-breathe {
+  0%, 100% { scale: .9;  opacity: calc(var(--orb-glow) * var(--orb-glow-boost) * .65); }
+  50%      { scale: 1.1; opacity: calc(var(--orb-glow) * var(--orb-glow-boost)); }
+}
+@keyframes ai-orb-tide {
+  0%, 100% { top: 60%; }
+  28%      { top: 36%; }
+  50%      { top: 22%; }
+  72%      { top: 38%; }
+}
+@keyframes ai-orb-hue {
+  0%, 100% { filter: blur(var(--orb-blur)) hue-rotate(0deg); }
+  50%      { filter: blur(var(--orb-blur)) hue-rotate(-32deg); }
+}
+@keyframes ai-orb-ping {
+  0%   { transform: scale(.92); opacity: .9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-orb, .ai-orb.is-thinking { --orb-speed: .3; }
+  .ai-orb.is-thinking::before { animation: none; }
+  .ai-orb__logo { animation: none !important; }
+}
+
+
+/* ===== Gắn orb vào nút trợ lý có sẵn (ClaimMVP .cc-console-fab / MyInsurance .pt-chat-fab) ===== */
+.cc-console-fab.ai-orb, .pt-fab.pt-chat-fab.ai-orb {
+  --orb-size: 58px;
+  display: block !important;
+  width: var(--orb-size) !important;
+  height: var(--orb-size) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+  box-shadow: 0 calc(var(--orb-size) * .14) calc(var(--orb-size) * .38) calc(var(--orb-size) * -.12) rgba(0, 150, 160, .5) !important;
+}
+.cc-console-fab.ai-orb:hover, .pt-fab.pt-chat-fab.ai-orb:hover {
+  transform: scale(1.07) !important;
+  background: transparent !important;
+  box-shadow: 0 calc(var(--orb-size) * .16) calc(var(--orb-size) * .5) calc(var(--orb-size) * -.08) rgba(22, 220, 168, .6) !important;
+}
+.cc-console-fab.ai-orb:active, .pt-fab.pt-chat-fab.ai-orb:active { transform: scale(.93) !important; }
+.cc-console-fab.ai-orb.is-open, .pt-fab.pt-chat-fab.ai-orb.is-open { background: transparent !important; border: 0 !important; --orb-glow-boost: 1.6; }
+.cc-console-fab.ai-orb:not(.is-thinking)::before, .pt-fab.pt-chat-fab.ai-orb:not(.is-thinking)::before { content: none !important; }
+.ai-orb > i, .ai-orb > .icon { display: none !important; }
+.ai-orb > .ai-orb__core, .ai-orb > .ai-orb__gloss, .ai-orb__core > div { margin: 0 !important; padding: 0 !important; }
+.ai-orb .cc-fab-n { z-index: 5 !important; }

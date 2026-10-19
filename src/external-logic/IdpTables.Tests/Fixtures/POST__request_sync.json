@@ -1,0 +1,289 @@
+{
+  "endpoint": {
+    "method": "POST",
+    "path": "/request/sync"
+  },
+  "mo_ta": "Biến thể đồng bộ: chờ và trả kết quả trong cùng một response",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <token>",
+      "User-Agent": "Mozilla/5.0 (…) Chrome/126.0.0.0 Safari/537.36",
+      "Accept": "application/json, text/plain, */*"
+    },
+    "body": {
+      "name": "SYNC-1788416655",
+      "templates": "5384,5127,5299",
+      "document": "<file DP_DATA_case1.pdf, 45091 bytes, application/pdf>"
+    }
+  },
+  "responses": {
+    "FO EndUser": {
+      "status": 201,
+      "body": {
+        "id": "21503",
+        "requestId": "21378",
+        "confidence": "97.81",
+        "result": {
+          "result": {
+            "errorCode": null,
+            "minioPath": "f33c99bf-a9ff-43fb-9fda-3831dd2dbc0e.pdf",
+            "minioBucket": "idp-gateway-bucket",
+            "refTenantId": "176",
+            "errorMessage": null,
+            "refPartnerId": "78",
+            "refRequestId": "21378",
+            "processingTime": 16.57,
+            "templates_data": [
+              {
+                "data": {
+                  "fields": [
+                    {
+                      "c": 0.9,
+                      "k": "Place Of Treatment",
+                      "v": "Benh vien Noi tiet Trung uong",
+                      "c_llm": 0,
+                      "match_w": "Ho so: Nguyen Hoang Ha - Benh vien Noi tiet Trung uong - 03/2025",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Số vào viện",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Tên bệnh nhân",
+                      "v": "NGUYỄN HOÀNG HÀ",
+                      "c_llm": 0,
+                      "match_w": "NGUYỄN HOÀNG HÀ",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Tuổi",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Giới tính",
+                      "v": "FEMALE",
+                      "c_llm": 0,
+                      "match_w": "FEMALE",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Ngày/ tháng/ năm sinh",
+                      "v": "1973-10-09",
+                      "c_llm": 0,
+                      "match_w": "1973-10-09",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Số thẻ bảo hiểm y tế",
+                      "v": "DN4010104021032",
+                      "c_llm": 0,
+                      "match_w": ": DN4010104021032",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Địa chỉ",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Admission Date",
+                      "v": "20/03/2025",
+                      "c_llm": 0,
+                      "match_w": "20/03/2025",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Discharge Date",
+                      "v": "26/03/2025",
+                      "c_llm": 0,
+                      "match_w": "20/03/2025",
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Diagnosis Codes",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Kết quả chẩn đoán",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Phương pháp điều trị",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Phương pháp phẫu thuật",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 1,
+                      "k": "Ngày phát hành",
+                      "v": "",
+                      "c_llm": 0,
+                      "match_w": null,
+                      "page_number": 1
+                    },
+                    {
+                      "c": 0.8,
+                      "k": "Thông tin bổ sung",
+                      "v": "Ho so: Nguyen Hoang Ha - Benh vien Noi tiet Trung uong - 03/2025; Claim Type: Chăm sóc y tế; Event Date: 20/03/2025; Document type: Chứng từ y tế, Giấy ra viện; Tai lieu mo phong du lieu Data Platform gui sang IDP - dung cho muc dich demo",
+                      "c_llm": 0,
+                      "match_w": "Ho so: Nguyen Hoang Ha - Benh vien Noi tiet Trung uong - 03/2025",
+                      "page_number": 1
+                    }
+                  ],
+                  "tables": [
+                    {
+                      "data": [
+                        [
+                          "Nội dung",
+                          "Đơn vị tính",
+                          "Số lượng",
+                          "Đơn giá BV (đồng)",
+                          "Đơn giá BH (đồng)",
+                          "Tỷ lệ thanh toán theo DV",
+                          "Thành tiền BV (đồng)",
+                          "Tỷ lệ thanh toán BHYT",
+                          "Thành tiền BH (đồng)",
+                          "Quỹ BHYT (đồng)",
+                          "Người bệnh cùng chi trả (đồng)",
+                          "Khác (đồng)",
+                          "Người bệnh tự trả (đồng)"
+                        ],
+                        [
+                          "---",
+                          "---",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0",
+                          "0"
+                        ]
+                      ],
+                      "name": "Bảng kê chi phí khám chữa bệnh",
+                      "description": "Bảng kê chi tiết các khoản chi phí khám bệnh, chữa bệnh theo mẫu BHYT, nằm ở phần giữa tài liệu, có dòng tiêu đề gồm Nội dung, Đơn vị tính, Số lượng, Đơn giá, Thành tiền và các cột tỷ lệ thanh toán. Lấy toàn bộ các dòng chi tiết, bỏ qua các dòng tiêu đề nhóm và dòng tổng cộng.",
+                      "confidence_du": [
+                        [
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0,
+                          0
+                        ]
+                      ],
+                      "confidence_ocr": [
+                        [
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1,
+                          1
+                        ],
+                        [
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95,
+                          0.95
+                        ]
+                      ]
+                    }
+                  ],
+                  "confidence": 97.81,
+                  "confidence_standalone": 98.125
+                },
+                "template": "SET1_Custom-T5127|Giấy ra viện/Hospital discharge papers",
+                "templateId": "5127",
+                "subDocumentType": "CL05"
+              }
+            ]
+          },
+          "requestId": "21378",
+          "extraParams": {}
+        },
+        "createdAt": "2026-09-03T06:25:19.896Z",
+        "updatedAt": "2026-09-03T06:25:19.896Z",
+        "deletedAt": null
+      }
+    }
+  }
+}

@@ -1,0 +1,448 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BnK IDP — subset for ODC REST Consume",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "https://idp-api.idpstg.bnksolution.com"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/user/me": {
+      "get": {
+        "operationId": "UserController_getCurrentUser",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request/sync": {
+      "post": {
+        "operationId": "RequestController_createSync",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "request"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request": {
+      "post": {
+        "operationId": "RequestController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "request"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request/group": {
+      "post": {
+        "operationId": "RequestController_createRequestGroup",
+        "summary": "Create a new request group",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "request"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request/group/{groupId}/check-status": {
+      "get": {
+        "operationId": "RequestController_getRequestStatusByGroup",
+        "summary": "Get status of all requests in a request group",
+        "parameters": [
+          {
+            "name": "groupId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "request"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request/{id}/result": {
+      "get": {
+        "operationId": "RequestController_getResult",
+        "summary": "Get request result",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "request"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request/{id}/check-status": {
+      "get": {
+        "operationId": "RequestController_getRequestResult",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "request"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/workflow/request": {
+      "put": {
+        "operationId": "WorkflowController_createWorkflowRequest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkflowRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "workflow"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/workflow/run-workflow-request/{id}": {
+      "get": {
+        "operationId": "WorkflowController_runWorkflowRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "workflow"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/workflow/request/{id}": {
+      "get": {
+        "operationId": "WorkflowController_getWorkflowRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "workflow"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/workflow/request/{id}/result/json": {
+      "get": {
+        "operationId": "WorkflowController_getWorkflowResultInJson",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "workflow"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/template/compact": {
+      "get": {
+        "operationId": "TemplateController_getCompactList",
+        "summary": "Get template compact list for user",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "template"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginDTO": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Email"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "CreateRequestDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "templates": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "separatorType": {
+            "type": "string"
+          },
+          "separatorValue": {
+            "type": "number"
+          },
+          "document": {
+            "type": "string",
+            "format": "binary"
+          },
+          "deleteFile": {
+            "type": "string"
+          },
+          "requestGroupId": {
+            "type": "string"
+          },
+          "extraParams": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "templates",
+          "document"
+        ]
+      },
+      "CreateWorkflowRequestDTO": {
+        "type": "object",
+        "properties": {
+          "ocrRequestIds": {
+            "description": "List of OCR Requests that will be the inputs for workflow.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "workflowId": {
+            "type": "string",
+            "description": "The flow ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "The Workflow Request Name"
+          },
+          "autoStart": {
+            "type": "string",
+            "description": "The Workflow Request Auto Start Flag"
+          }
+        },
+        "required": [
+          "ocrRequestIds",
+          "workflowId",
+          "name"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    }
+  }
+}

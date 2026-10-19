@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2560 1560" width="2560" height="1560" font-family="Be Vietnam Pro, Arial, sans-serif">
+<defs>
+<marker id="ard" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A4F4A"/></marker>
+<marker id="aridp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#8C6BA0"/></marker>
+<marker id="arimo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#D08A1E"/></marker>
+<marker id="arfin" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6FA463"/></marker>
+<marker id="arodc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#5B82B0"/></marker>
+<marker id="arwarn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B45450"/></marker>
+</defs>
+<rect width="2560" height="1560" fill="#FCFCFA"/>
+<rect x="50" y="24" width="2460" height="70" rx="7" fill="#FFFFFF" stroke="#A8ACA6" stroke-width="1.5"/>
+<text x="60" y="55" font-size="21" font-weight="600" fill="#222621">Agentic Health Claim Adjudication — Integration Architecture</text>
+<text x="60" y="73.5" font-size="11" fill="#222621"><tspan style="">Dựng theo </tspan><tspan style="font-weight:600;">OutSystems Architecture Canvas</tspan><tspan style="">: End-User → Core → Foundation, phụ thuộc chỉ đi một chiều từ trên xuống. | ODC (OutSystems Developer Cloud) + AI Agent Workbench | 17/09/2026</tspan></text>
+<rect x="50" y="118" width="1520" height="1180" rx="7" fill="#152439" stroke="#0B1526" stroke-width="1.5"/>
+<rect x="78" y="142" width="190" height="66" rx="7" fill="#FFFFFF" stroke="#9AA096" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="173.0" y="171.15" text-anchor="middle" font-size="11" font-weight="600" fill="#7A8078">LOGO</text>
+<text x="173.0" y="186.15" text-anchor="middle" font-size="11" fill="#7A8078" opacity=".85"><tspan style="">OutSystems</tspan></text>
+<text x="296" y="169" font-size="17" font-weight="600" fill="#E6ECF5">OutSystems Developer Cloud (ODC)</text>
+<text x="296" y="187.5" font-size="11" fill="#E6ECF5"><tspan style="">Nền tảng chạy toàn bộ ứng dụng bồi thường — BnK sở hữu và phát triển</tspan></text>
+<rect x="1140" y="150" width="404" height="50" rx="7" fill="#C1003C" stroke="#8E002C" stroke-width="1.5"/>
+<text x="1342.0" y="170.625" text-anchor="middle" font-size="12.5" font-weight="600" fill="#FFFFFF">1 ODC app  ·  5 module  ·  6 AI agent</text>
+<rect x="78" y="232" width="1464" height="196" rx="7" fill="#CFE4F7" stroke="#2F7FD1" stroke-width="1.5"/>
+<text x="88" y="251" font-size="9.5" fill="#0F3357" opacity=".7" letter-spacing=".6">LAYER 1</text>
+<text x="88" y="270" font-size="13" font-weight="600" fill="#0F3357">END-USER · giao diện người dùng</text>
+<text x="88" y="287.5" font-size="10" fill="#0F3357"><tspan style="">Chỉ chứa màn hình và điều hướng. Không logic nghiệp vụ, không gọi thẳng hệ ngoài.</tspan></text>
+<rect x="104" y="300" width="452" height="108" rx="7" fill="#EAF4FD" stroke="#2F7FD1" stroke-width="1.5"/>
+<text x="114" y="323" font-size="13" font-weight="600" fill="#0F3357">CLM_Portal</text>
+<text x="114" y="340.0" font-size="9.5" fill="#0F3357"><tspan style="">Reactive Web · khách hàng</tspan></text>
+<text x="114" y="352.5" font-size="9.5" fill="#0F3357"><tspan style="">Nộp hồ sơ · tải chứng từ · theo dõi · bổ sung</tspan></text>
+<rect x="578" y="300" width="452" height="108" rx="7" fill="#EAF4FD" stroke="#2F7FD1" stroke-width="1.5"/>
+<text x="588" y="323" font-size="13" font-weight="600" fill="#0F3357">CLM_Console</text>
+<text x="588" y="340.0" font-size="9.5" fill="#0F3357"><tspan style="">Reactive Web · nhân viên thẩm định</tspan></text>
+<text x="588" y="352.5" font-size="9.5" fill="#0F3357"><tspan style="">Hàng đợi · đối chiếu ảnh ↔ số · duyệt · nhật ký agent</tspan></text>
+<rect x="1052" y="300" width="466" height="108" rx="7" fill="#EAF4FD" stroke="#2F7FD1" stroke-width="1.5"/>
+<text x="1062" y="323" font-size="13" font-weight="600" fill="#0F3357">Màn hình quản trị</text>
+<text x="1062" y="340.0" font-size="9.5" fill="#0F3357"><tspan style="">Ánh xạ biểu quyền lợi · nạp hợp đồng nhóm</tspan></text>
+<text x="1062" y="352.5" font-size="9.5" fill="#0F3357"><tspan style="">Cấu hình template và bộ chứng từ</tspan></text>
+<rect x="78" y="452" width="1464" height="236" rx="7" fill="#FBE4C4" stroke="#D9902C" stroke-width="1.5"/>
+<text x="88" y="471" font-size="9.5" fill="#573606" opacity=".7" letter-spacing=".6">LAYER 2</text>
+<text x="88" y="490" font-size="13" font-weight="600" fill="#573606">CORE · nghiệp vụ và phán đoán</text>
+<text x="88" y="507.5" font-size="10" fill="#573606"><tspan style="">Khái niệm nghiệp vụ tái dùng được. Tiền chỉ được tính ở đây.</tspan></text>
+<rect x="104" y="520" width="700" height="156" rx="7" fill="#FEF4E6" stroke="#D9902C" stroke-width="1.5"/>
+<text x="114" y="543" font-size="13" font-weight="600" fill="#573606">CLM_Core</text>
+<text x="114" y="560.0" font-size="9.5" fill="#573606"><tspan style="font-weight:600;">34 Server Action tất định — không có LLM.</tspan></text>
+<text x="114" y="572.5" font-size="9.5" fill="#573606"><tspan style="">· Chuỗi 13 bước tính tiền theo từng dòng chi phí</tspan></text>
+<text x="114" y="585.0" font-size="9.5" fill="#573606"><tspan style="">· Snapshot quyền lợi tại ngày dịch vụ rồi đóng băng (P-02)</tspan></text>
+<text x="114" y="597.5" font-size="9.5" fill="#573606"><tspan style="">· Sổ hạn mức append-only: năm · đợt · ngày · đồng chi trả</tspan></text>
+<text x="114" y="610.0" font-size="9.5" fill="#573606"><tspan style="">· Máy trạng thái hồ sơ và quyền duyệt</tspan></text>
+<rect x="826" y="520" width="692" height="156" rx="7" fill="#FEF4E6" stroke="#D9902C" stroke-width="1.5"/>
+<text x="836" y="543" font-size="13" font-weight="600" fill="#573606">CLM_Agents · AI Agent Workbench</text>
+<text x="836" y="560.0" font-size="9.5" fill="#573606"><tspan style="font-weight:600;">6 agent · 39 tool binding · 13 hand-off.</tspan><tspan style=""> Agent đọc và đề xuất, không ghi tiền.</tspan></text>
+<text x="836" y="572.5" font-size="9.5" fill="#573606"><tspan style="">AG-0 Điều phối · AG-1 Tiếp nhận · AG-2 Đối chiếu</tspan></text>
+<text x="836" y="585.0" font-size="9.5" fill="#573606"><tspan style="">AG-3 Lâm sàng · AG-4 Danh mục · AG-5 Soạn thảo</tspan></text>
+<text x="836" y="597.5" font-size="9.5" fill="#573606"><tspan style="">Tool của agent là Server Action của CLM_Core — không gọi thẳng REST ra ngoài.</tspan></text>
+<rect x="78" y="712" width="1464" height="246" rx="7" fill="#D3EBDA" stroke="#3F8C55" stroke-width="1.5"/>
+<text x="88" y="731" font-size="9.5" fill="#12331E" opacity=".7" letter-spacing=".6">LAYER 3</text>
+<text x="88" y="750" font-size="13" font-weight="600" fill="#12331E">FOUNDATION · tích hợp và tiện ích</text>
+<text x="88" y="767.5" font-size="10" fill="#12331E"><tspan style="">Bọc hệ ngoài. Không biết gì về nghiệp vụ bồi thường — chỉ dịch định dạng và chịu lỗi.</tspan></text>
+<rect x="104" y="780" width="462" height="166" rx="7" fill="#EDF8F0" stroke="#3F8C55" stroke-width="1.5"/>
+<text x="114" y="803" font-size="13" font-weight="600" fill="#12331E">CLM_IDP_Int</text>
+<text x="114" y="820.0" font-size="9.5" fill="#12331E"><tspan style="">REST Consume → BnK IDP</tspan></text>
+<text x="114" y="837.25" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">IdpSession</tspan><tspan style=""> · </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">IdpSubmitPackage</tspan></text>
+<text x="114" y="849.75" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">IdpPoller</tspan><tspan style=""> (Timer) · </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">IdpGetExtractionResult</tspan></text>
+<text x="114" y="862.25" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">IdpStartClinicalAssessment</tspan></text>
+<text x="114" y="879.5" font-size="9.5" fill="#12331E"><tspan style="">Hấp thụ 13 bẫy đã ghi lại của IDP</tspan></text>
+<rect x="586" y="780" width="462" height="166" rx="7" fill="#EDF8F0" stroke="#3F8C55" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="596" y="803" font-size="13" font-weight="600" fill="#12331E">CLM_IMO_Int</text>
+<text x="596" y="820.0" font-size="9.5" fill="#12331E"><tspan style="">REST Consume → InsureMO</tspan></text>
+<text x="596" y="837.25" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">SearchMembers</tspan><tspan style=""> · </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GetPolicy</tspan></text>
+<text x="596" y="849.75" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GetMemberCoverage</tspan><tspan style=""> · </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GetBenefitTree</tspan></text>
+<text x="596" y="867.0" font-size="9.5" fill="#12331E"><tspan style="">Hackathon: đọc seed trong ODC.</tspan></text>
+<text x="596" y="879.5" font-size="9.5" fill="#12331E"><tspan style="">Đổi sang thật bằng Site Setting </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">InsureMOMode</tspan><tspan style="">.</tspan></text>
+<rect x="1068" y="780" width="450" height="166" rx="7" fill="#EDF8F0" stroke="#3F8C55" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1078" y="803" font-size="13" font-weight="600" fill="#12331E">CLM_Fin_Int</text>
+<text x="1078" y="820.0" font-size="9.5" fill="#12331E"><tspan style="">REST Consume → Tài chính</tspan></text>
+<text x="1078" y="837.25" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">CreatePaymentInstruction</tspan><tspan style=""> (I-11)</tspan></text>
+<text x="1078" y="849.75" font-size="9.5" fill="#12331E"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">ConfirmPaymentSettled</tspan><tspan style=""> (I-12)</tspan></text>
+<text x="1078" y="867.0" font-size="9.5" fill="#12331E"><tspan style="">Stub trong hackathon — sinh lệnh,</tspan></text>
+<text x="1078" y="879.5" font-size="9.5" fill="#12331E"><tspan style="">không chuyển tiền.</tspan></text>
+<rect x="78" y="982" width="1464" height="200" rx="7" fill="#1D3150" stroke="#0B1526" stroke-width="1.5"/>
+<text x="88" y="1001" font-size="9.5" fill="#E6ECF5" opacity=".7" letter-spacing=".6">ODC PLATFORM SERVICES</text>
+<text x="88" y="1020" font-size="13" font-weight="600" fill="#E6ECF5">Dịch vụ nền tảng — dùng sẵn, không phải tự dựng</text>
+<rect x="104" y="1048" width="268" height="112" rx="7" fill="#27415F" stroke="#3C5A7C" stroke-width="1.5"/>
+<text x="114" y="1070" font-size="12" font-weight="600" fill="#E6ECF5">Identity</text>
+<text x="114" y="1087.0" font-size="9.5" fill="#E6ECF5"><tspan style="">Đăng nhập nhân viên và khách hàng,</tspan></text>
+<text x="114" y="1099.5" font-size="9.5" fill="#E6ECF5"><tspan style="">vai và quyền theo màn hình</tspan></text>
+<rect x="392" y="1048" width="268" height="112" rx="7" fill="#27415F" stroke="#3C5A7C" stroke-width="1.5"/>
+<text x="402" y="1070" font-size="12" font-weight="600" fill="#E6ECF5">Secrets</text>
+<text x="402" y="1087.0" font-size="9.5" fill="#E6ECF5"><tspan style="">Tài khoản IDP, khoá InsureMO</tspan></text>
+<text x="402" y="1099.5" font-size="9.5" fill="#E6ECF5"><tspan style="">nằm trong ODC Secret — không vào source</tspan></text>
+<rect x="680" y="1048" width="268" height="112" rx="7" fill="#27415F" stroke="#3C5A7C" stroke-width="1.5"/>
+<text x="690" y="1070" font-size="12" font-weight="600" fill="#E6ECF5">Logging &amp; Traces</text>
+<text x="690" y="1087.0" font-size="9.5" fill="#E6ECF5"><tspan style="">Vết mọi lời gọi REST ra ngoài,</tspan></text>
+<text x="690" y="1099.5" font-size="9.5" fill="#E6ECF5"><tspan style="">thời gian đáp, mã lỗi</tspan></text>
+<rect x="968" y="1048" width="268" height="112" rx="7" fill="#27415F" stroke="#3C5A7C" stroke-width="1.5"/>
+<text x="978" y="1070" font-size="12" font-weight="600" fill="#E6ECF5">Timers</text>
+<text x="978" y="1087.0" font-size="9.5" fill="#E6ECF5"><tspan style="">IdpPoller, đồng bộ master data,</tspan></text>
+<text x="978" y="1099.5" font-size="9.5" fill="#E6ECF5"><tspan style="">cảnh báo quota theo ngày</tspan></text>
+<rect x="1256" y="1048" width="268" height="112" rx="7" fill="#27415F" stroke="#3C5A7C" stroke-width="1.5"/>
+<text x="1266" y="1070" font-size="12" font-weight="600" fill="#E6ECF5">Data</text>
+<text x="1266" y="1087.0" font-size="9.5" fill="#E6ECF5"><tspan style="">Entity của CLM_Core:</tspan></text>
+<text x="1266" y="1099.5" font-size="9.5" fill="#E6ECF5"><tspan style="">hồ sơ, sổ hạn mức, vết agent</tspan></text>
+<text x="88" y="1229" font-size="13" font-weight="600" fill="#E6ECF5">Quy tắc phụ thuộc của Architecture Canvas</text>
+<text x="88" y="1247.0" font-size="10.5" fill="#E6ECF5"><tspan style="">Mũi tên chỉ đi </tspan><tspan style="font-weight:600;">xuống</tspan><tspan style="">: End-User gọi Core, Core gọi Foundation. Không có chiều ngược lại, không có gọi ngang giữa hai module cùng lớp.</tspan></text>
+<text x="88" y="1260.5" font-size="10.5" fill="#E6ECF5"><tspan style="">Nhờ vậy đổi một hệ ngoài chỉ phải sửa một module ở Layer 3, không lan lên trên.</tspan></text>
+<rect x="1700" y="118" width="800" height="1180" rx="7" fill="#FBFBF9" stroke="#8A8F88" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1710" y="141" font-size="13" font-weight="600" fill="#2A2E2A">HỆ THỐNG NGOÀI · REST / JSON over HTTPS</text>
+<rect x="1732" y="180" width="150" height="60" rx="7" fill="#FFFFFF" stroke="#9AA096" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1807.0" y="206.15" text-anchor="middle" font-size="11" font-weight="600" fill="#7A8078">LOGO</text>
+<text x="1807.0" y="221.15" text-anchor="middle" font-size="11" fill="#7A8078" opacity=".85"><tspan style="">BnK IDP</tspan></text>
+<text x="1908" y="207" font-size="17" font-weight="600" fill="#2A2E2A">BnK IDP</text>
+<text x="1908" y="225.5" font-size="11" fill="#2A2E2A"><tspan style="">Bóc tách chứng từ và đánh giá lâm sàng</tspan></text>
+<rect x="1732" y="252" width="728" height="288" rx="7" fill="#E4D6EA" stroke="#8C6BA0" stroke-width="1.5"/>
+<text x="1742" y="273.0" font-size="9.5" fill="#3D2A47"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">idp-api.idpstg.bnksolution.com</tspan><tspan style=""> · tenant 177 · partner 40</tspan></text>
+<text x="1742" y="285.5" font-size="9.5" fill="#3D2A47"><tspan style="font-weight:600;">Xác thực:</tspan><tspan style=""> JWT bearer, không refresh token · header </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">User-Agent</tspan><tspan style=""> bắt buộc</tspan></text>
+<text x="1742" y="302.75" font-size="9.5" fill="#3D2A47"><tspan style="font-weight:600;">Bóc tách</tspan><tspan style=""> </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">POST /request</tspan><tspan style=""> → poll → </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GET /request/{id}/result</tspan></text>
+<text x="1742" y="315.25" font-size="9.5" fill="#3D2A47"><tspan style="">9 template Claim MVP (6090–6098), bộ chứng từ 198</tspan></text>
+<text x="1742" y="327.75" font-size="9.5" fill="#3D2A47"><tspan style="">Đo thật: 1 trang ≈ 15 s · 9 trang song song ≈ 65 s · </tspan><tspan style="font-weight:600;">9/9 phân loại đúng</tspan></text>
+<text x="1742" y="345.0" font-size="9.5" fill="#3D2A47"><tspan style="font-weight:600;">Đánh giá lâm sàng</tspan><tspan style=""> flow Langflow </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">5ed8e4fc</tspan></text>
+<text x="1742" y="357.5" font-size="9.5" fill="#3D2A47"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">PUT /workflow/request</tspan><tspan style=""> → kích hoạt → poll → </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">/result/json</tspan></text>
+<text x="1742" y="370.0" font-size="9.5" fill="#3D2A47"><tspan style="">Đo thật: 9 chứng từ ≈ 118 s · 20 mục cảnh báo và trích field</tspan></text>
+<text x="1742" y="387.25" font-size="9.5" fill="#3D2A47"><tspan style="font-weight:600;">Danh mục</tspan><tspan style=""> OpenSearch bảng 322 (13.328 cơ sở KCB) · 321 · 316</tspan></text>
+<rect x="1732" y="570" width="150" height="60" rx="7" fill="#FFFFFF" stroke="#9AA096" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1807.0" y="596.15" text-anchor="middle" font-size="11" font-weight="600" fill="#7A8078">LOGO</text>
+<text x="1807.0" y="611.15" text-anchor="middle" font-size="11" fill="#7A8078" opacity=".85"><tspan style="">InsureMO</tspan></text>
+<text x="1908" y="597" font-size="17" font-weight="600" fill="#2A2E2A">InsureMO</text>
+<text x="1908" y="615.5" font-size="11" fill="#2A2E2A"><tspan style="">Hệ quản lý sản phẩm và hợp đồng bảo hiểm</tspan></text>
+<rect x="1732" y="642" width="728" height="230" rx="7" fill="#FFE3C6" stroke="#D08A1E" stroke-width="1.5"/>
+<text x="1742" y="663.0" font-size="9.5" fill="#5A3703"><tspan style="font-weight:600;">Hackathon: MOCK</tspan><tspan style=""> — seed trong ODC, chữ ký Server Action giữ nguyên khi đổi sang thật.</tspan></text>
+<text x="1742" y="680.25" font-size="9.5" fill="#5A3703"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GET /v1/members</tspan><tspan style=""> tìm thành viên được bảo hiểm</tspan></text>
+<text x="1742" y="692.75" font-size="9.5" fill="#5A3703"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GET /v1/policies/{policyNo}</tspan><tspan style=""> chi tiết hợp đồng</tspan></text>
+<text x="1742" y="705.25" font-size="9.5" fill="#5A3703"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GET /v1/members/{id}/coverage?asOfDate=</tspan><tspan style=""> coverage tại ngày dịch vụ</tspan></text>
+<text x="1742" y="717.75" font-size="9.5" fill="#5A3703"><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">GET /v1/plans/{planCode}/benefits?asOfDate=</tspan><tspan style=""> cây quyền lợi</tspan></text>
+<text x="1742" y="735.0" font-size="9.5" fill="#5A3703"><tspan style="">Đường dẫn trên là </tspan><tspan style="font-weight:600;">facade của adapter</tspan><tspan style=""> — schema thật của vendor chưa ai thấy.</tspan></text>
+<text x="1742" y="747.5" font-size="9.5" fill="#5A3703"><tspan style="">Ranh giới: hợp đồng thuộc InsureMO, bồi thường thuộc ta.</tspan></text>
+<rect x="1732" y="902" width="150" height="60" rx="7" fill="#FFFFFF" stroke="#9AA096" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1807.0" y="928.15" text-anchor="middle" font-size="11" font-weight="600" fill="#7A8078">LOGO</text>
+<text x="1807.0" y="943.15" text-anchor="middle" font-size="11" fill="#7A8078" opacity=".85"><tspan style="">Ngân hàng</tspan></text>
+<text x="1908" y="929" font-size="17" font-weight="600" fill="#2A2E2A">Tài chính / Ngân hàng</text>
+<text x="1908" y="947.5" font-size="11" fill="#2A2E2A"><tspan style="">Lệnh chi và xác nhận đã chi</tspan></text>
+<rect x="1732" y="974" width="728" height="152" rx="7" fill="#D7EAD4" stroke="#6FA463" stroke-width="1.5"/>
+<text x="1742" y="995.0" font-size="9.5" fill="#1F3D1A"><tspan style="font-weight:600;">Hackathon: STUB</tspan><tspan style=""> — sinh lệnh chi, nhận xác nhận giả lập, không có tiền thật.</tspan></text>
+<text x="1742" y="1012.25" font-size="9.5" fill="#1F3D1A"><tspan style="">I-11 lệnh chi: người nhận, số tiền, </tspan><tspan style="font-family:ui-monospace,monospace;font-size:9.0px">instructionRef</tspan><tspan style="">, claimNo</tspan></text>
+<text x="1742" y="1024.75" font-size="9.5" fill="#1F3D1A"><tspan style="">I-12 xác nhận đã chi: ngày giờ, mã giao dịch → ta đóng hồ sơ</tspan></text>
+<text x="1742" y="1042.0" font-size="9.5" fill="#1F3D1A"><tspan style="">Cổng phát hành trước lệnh chi thật đầu tiên còn chờ phòng Tài chính.</tspan></text>
+<rect x="1732" y="1150" width="728" height="128" rx="7" fill="#FFF4D4" stroke="#C9A73F" stroke-width="1.5"/>
+<text x="1742" y="1173" font-size="13" font-weight="600" fill="#4A3A06">Ba trạng thái tích hợp trên trang này</text>
+<text x="1742" y="1190.5" font-size="10" fill="#4A3A06"><tspan style="font-weight:600;">THẬT</tspan><tspan style=""> — BnK IDP: đã gọi thật trên staging, mọi con số ở trên là đo được.</tspan></text>
+<text x="1742" y="1203.5" font-size="10" fill="#4A3A06"><tspan style="font-weight:600;">MOCK</tspan><tspan style=""> — InsureMO: hợp đồng dữ liệu do ta định nghĩa, dữ liệu từ seed trong ODC.</tspan></text>
+<text x="1742" y="1216.5" font-size="10" fill="#4A3A06"><tspan style="font-weight:600;">STUB</tspan><tspan style=""> — Tài chính: giao diện có thật, hành vi giả lập, không có giao dịch nào.</tspan></text>
+<rect x="50" y="1320" width="2460" height="100" rx="7" fill="#FFFFFF" stroke="#A8ACA6" stroke-width="1.5"/>
+<text x="60" y="1343" font-size="13" font-weight="600" fill="#222621">Ô "LOGO" là chỗ đặt logo thật</text>
+<text x="60" y="1361.0" font-size="10.5" fill="#222621"><tspan style="">Bốn ô nét đứt ghi LOGO giữ đúng kích thước để anh thả file logo vào trong draw.io (kéo ảnh vào ô, hoặc Edit Style → </tspan><tspan style="font-family:ui-monospace,monospace;font-size:10.0px">shape=image;image=…</tspan><tspan style="">).</tspan></text>
+<text x="60" y="1374.5" font-size="10.5" fill="#222621"><tspan style="">Tôi không vẽ sẵn logo vì đó là nhãn hiệu của OutSystems, InsureMO và ngân hàng — lấy từ bộ nhận diện chính thức của mỗi bên sẽ đúng phiên bản và đúng tỷ lệ.</tspan></text>
+<rect x="50" y="1440" width="2460" height="96" rx="7" fill="#FFFFFF" stroke="#A8ACA6" stroke-width="1.5"/>
+<text x="60" y="1463" font-size="13" font-weight="600" fill="#222621">Màu theo quy ước Architecture Canvas của OutSystems</text>
+<text x="60" y="1481.0" font-size="10.5" fill="#222621"><tspan style="font-weight:600;">Xanh dương</tspan><tspan style=""> = End-User (màn hình) · </tspan><tspan style="font-weight:600;">Vàng cam</tspan><tspan style=""> = Core (khái niệm nghiệp vụ tái dùng được) · </tspan><tspan style="font-weight:600;">Xanh lá</tspan><tspan style=""> = Foundation (bọc hệ ngoài và tiện ích kỹ thuật)</tspan></text>
+<text x="60" y="1494.5" font-size="10.5" fill="#222621"><tspan style="font-weight:600;">Xanh đậm</tspan><tspan style=""> = dịch vụ nền tảng ODC dùng sẵn · </tspan><tspan style="font-weight:600;">Nét đứt</tspan><tspan style=""> = chưa phải hệ thật trong hackathon (mock hoặc stub)</tspan></text>
+<path d="M 1571,396 L 1595,396 L 1708,396 L 1732,396" fill="none" stroke="#8C6BA0" stroke-width="1.8" marker-end="url(#aridp)" stroke-linejoin="round"/>
+<rect x="1609" y="380" width="84" height="32" rx="3" fill="#FCFCFA" stroke="#8C6BA0" stroke-width=".8" opacity=".97"/>
+<text x="1652" y="392" text-anchor="middle" font-size="11" font-weight="600" fill="#222621" opacity="1">REST / JSON</text>
+<text x="1652" y="405" text-anchor="middle" font-size="9.5" font-weight="400" fill="#222621" opacity="0.8">JWT bearer</text>
+<path d="M 1571,758 L 1595,758 L 1708,757 L 1732,757" fill="none" stroke="#D08A1E" stroke-width="1.8" marker-end="url(#arimo)" stroke-linejoin="round"/>
+<rect x="1609" y="741" width="84" height="32" rx="3" fill="#FCFCFA" stroke="#D08A1E" stroke-width=".8" opacity=".97"/>
+<text x="1652" y="753" text-anchor="middle" font-size="11" font-weight="600" fill="#222621" opacity="1">REST / JSON</text>
+<text x="1652" y="766" text-anchor="middle" font-size="9.5" font-weight="400" fill="#222621" opacity="0.8">mock</text>
+<path d="M 1571,1050 L 1595,1050 L 1708,1050 L 1732,1050" fill="none" stroke="#6FA463" stroke-width="1.8" stroke-dasharray="7 5" marker-end="url(#arfin)" stroke-linejoin="round"/>
+<rect x="1609" y="1034" width="84" height="32" rx="3" fill="#FCFCFA" stroke="#6FA463" stroke-width=".8" opacity=".97"/>
+<text x="1652" y="1046" text-anchor="middle" font-size="11" font-weight="600" fill="#222621" opacity="1">REST / JSON</text>
+<text x="1652" y="1059" text-anchor="middle" font-size="9.5" font-weight="400" fill="#222621" opacity="0.8">stub</text>
+<path d="M 804,408 L 804,432 L 804,440 L 454,440 L 454,496 L 454,520" fill="none" stroke="#5B82B0" stroke-width="1.8" marker-end="url(#arodc)" stroke-linejoin="round"/>
+<path d="M 330,408 L 330,432 L 330,440 L 220,440 L 220,496 L 454,496 L 454,520" fill="none" stroke="#5B82B0" stroke-width="1.8" marker-end="url(#arodc)" stroke-linejoin="round"/>
+<path d="M 454,676 L 454,700 L 454,756 L 335,756 L 335,780" fill="none" stroke="#5B82B0" stroke-width="1.8" marker-end="url(#arodc)" stroke-linejoin="round"/>
+<path d="M 454,676 L 454,700 L 700,700 L 817,700 L 817,756 L 817,780" fill="none" stroke="#5B82B0" stroke-width="1.8" marker-end="url(#arodc)" stroke-linejoin="round"/>
+<path d="M 454,676 L 454,700 L 454,712 L 700,712 L 1293,712 L 1293,756 L 1293,780" fill="none" stroke="#5B82B0" stroke-width="1.8" marker-end="url(#arodc)" stroke-linejoin="round"/>
+</svg>

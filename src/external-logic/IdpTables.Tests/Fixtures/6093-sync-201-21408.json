@@ -1,0 +1,204 @@
+{
+  "id": "21527",
+  "requestId": "21408",
+  "confidence": "71.01",
+  "result": {
+    "result": {
+      "errorCode": null,
+      "minioPath": "089a67c0-a9d9-4b6b-bb59-dca249d2af76.png",
+      "minioBucket": "idp-gateway-bucket",
+      "refTenantId": "177",
+      "errorMessage": null,
+      "refPartnerId": "78",
+      "refRequestId": "21408",
+      "processingTime": 13.75,
+      "templates_data": [
+        {
+          "data": {
+            "fields": [
+              {
+                "c": 0.664,
+                "k": "Place Of Treatment",
+                "v": "BỆNH VIỆN THỬ NGHIỆM SỐ 2",
+                "c_llm": 0,
+                "match_w": "BỆNH VIỆN THỬ NGHIỆM SỐ 2",
+                "page_number": 1
+              },
+              {
+                "c": 0.7677,
+                "k": "Số vào viện",
+                "v": "2026/00915",
+                "c_llm": 0,
+                "match_w": "Số vào viện: 2026/00915",
+                "page_number": 1
+              },
+              {
+                "c": 0.5755,
+                "k": "Tên bệnh nhân",
+                "v": "TRẦN THỊ DEMO",
+                "c_llm": 0,
+                "match_w": "Tên bệnh nhân: TRẦN THỊ DEMO",
+                "page_number": 1
+              },
+              {
+                "c": 0.5742,
+                "k": "Ngày/ tháng/ năm sinh",
+                "v": "15/03/1984",
+                "c_llm": 0,
+                "match_w": "Ngày/ tháng/ năm sinh: 15/03/1984",
+                "page_number": 1
+              },
+              {
+                "c": 0.6587000000000001,
+                "k": "Dân tộc",
+                "v": "Kinh",
+                "c_llm": 0,
+                "match_w": "Dân tộc: Kinh",
+                "page_number": 1
+              },
+              {
+                "c": 0.5562,
+                "k": "Nghề nghiệp",
+                "v": "Giáo viên",
+                "c_llm": 0,
+                "match_w": "Nghề nghiệp: Giáo viên",
+                "page_number": 1
+              },
+              {
+                "c": 0.5337000000000001,
+                "k": "Số thẻ bảo hiểm y tế",
+                "v": "GD2030184000123",
+                "c_llm": 0,
+                "match_w": "Số thẻ bảo hiểm y tế: GD2030184000123",
+                "page_number": 1
+              },
+              {
+                "c": 0.6844,
+                "k": "Thời hạn hiệu lực của thẻ bảo hiểm y tế",
+                "v": "từ 01/01/2026 đến 31/12/2026",
+                "c_llm": 0,
+                "match_w": "Thời hạn hiệu lực của thẻ: từ 01/01/2026 đến 31/12/2026",
+                "page_number": 1
+              },
+              {
+                "c": 0.7561,
+                "k": "Địa chỉ",
+                "v": "Số 25 Phố Giả Định, Quận Thử, TP. Hải Phòng",
+                "c_llm": 0,
+                "match_w": "Địa chỉ: Số 25 Phố Giả Định, Quận Thử, TP. Hải Phòng",
+                "page_number": 1
+              },
+              {
+                "c": 0.6883,
+                "k": "Admission Date",
+                "v": "07:40 ngày 02/09/2026",
+                "c_llm": 0,
+                "match_w": "Vào viện lúc: 07:40 ngày 02/09/2026",
+                "page_number": 1
+              },
+              {
+                "c": 0.681,
+                "k": "Discharge Date",
+                "v": "15:20 ngày 06/09/2026",
+                "c_llm": 0,
+                "match_w": "Ra viện lúc: 15:20 ngày 06/09/2026",
+                "page_number": 1
+              },
+              {
+                "c": 0.689,
+                "k": "Khoa phòng",
+                "v": "Nội tiêu hoa",
+                "c_llm": 0,
+                "match_w": "Khoa phòng: Nội tiêu hoa",
+                "page_number": 1
+              },
+              {
+                "c": 0.5544,
+                "k": "Diagnosis Codes",
+                "v": "K29.1",
+                "c_llm": 0,
+                "match_w": "Chẩn đoán: Viem da day cấp - Mã ICD: K29.1",
+                "page_number": 1
+              },
+              {
+                "c": 0.7269,
+                "k": "Phương pháp điều trị",
+                "v": "Điều trị nội khoa, ức chế bơm proton, bù dịch",
+                "c_llm": 0,
+                "match_w": "Phương pháp điều trị: Điều trị nội khoa, ức chế bơm proton, bù dịch",
+                "page_number": 1
+              },
+              {
+                "c": 1,
+                "k": "Phương pháp phẫu thuật",
+                "v": "",
+                "c_llm": 0,
+                "match_w": null,
+                "page_number": 1
+              },
+              {
+                "c": 0.7685,
+                "k": "Ghi chú",
+                "v": "Bệnh nhân ổn định, không biến chứng trong quá trình điều trị.",
+                "c_llm": 0,
+                "match_w": "Ghi chú: Bệnh nhân ổn định, không biến chứng trong quá trình điều trị.",
+                "page_number": 1
+              },
+              {
+                "c": 0.7354,
+                "k": "Ngày phát hành",
+                "v": "Hải Phòng, ngày 06 tháng 09 năm 2026",
+                "c_llm": 0,
+                "match_w": "Hải Phòng, ngày 06 tháng 09 năm 2026",
+                "page_number": 1
+              },
+              {
+                "c": 0.5988,
+                "k": "Thông tin bổ sung",
+                "v": "Lời dặn của bác sĩ: Ăn uống điều độ, kiêng rượu bia và đồ cay nóng. Uống thuốc đủ 14 ngày. Tái khám sau 02 tuần hoặc khi đau tăng.",
+                "c_llm": 0,
+                "match_w": "Lời dặn của bác sĩ:",
+                "page_number": 1
+              },
+              {
+                "c": 0.8999999999999999,
+                "k": "Tuổi",
+                "v": "42",
+                "c_llm": 0,
+                "match_w": null,
+                "page_number": 1
+              },
+              {
+                "c": 0.8999999999999999,
+                "k": "Giới tính",
+                "v": "Nữ",
+                "c_llm": 0,
+                "match_w": null,
+                "page_number": 1
+              },
+              {
+                "c": 0.8999999999999999,
+                "k": "Kết quả chẩn đoán",
+                "v": "Viêm dạ dày cấp",
+                "c_llm": 0,
+                "match_w": null,
+                "page_number": 1
+              }
+            ],
+            "tables": [],
+            "confidence": 71.01,
+            "confidence_standalone": 71.01333333333335
+          },
+          "template": "SET1_Custom-T6093|VNVision-Giấy ra viện/Hospital discharge papers",
+          "templateId": "6093",
+          "subDocumentType": null
+        }
+      ]
+    },
+    "requestId": "21408",
+    "extraParams": {}
+  },
+  "createdAt": "2026-09-28T09:21:07.413Z",
+  "updatedAt": "2026-09-28T09:21:07.413Z",
+  "deletedAt": null
+}

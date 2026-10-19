@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>BnK.IdpTables</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Cùng phiên bản với IdpUpload (đã chạy trên tenant 28/09) -->
+    <PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="1.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="IdpTables.Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,281 @@
+{
+  "endpoint": {
+    "method": "GET",
+    "path": "/request/21383/result"
+  },
+  "mo_ta": "Kết quả SAU KHI đã nạp ánh xạ template-map — so với lần trước để thấy subDocumentType đổi từ null sang mã CL.",
+  "request": {
+    "headers": {
+      "Authorization": "Bearer <token>",
+      "User-Agent": "Mozilla/5.0 (…) Chrome/126.0.0.0 Safari/537.36",
+      "Accept": "application/json, text/plain, */*"
+    }
+  },
+  "responses": {
+    "FO EndUser": {
+      "status": 200,
+      "body": {
+        "result": {
+          "errorCode": null,
+          "minioPath": "1043de79-5fdc-43b6-8b73-1d5289a06cbe.pdf",
+          "minioBucket": "idp-gateway-bucket",
+          "refTenantId": "176",
+          "errorMessage": null,
+          "refPartnerId": "78",
+          "refRequestId": "21383",
+          "processingTime": 19.04,
+          "templates_data": [
+            {
+              "data": {
+                "fields": [
+                  {
+                    "c": 0.9,
+                    "k": "Place Of Treatment",
+                    "v": "Benh vien Noi tiet Trung uong",
+                    "c_llm": 0,
+                    "match_w": "Ho so: Nguyen Hoang Ha - Benh vien Noi tiet Trung uong - 03/2025",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Số vào viện",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Tên bệnh nhân",
+                    "v": "NGUYỄN HOÀNG HÀ",
+                    "c_llm": 0,
+                    "match_w": "NGUYỄN HOÀNG HÀ",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Tuổi",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Giới tính",
+                    "v": "FEMALE",
+                    "c_llm": 0,
+                    "match_w": "FEMALE",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Ngày/ tháng/ năm sinh",
+                    "v": "1973-10-09",
+                    "c_llm": 0,
+                    "match_w": "1973-10-09",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Số thẻ bảo hiểm y tế",
+                    "v": "DN4010104021032",
+                    "c_llm": 0,
+                    "match_w": ": DN4010104021032",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Địa chỉ",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Admission Date",
+                    "v": "20/03/2025",
+                    "c_llm": 0,
+                    "match_w": "20/03/2025",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Discharge Date",
+                    "v": "26/03/2025",
+                    "c_llm": 0,
+                    "match_w": "20/03/2025",
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Diagnosis Codes",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Kết quả chẩn đoán",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Phương pháp điều trị",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Phương pháp phẫu thuật",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 1,
+                    "k": "Ngày phát hành",
+                    "v": "",
+                    "c_llm": 0,
+                    "match_w": null,
+                    "page_number": 1
+                  },
+                  {
+                    "c": 0.8,
+                    "k": "Thông tin bổ sung",
+                    "v": "Ho so: Nguyen Hoang Ha - Benh vien Noi tiet Trung uong - 03/2025; Claim Type: Chăm sóc y tế; Event Date: 20/03/2025; Document type: Chứng từ y tế, Giấy ra viện; Tai lieu mo phong du lieu Data Platform gui sang IDP - dung cho muc dich demo",
+                    "c_llm": 0,
+                    "match_w": "Ho so: Nguyen Hoang Ha - Benh vien Noi tiet Trung uong - 03/2025",
+                    "page_number": 1
+                  }
+                ],
+                "tables": [
+                  {
+                    "data": [
+                      [
+                        "Nội dung",
+                        "Đơn vị tính",
+                        "Số lượng",
+                        "Đơn giá BV (đồng)",
+                        "Đơn giá BH (đồng)",
+                        "Tỷ lệ thanh toán theo DV",
+                        "Thành tiền BV (đồng)",
+                        "Tỷ lệ thanh toán BHYT",
+                        "Thành tiền BH (đồng)",
+                        "Quỹ BHYT (đồng)",
+                        "Người bệnh cùng chi trả (đồng)",
+                        "Khác (đồng)",
+                        "Người bệnh tự trả (đồng)"
+                      ],
+                      [
+                        "---",
+                        "---",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    ],
+                    "name": "Bảng kê chi phí khám chữa bệnh",
+                    "description": "Bảng kê chi tiết các khoản chi phí khám bệnh, chữa bệnh theo mẫu BHYT, nằm ở phần giữa tài liệu, có dòng tiêu đề gồm Nội dung, Đơn vị tính, Số lượng, Đơn giá, Thành tiền và các cột tỷ lệ thanh toán. Lấy toàn bộ các dòng chi tiết, bỏ qua các dòng tiêu đề nhóm và dòng tổng cộng.",
+                    "confidence_du": [
+                      [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "confidence_ocr": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95,
+                        0.95
+                      ]
+                    ]
+                  }
+                ],
+                "confidence": 97.81,
+                "confidence_standalone": 98.125
+              },
+              "template": "SET1_Custom-T5127|Giấy ra viện/Hospital discharge papers",
+              "templateId": "5127",
+              "subDocumentType": "CL05"
+            }
+          ]
+        },
+        "requestId": "21383",
+        "extraParams": {
+          "document_set": "195",
+          "mbal_claim_type": "MEDICAL_ILLNESS",
+          "mbal_docset_map_id": "78",
+          "mbal_document_type": "CL06"
+        }
+      }
+    }
+  }
+}

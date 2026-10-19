@@ -1,0 +1,1415 @@
+<title>Sổ tay hệ thống My Insurance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Roboto+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: field manual — sticky contents rail on the left, one reading column (~70ch), diagrams and tables break out wider. */
+:root{
+  --bg:#f3f6f5;          /* page */
+  --paper:#ffffff;       /* cards, figures */
+  --ink:#10292c;         /* text */
+  --soft:#4c6a6c;        /* secondary text */
+  --line:#d3e0de;        /* rules */
+  --teal:#0f5a5f;        /* structure, headings — Claim Console teal */
+  --mint:#138a68;        /* money, pass */
+  --ai:#6a4fd8;          /* anything an agent does */
+  --warn:#a86a00;
+  --bad:#c0392b;
+  --tint-mint:#e3f4ee; --tint-ai:#eeeafd; --tint-warn:#fbf1df; --tint-bad:#fbe7e4; --tint-teal:#e4eff0;
+  --f-display:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Roboto Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0b1d20; --paper:#11292d; --ink:#e4efed; --soft:#9db8b5; --line:#24474b;
+  --teal:#6fc7c4; --mint:#4fd6a8; --ai:#a893ff; --warn:#f0b54a; --bad:#ff8a7a;
+  --tint-mint:#123a33; --tint-ai:#231f45; --tint-warn:#3a2e14; --tint-bad:#3d1f1c; --tint-teal:#163a3e;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0b1d20; --paper:#11292d; --ink:#e4efed; --soft:#9db8b5; --line:#24474b;
+  --teal:#6fc7c4; --mint:#4fd6a8; --ai:#a893ff; --warn:#f0b54a; --bad:#ff8a7a;
+  --tint-mint:#123a33; --tint-ai:#231f45; --tint-warn:#3a2e14; --tint-bad:#3d1f1c; --tint-teal:#163a3e;
+  color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--f-body);margin:0}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:48px;max-width:1240px;margin:0 auto;padding-inline:24px;padding-block:32px 80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;max-height:calc(100vh - 48px);overflow:auto;font-size:14px}
+nav.toc .brand{font:800 15px var(--f-display);color:var(--teal);margin-bottom:14px;display:block}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+nav.toc a{display:block;padding:5px 10px;border-radius:6px;color:var(--soft);text-decoration:none;line-height:1.35}
+nav.toc a:hover{background:var(--paper);color:var(--ink)}
+nav.toc a.on{background:var(--tint-teal);color:var(--teal);font-weight:600}
+nav.toc a:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+main{min-width:0}
+.prose{max-width:72ch}
+header.hero{padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.kicker{font:600 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+h1{font:800 clamp(32px,4.6vw,48px)/1.1 var(--f-display);letter-spacing:-.02em;margin:10px 0 14px;text-wrap:balance}
+h2{font:800 28px/1.2 var(--f-display);letter-spacing:-.01em;margin:0 0 6px;text-wrap:balance}
+h3{font:700 19px/1.3 var(--f-display);margin:30px 0 8px;text-wrap:balance}
+h4{font:700 15px/1.3 var(--f-body);margin:18px 0 4px}
+section{padding-top:52px;scroll-margin-top:16px}
+section > .num{font:600 12px var(--f-mono);color:var(--soft);letter-spacing:.08em}
+p{margin:10px 0}
+.lead{font-size:18.5px;color:var(--soft);max-width:66ch}
+a{color:var(--teal)}
+code,.mono{font-family:var(--f-mono);font-size:.88em}
+code{background:var(--tint-teal);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+b,strong{font-weight:700}
+.ai-t{color:var(--ai);font-weight:600}.mint-t{color:var(--mint);font-weight:600}.bad-t{color:var(--bad);font-weight:600}.warn-t{color:var(--warn);font-weight:600}
+
+/* callouts */
+.say{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:14px 18px;margin:18px 0;max-width:72ch}
+.say .lbl{font:600 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px}
+.say p{margin:4px 0;font-size:16.5px}
+.say.ai{border-left-color:var(--ai)}.say.ai .lbl{color:var(--ai)}
+.say.warn{border-left-color:var(--warn)}.say.warn .lbl{color:var(--warn)}
+.say.bad{border-left-color:var(--bad)}.say.bad .lbl{color:var(--bad)}
+.pitch{background:var(--tint-teal);border:0;border-radius:12px;padding:20px 22px;max-width:76ch}
+.pitch p{font-size:17.5px;line-height:1.6}
+
+/* principles */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:18px 0}
+.rule{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.rule .t{font:800 17px var(--f-display);margin-bottom:4px;display:block}
+.rule p{margin:0;font-size:14.5px;color:var(--soft);line-height:1.5}
+.rule.m{border-top:3px solid var(--mint)}.rule.a{border-top:3px solid var(--ai)}.rule.t3{border-top:3px solid var(--teal)}.rule.w{border-top:3px solid var(--warn)}
+
+/* tables */
+.tbl{overflow-x:auto;margin:16px 0;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+th{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--tint-teal) 50%,transparent)}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:0}
+td.k{font-weight:700;white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--f-mono);white-space:nowrap}
+td.c{font-family:var(--f-mono);font-size:13px;white-space:nowrap;color:var(--teal)}
+.pill{display:inline-block;font:600 11.5px var(--f-mono);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.p-ok{background:var(--tint-mint);color:var(--mint)}.p-ai{background:var(--tint-ai);color:var(--ai)}.p-w{background:var(--tint-warn);color:var(--warn)}.p-b{background:var(--tint-bad);color:var(--bad)}.p-t{background:var(--tint-teal);color:var(--teal)}
+
+/* figures */
+figure{margin:22px 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:640px;color:var(--ink)}
+figcaption{font-size:13.5px;color:var(--soft);margin-top:8px;max-width:80ch}
+svg text{font-family:var(--f-body);fill:currentColor}
+svg .bx{fill:var(--bg);stroke:var(--line);stroke-width:1.2}
+svg .bx-t{fill:var(--tint-teal);stroke:var(--teal);stroke-width:1.2}
+svg .bx-m{fill:var(--tint-mint);stroke:var(--mint);stroke-width:1.4}
+svg .bx-a{fill:var(--tint-ai);stroke:var(--ai);stroke-width:1.2}
+svg .bx-b{fill:var(--tint-bad);stroke:var(--bad);stroke-width:1.2}
+svg .bx-w{fill:var(--tint-warn);stroke:var(--warn);stroke-width:1.2}
+svg .ln{stroke:var(--soft);stroke-width:1.4;fill:none}
+svg .ln-a{stroke:var(--ai);stroke-width:1.6;fill:none}
+svg .ln-m{stroke:var(--mint);stroke-width:1.8;fill:none}
+svg .ln-d{stroke:var(--soft);stroke-width:1.2;fill:none;stroke-dasharray:4 4}
+svg .sm{font-size:11.5px;fill:var(--soft)}
+svg .tt{font-weight:700;font-size:13.5px}
+svg .ta{fill:var(--ai)} svg .tm{fill:var(--mint)} svg .tb{fill:var(--bad)} svg .tc{fill:var(--teal)}
+svg .ah{fill:var(--soft)} svg .ah-a{fill:var(--ai)} svg .ah-m{fill:var(--mint)}
+
+/* steps */
+ol.steps{list-style:none;margin:18px 0;padding:0;counter-reset:s;display:grid;gap:12px;max-width:80ch}
+ol.steps > li{counter-increment:s;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+ol.steps > li::before{content:counter(s);font:800 18px var(--f-display);color:var(--teal);width:34px;height:34px;border-radius:9px;background:var(--tint-teal);display:grid;place-items:center}
+ol.steps h4{margin:2px 0 4px;font-size:16px}
+ol.steps p{margin:4px 0;font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.meta span{font:500 12px var(--f-mono);color:var(--soft);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
+
+/* agent cards */
+.agents{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:18px 0}
+.agent{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.agent.wb{border-top:3px solid var(--ai)} .agent.sa{border-top:3px solid var(--teal)}
+.agent .hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.agent .id{font:800 22px var(--f-display)}
+.agent .nm{font:500 12px var(--f-mono);color:var(--soft)}
+.agent dl{display:grid;grid-template-columns:86px minmax(0,1fr);gap:4px 10px;margin:6px 0 0;font-size:14px}
+.agent dt{color:var(--soft);font-size:12.5px;padding-top:2px}
+.agent dd{margin:0;line-height:1.45}
+
+/* glossary */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin:16px 0}
+.gloss div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.gloss b{display:block;font-size:15px}
+.gloss .en{font:500 11.5px var(--f-mono);color:var(--soft)}
+.gloss p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--soft)}
+
+/* qa */
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin:8px 0;max-width:80ch}
+summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font:700 16px var(--f-mono);color:var(--teal);width:14px;flex:none}
+details[open] summary::before{content:"–"}
+details > div{padding:0 16px 14px 40px;font-size:15px}
+details > div p{margin:6px 0}
+
+.checks{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px;max-width:80ch}
+.checks li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:15px}
+.checks li::before{content:"";width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;margin-top:4px}
+
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.card h4{margin-top:0}
+.card ul{margin:6px 0 0;padding-left:18px;font-size:14.5px}
+.card li{margin:3px 0}
+
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr;gap:0;padding-inline:16px}
+  nav.toc{position:static;max-height:none;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:8px}
+  nav.toc ol{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  ol.steps > li{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+
+/* ---- use case & flow diagrams ---- */
+svg.uc,svg.fl{min-width:760px}
+svg.uc .bnd{fill:color-mix(in srgb,var(--tint-teal) 55%,transparent);stroke:var(--line);stroke-width:1.4}
+svg.uc .uc-o{fill:var(--paper);stroke:var(--teal);stroke-width:1.2}
+svg.uc .uct{font-size:13.5px;fill:var(--ink)}
+svg.uc .actor circle,svg.uc .actor line{fill:none;stroke:var(--ink);stroke-width:2}
+svg.uc .tg-m{fill:var(--mint)} svg.uc .tg-a{fill:var(--ai)}
+svg.uc .tgt{font-size:10.5px;font-weight:700;fill:var(--paper)}
+svg.uc .ucid{font-size:10.5px;font-weight:700;fill:var(--warn)}
+svg.fl .lane{fill:var(--bg)} svg.fl .lane.alt{fill:color-mix(in srgb,var(--tint-teal) 60%,transparent)}
+svg.fl .ln-t{font-size:13.5px;font-weight:700;fill:var(--ink)} svg.fl .ln-s{font-size:11px;fill:var(--soft)}
+svg.fl .ln-sep{stroke:var(--line)}
+svg.fl .nd{stroke-width:1.3}
+svg.fl .nd.act{fill:var(--paper);stroke:var(--soft)} svg.fl .nd.sys{fill:var(--tint-teal);stroke:var(--teal)}
+svg.fl .nd.idp{fill:var(--tint-mint);stroke:var(--mint)} svg.fl .nd.ai{fill:var(--tint-ai);stroke:var(--ai)}
+svg.fl .nd.ok{fill:var(--tint-mint);stroke:var(--mint);stroke-width:2.2} svg.fl .nd.hold{fill:var(--tint-warn);stroke:var(--warn)} svg.fl .nd.bad{fill:var(--tint-bad);stroke:var(--bad)}
+svg.fl .nt{font-size:12.5px;fill:var(--ink)} svg.fl .nt.b{font-weight:700}
+svg.fl .ed{stroke:var(--soft);stroke-width:1.4;fill:none} svg.fl .ed-m{stroke:var(--mint);stroke-width:2;fill:none} svg.fl .ed-d{stroke:var(--soft);stroke-width:1.2;stroke-dasharray:4 4;fill:none}
+svg.fl .ed-t{font-size:10.5px;fill:var(--soft)}
+svg.fl .altb{fill:var(--warn)} svg.fl .altt{font-size:10.5px;font-weight:800;fill:var(--paper)}
+svg .mono-s{font-family:var(--f-mono);font-size:11px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;color:var(--soft);margin-top:10px}
+.legend i{font-style:normal;font:700 11px var(--f-mono);padding:1px 7px;border-radius:5px;color:var(--paper);margin-right:5px}
+.legend i.m{background:var(--mint)} .legend i.a{background:var(--ai)} .legend i.u{background:var(--warn)}
+.ucspec{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0 6px}
+.ucspec > div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.5}
+.ucspec .h{display:block;font:600 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.ucspec > div.alt .h{color:var(--warn)}
+.ucspec ul{margin:0;padding-left:18px}
+/* ---- IDP markers ---- */
+.idp-tag{display:inline-flex;align-items:center;font:600 11.5px var(--f-mono);background:var(--tint-mint);color:var(--mint);border:1px solid color-mix(in srgb,var(--mint) 45%,transparent);border-radius:6px;padding:1px 7px;text-decoration:none;white-space:nowrap;vertical-align:1px}
+.idp-tag:hover{border-color:var(--mint)}
+.say.idp{border-left-color:var(--mint)} .say.idp .lbl{color:var(--mint)}
+.ipcs{display:grid;gap:12px;margin:16px 0}
+.ipc{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--mint);border-radius:12px;padding:14px 18px}
+.ipc-hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.ipc-hd b{font:800 18px var(--f-display)} .ipc-hd .where{color:var(--soft);font-size:14px}
+.ipc-bd{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,1.6fr);gap:18px}
+.ipc .ep{font-family:var(--f-mono);font-size:12.5px;line-height:1.55;background:var(--bg);border-radius:8px;padding:10px 12px;align-self:start}
+.ipc .ep > div{margin:3px 0} .ipc .ep span{display:block;color:var(--soft);font-family:var(--f-body);font-size:12.5px}
+.ipc dl{display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;margin:0;font-size:14.5px;line-height:1.5}
+.ipc dt{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);padding-top:3px}
+.ipc dd{margin:0}
+@media (max-width:760px){.ipc-bd{grid-template-columns:1fr}}
+.no{font:800 18px var(--f-display);color:var(--mint);white-space:nowrap}
+/* ---- presenting mode ---- */
+#pm{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--teal);color:var(--paper);border:0;border-radius:999px;padding:10px 16px;font:600 14px var(--f-body);cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#pm:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+body.present{font-size:18.5px}
+body.present .wrap{grid-template-columns:minmax(0,1fr);max-width:1240px}
+body.present nav.toc{display:none}
+body.present .prose,body.present .lead,body.present .say,body.present ol.steps,body.present details{max-width:none}
+body.present h2{font-size:34px} body.present h3{font-size:22px}
+body.present table{font-size:16px} body.present .ipc dl{font-size:16.5px} body.present .ipc .ep{font-size:14px}
+body.present section{padding-top:72px}
+@media print{#pm{display:none}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Mục lục">
+  <span class="brand">Sổ tay hệ thống</span>
+  <ol>
+    <li><a href="#tomtat">Tóm tắt 60 giây</a></li>
+    <li><a href="#concept">1 · Ý tưởng &amp; nguyên tắc</a></li>
+    <li><a href="#tuvung">2 · Từ vựng nghiệp vụ</a></li>
+    <li><a href="#kientruc">3 · Kiến trúc</a></li>
+    <li><a href="#usecase">4 · Use case &amp; luồng</a></li>
+    <li><a href="#vongdoi">5 · Vòng đời hồ sơ</a></li>
+    <li><a href="#workflow">6 · Workflow từng bước</a></li>
+    <li><a href="#agent">7 · Các agent phối hợp</a></li>
+    <li><a href="#chuoi">8 · Chuỗi 14 bước tính tiền</a></li>
+    <li><a href="#cong">9 · Cổng tự duyệt</a></li>
+    <li><a href="#doichieu">10 · Đối chiếu R1–R9</a></li>
+    <li><a href="#idpmap">11 · Dùng BnK IDP ở đâu, thế nào</a></li>
+    <li><a href="#idp">12 · Tích hợp BnK IDP chi tiết</a></li>
+    <li><a href="#manhinh">13 · Bản đồ màn hình</a></li>
+    <li><a href="#solieu">14 · Số liệu được phép nói</a></li>
+    <li><a href="#hoidap">15 · Hỏi đáp khi thuyết trình</a></li>
+    <li><a href="#truocdemo">16 · Checklist trước demo</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero" id="top">
+  <div class="kicker">[BnK IDP] · Demo nội bộ · Tài liệu chuẩn bị thuyết trình</div>
+  <h1>Hệ thống My Insurance hoạt động thế nào</h1>
+  <p class="lead">Trang này giải thích từ đầu: hệ thống giải bài toán gì, các khối ghép với nhau ra sao, một hồ sơ đi qua những bước nào, các agent chia việc thế nào và BnK IDP được gọi ở đâu. Mọi ví dụ lấy từ hồ sơ thật trên tenant <code>bnk-dev.outsystems.app</code>.</p>
+</header>
+
+<!-- ================= TÓM TẮT ================= -->
+<section id="tomtat">
+  <div class="num">Đọc trước tiên</div>
+  <h2>Tóm tắt 60 giây, học thuộc đoạn này</h2>
+  <div class="say pitch">
+    <span class="lbl">Câu mở đầu gợi ý</span>
+    <p>"Khách hàng bảo hiểm sức khoẻ chỉ cần chụp ảnh chứng từ trên cổng <b>MyInsurance</b>. <b>BnK IDP</b> đọc ảnh thành từng dòng chi phí. Trên <b>Claim Console</b> (ClaimMVP), các agent của OutSystems Agent Workbench kiểm tra bất thường, thẩm định lâm sàng và giải thích kết quả, nhưng <b>không agent nào được ghi số tiền</b>. Tiền do một <b>chuỗi 14 bước tất định</b> tính, chạy lại bao nhiêu lần cũng ra cùng kết quả. Cuối cùng, <b>cổng 4 điều kiện</b> quyết định: hồ sơ sạch và nhỏ thì tự duyệt và chi trả, còn lại chuyển cho người duyệt. Hồ sơ thật CLM-2026-0449 đi từ lúc khách bấm Gửi đến lúc chi trả mất 4 phút."</p>
+  </div>
+  <div class="rules">
+    <div class="rule t3"><span class="t">Hai ứng dụng</span><p>MyInsurance cho khách, ClaimMVP cho cán bộ. Cả hai chạy trên OutSystems ODC và dùng chung dữ liệu.</p></div>
+    <div class="rule m"><span class="t">Một nguồn đọc chứng từ</span><p>BnK IDP: phân loại, bóc tách, thẩm định workflow, danh mục cơ sở y tế, lưu bản gốc.</p></div>
+    <div class="rule a"><span class="t">Sáu tác nhân</span><p>AG-0 điều phối, AG-1 tiếp nhận, AG-2 giải thích tiền, AG-3 lâm sàng, AG-4 bất thường, AG-5 thư khách.</p></div>
+    <div class="rule w"><span class="t">Một chốt chặn</span><p>Cổng tự duyệt 4 điều kiện. Thiếu 1 điều kiện là chuyển người.</p></div>
+  </div>
+</section>
+
+<!-- ================= 1 CONCEPT ================= -->
+<section id="concept">
+  <div class="num">01</div>
+  <h2>Ý tưởng và nguyên tắc thiết kế</h2>
+  <div class="prose">
+    <h3>Bài toán</h3>
+    <p>Một hồ sơ bồi thường sức khoẻ (khám ngoại trú, nằm viện, nha khoa, tai nạn, thai sản) thường gồm vài tờ giấy: <b>bảng kê chi phí</b> của bệnh viện, <b>phiếu khám</b> có chẩn đoán, <b>đơn thuốc</b>, có thể thêm hoá đơn và giấy tờ tuỳ thân. Hôm nay cán bộ bồi thường làm tay gần hết:</p>
+    <ul>
+      <li>Gõ lại từng dòng chi phí từ ảnh.</li>
+      <li>So bằng mắt tên bệnh nhân, ngày khám, bệnh viện giữa các tờ.</li>
+      <li>Tra hợp đồng xem khoản nào được trả, còn bao nhiêu hạn mức, đã qua kỳ chờ chưa, đồng chi trả bao nhiêu phần trăm.</li>
+      <li>Viết thư giải thích cho khách vì sao không được trả đủ.</li>
+    </ul>
+    <p>Hậu quả là chậm (tính bằng ngày), dễ sai, và khó giải thích. Một hồ sơ 300 nghìn đồng tốn công y như hồ sơ 30 triệu.</p>
+
+    <h3>Ý tưởng</h3>
+    <p>Tên định vị khi đi thi là <b>"Agentic Health Claim Adjudication"</b>: hồ sơ đi từ ảnh chứng từ đến quyết định chi trả do một nhóm agent phối hợp trên OutSystems ODC, con người chỉ can thiệp đúng chỗ cần phán đoán. Đây là một lát cắt của dự án Claim MVP lớn hơn, dựng đủ để chạy thật, không phải bản mô phỏng.</p>
+  </div>
+
+  <h3>Năm nguyên tắc, mọi thiết kế đều suy ra từ đây</h3>
+  <div class="rules">
+    <div class="rule m"><span class="t">Tiền là tất định</span><p>Chỉ một server action được ghi tiền: <code>RunAdjudicationChain</code>. Cùng dữ liệu, chạy lại ra cùng số. Mỗi lần chạy là một bản ghi mới, không ghi đè.</p></div>
+    <div class="rule a"><span class="t">Phán đoán là của agent</span><p>Agent đọc, đối chiếu, đề xuất, giải thích. Agent không có tool nào ghi số tiền.</p></div>
+    <div class="rule t3"><span class="t">AI đề xuất, người quyết</span><p>Đề xuất của AG-3 chỉ đổi tiền khi cán bộ bấm xác nhận và chuỗi chạy lại. Thư AG-5 chỉ là nháp đến khi cán bộ gửi.</p></div>
+    <div class="rule w"><span class="t">Lỗi không bao giờ thành từ chối</span><p>IDP chậm, agent lỗi, thiếu dữ liệu: hồ sơ vào hàng đợi cho người xử lý, không bao giờ bị từ chối vì lỗi kỹ thuật.</p></div>
+    <div class="rule t3"><span class="t">Mọi thứ để lại dấu vết</span><p>Mỗi lượt agent, mỗi lần gọi IDP, mỗi quyết định cổng đều ghi vào <code>AgentRun</code> và xem được ở Nhật ký kỹ thuật.</p></div>
+  </div>
+  <div class="say">
+    <span class="lbl">Vì sao tách tiền khỏi AI</span>
+    <p>Mô hình ngôn ngữ có thể tính sai hoặc trả lời khác nhau giữa hai lần hỏi. Bảo hiểm không chấp nhận điều đó với tiền. Vì vậy phần tiền viết bằng logic thường trong OutSystems, có 46 ca kiểm thử. AI chỉ làm những việc cần đọc hiểu và lập luận, và mọi kết luận của AI đều đi qua một quy tắc hoặc một con người trước khi có hiệu lực.</p>
+  </div>
+</section>
+
+<!-- ================= 2 GLOSSARY ================= -->
+<section id="tuvung">
+  <div class="num">02</div>
+  <h2>Từ vựng nghiệp vụ cần nắm</h2>
+  <p class="prose">Khi trình bày, dùng tên tiếng Việt; tên tiếng Anh trong ngoặc là tên trong code và trên màn kỹ thuật.</p>
+  <div class="gloss">
+    <div><b>Hồ sơ</b><span class="en">Claim · CLM-2026-xxxx</span><p>Một lần khách yêu cầu bồi thường. Có số hồ sơ, người được bảo hiểm, cơ sở y tế, ngày khám, chẩn đoán.</p></div>
+    <div><b>Dòng chi phí</b><span class="en">ClaimLine</span><p>Một dòng trên bảng kê: tên khoản, số lượng, thành tiền. Tiền được tính theo từng dòng.</p></div>
+    <div><b>Chứng từ</b><span class="en">ClaimDocument · T1-01, T1-02…</span><p>T1-01 bảng kê chi phí (quan trọng nhất, mọi dòng tiền đến từ đây), T1-02 đơn thuốc, T1-03 phiếu khám, T1-04 hoá đơn VAT (chỉ nhận XML). Nhóm T2 chỉ phân loại, không đọc trường.</p></div>
+    <div><b>Loại tổn thất</b><span class="en">lossType · ILL_OP, ACC_IP…</span><p>Bệnh / nha khoa / tai nạn / thai sản × ngoại trú / nội trú. Quyết định chứng từ nào bắt buộc.</p></div>
+    <div><b>Nhóm bệnh</b><span class="en">conditionClass · GEN, SPE, PRE…</span><p>Bệnh thông thường, bệnh đặc biệt, bệnh có sẵn, tai nạn, sinh đẻ, biến chứng thai sản. Quyết định kỳ chờ.</p></div>
+    <div><b>Kỳ chờ</b><span class="en">Waiting period · WAIT</span><p>Số ngày từ khi hợp đồng có hiệu lực đến khi được bồi thường cho một nhóm bệnh. Ví dụ bệnh thông thường 30 ngày.</p></div>
+    <div><b>Quyền lợi</b><span class="en">Benefit · 200.1, 200.2…</span><p>Cây quyền lợi của sản phẩm HC-STD/PLS/PRM. Ví dụ 200 = ngoại trú, 200.1 = khám &amp; xét nghiệm, 200.2 = thuốc.</p></div>
+    <div><b>Trần, hạn mức</b><span class="en">Sub-limit · annual cap</span><p>Số tiền tối đa mỗi lần khám, mỗi ngày, mỗi năm. Trả qua quyền lợi con thì trừ cả hạn mức của quyền lợi cha.</p></div>
+    <div><b>Đồng chi trả</b><span class="en">Co-payment · COPAY</span><p>Phần trăm khách tự chịu theo hợp đồng. Hồ sơ demo dùng 20%.</p></div>
+    <div><b>7 mã từ chối</b><span class="en">LIMIT · PERIOD · NOBEN · WAIT · EXCL · NOTREL · NOTCOV</span><p>Hết hạn mức, ngoài thời hạn, không có quyền lợi, chưa qua kỳ chờ, điều khoản loại trừ, không liên quan chẩn đoán, không thuộc danh mục chi trả.</p></div>
+    <div><b>Track 1 / Track 2</b><span class="en">Deterministic / Clinical</span><p>Track 1 là chuỗi quy tắc tính tiền, sinh <i>quyết định</i>. Track 2 là thẩm định lâm sàng, sinh <i>khuyến nghị</i>.</p></div>
+    <div><b>Tín hiệu bất thường</b><span class="en">FraudSignal</span><p>Do AG-4 nêu: hồ sơ trùng, ngày vô lý, cơ sở y tế không khớp danh mục. Không phải kết luận gian lận.</p></div>
+    <div><b>Điểm kiểm</b><span class="en">TermCheckpoint</span><p>Câu hỏi cần người trả lời khi một điều khoản có thể áp dụng nhưng máy không đủ căn cứ để tự quyết.</p></div>
+    <div><b>Tự duyệt</b><span class="en">Auto-approval · STP</span><p>Hồ sơ đi thẳng đến chi trả không qua tay người, vì đạt đủ 4 điều kiện của cổng.</p></div>
+    <div><b>Độ tin cậy</b><span class="en">Confidence</span><p>IDP chấm mỗi trường đọc được từ 0 đến 1. Dưới 0,75 thì dòng được tô vàng để cán bộ xác minh.</p></div>
+    <div><b>Bốn mắt</b><span class="en">Four-eyes</span><p>Người duyệt phải khác người thẩm định. Hệ thống kiểm ở server.</p></div>
+  </div>
+</section>
+
+<!-- ================= 3 ARCHITECTURE ================= -->
+<section id="kientruc">
+  <div class="num">03</div>
+  <h2>Kiến trúc: ai nói chuyện với ai</h2>
+  <p class="prose">Có bốn khối. Hai ứng dụng web dựng trên OutSystems ODC, một dịch vụ bên ngoài là BnK IDP, và các agent chạy trong ODC Agent Workbench. Điểm cần nhớ: <b>MyInsurance không có logic nghiệp vụ riêng</b>. Nó gọi service action của ClaimMVP, nên mọi thứ khách thấy và cán bộ thấy là cùng một dữ liệu.</p>
+  <figure>
+    <svg viewBox="0 0 1000 470" role="img" aria-label="Kiến trúc: MyInsurance gọi service action của ClaimMVP; ClaimMVP gọi REST tới BnK IDP và dùng agent trên Agent Workbench làm tool, agent gọi ngược server action của ClaimMVP">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah-a"/></marker>
+        <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker>
+      </defs>
+      <!-- people -->
+      <text x="90" y="24" text-anchor="middle" class="tt">Khách hàng</text>
+      <text x="430" y="24" text-anchor="middle" class="tt">Cán bộ · Người duyệt · Vận hành</text>
+      <line x1="90" y1="32" x2="90" y2="58" class="ln" marker-end="url(#a1)"/>
+      <line x1="430" y1="32" x2="430" y2="58" class="ln" marker-end="url(#a1)"/>
+      <!-- MyInsurance -->
+      <rect x="10" y="62" width="160" height="200" rx="12" class="bx-t"/>
+      <text x="90" y="88" text-anchor="middle" class="tt tc">MyInsurance</text>
+      <text x="90" y="106" text-anchor="middle" class="sm">cổng khách · VI/EN</text>
+      <text x="24" y="134" class="sm">Bảo hiểm của tôi</text>
+      <text x="24" y="154" class="sm">Tạo hồ sơ 4 bước</text>
+      <text x="24" y="174" class="sm">Hồ sơ &amp; tiến trình</text>
+      <text x="24" y="194" class="sm">Kết quả + thư</text>
+      <text x="24" y="214" class="sm">Bổ sung chứng từ</text>
+      <text x="24" y="234" class="sm ta">Trợ lý khách</text>
+      <!-- arrow MyInsurance -> ClaimMVP -->
+      <line x1="172" y1="160" x2="236" y2="160" class="ln" marker-end="url(#a1)"/>
+      <text x="204" y="150" text-anchor="middle" class="sm">service</text>
+      <text x="204" y="178" text-anchor="middle" class="sm">action</text>
+      <!-- ClaimMVP -->
+      <rect x="240" y="62" width="380" height="396" rx="12" class="bx-t"/>
+      <text x="430" y="88" text-anchor="middle" class="tt tc">ClaimMVP · Claim Console</text>
+      <text x="430" y="106" text-anchor="middle" class="sm">16 màn nghiệp vụ · dữ liệu dùng chung</text>
+      <rect x="258" y="120" width="344" height="62" rx="9" class="bx"/>
+      <text x="272" y="144" class="tt">AG-0 Điều phối · AG-1 Tiếp nhận</text>
+      <text x="272" y="164" class="sm">server action + timer, chuyển trạng thái hồ sơ</text>
+      <rect x="258" y="192" width="344" height="62" rx="9" class="bx-m"/>
+      <text x="272" y="216" class="tt tm">Chuỗi 14 bước (RunAdjudicationChain)</text>
+      <text x="272" y="236" class="sm">nơi duy nhất ghi tiền · ChainRun · sổ hạn mức</text>
+      <rect x="258" y="264" width="344" height="62" rx="9" class="bx"/>
+      <text x="272" y="288" class="tt">Đối chiếu R1–R9 · Cổng C1–C4</text>
+      <text x="272" y="308" class="sm">quy tắc thường, lý do bằng lời</text>
+      <rect x="258" y="336" width="344" height="106" rx="9" class="bx"/>
+      <text x="272" y="360" class="tt">Dữ liệu</text>
+      <text x="272" y="380" class="sm">Claim · ClaimLine · ClaimDocument (copy IDP bất biến)</text>
+      <text x="272" y="398" class="sm">FraudSignal · Recommendation · TermCheckpoint</text>
+      <text x="272" y="416" class="sm">Letter · ChainRun · AgentRun (dấu vết)</text>
+      <!-- IDP -->
+      <rect x="720" y="62" width="270" height="180" rx="12" class="bx-m"/>
+      <text x="855" y="88" text-anchor="middle" class="tt tm">BnK IDP</text>
+      <text x="855" y="106" text-anchor="middle" class="sm">staging · tenant 177</text>
+      <text x="736" y="134" class="sm">Phân loại + bóc tách chứng từ</text>
+      <text x="736" y="154" class="sm">Workflow thẩm định (Langflow)</text>
+      <text x="736" y="174" class="sm">Danh mục 13.328 cơ sở y tế</text>
+      <text x="736" y="194" class="sm">Lưu bản gốc (raw-file)</text>
+      <text x="736" y="222" class="sm">REST + JWT, polling</text>
+      <line x1="622" y1="150" x2="716" y2="150" class="ln-m" marker-end="url(#a3)"/>
+      <text x="669" y="140" text-anchor="middle" class="sm tm">REST</text>
+      <text x="669" y="168" text-anchor="middle" class="sm">15 endpoint</text>
+      <!-- Workbench -->
+      <rect x="720" y="270" width="270" height="188" rx="12" class="bx-a"/>
+      <text x="855" y="296" text-anchor="middle" class="tt ta">ODC Agent Workbench</text>
+      <text x="855" y="314" text-anchor="middle" class="sm">model gpt-5.4-mini</text>
+      <text x="736" y="342" class="sm">AG-2 Giải thích tính tiền</text>
+      <text x="736" y="362" class="sm">AG-3 Lâm sàng</text>
+      <text x="736" y="382" class="sm">AG-4 Tín hiệu bất thường</text>
+      <text x="736" y="402" class="sm">AG-5 Thư khách hàng</text>
+      <text x="736" y="422" class="sm">Trợ lý khách · Trợ lý cán bộ</text>
+      <line x1="622" y1="350" x2="716" y2="350" class="ln-a" marker-end="url(#a2)"/>
+      <text x="669" y="340" text-anchor="middle" class="sm ta">gọi agent</text>
+      <line x1="716" y1="390" x2="622" y2="390" class="ln-a" marker-end="url(#a2)"/>
+      <text x="669" y="408" text-anchor="middle" class="sm ta">tool là</text><text x="669" y="422" text-anchor="middle" class="sm ta">server action</text>
+    </svg>
+    <figcaption>ClaimMVP là trung tâm. Nó gọi BnK IDP qua REST và gọi agent trên Agent Workbench. Agent không chạm database trực tiếp: mỗi "tool" của agent là một server action của ClaimMVP, nên hệ thống kiểm soát được agent đọc gì và ghi gì.</figcaption>
+  </figure>
+
+  <div class="tbl"><table>
+    <tr><th>Khối</th><th>Công nghệ</th><th>Vai trò</th><th>Ghi chú khi bị hỏi</th></tr>
+    <tr><td class="k">MyInsurance</td><td>ODC Reactive Web</td><td>Cổng cho người được bảo hiểm</td><td>Đăng nhập theo khách, chỉ thấy hồ sơ của mình. Gọi service action của ClaimMVP.</td></tr>
+    <tr><td class="k">ClaimMVP</td><td>ODC Reactive Web</td><td>Claim Console cho 3 vai: cán bộ (ClaimOfficer), người duyệt (ClaimApprover), vận hành (ClaimOps)</td><td>Chứa entity, chuỗi tính tiền, cổng, adapter IDP, timer điều phối.</td></tr>
+    <tr><td class="k">BnK IDP</td><td>Sản phẩm IDP của BnK, gọi qua REST</td><td>Đọc chứng từ, thẩm định workflow, danh mục bệnh viện</td><td>Môi trường staging <code>idp-api.idpstg.bnksolution.com</code>, tenant 177, bộ chứng từ 198 <code>HEALTH_CLAIM_OS_V1</code>.</td></tr>
+    <tr><td class="k">Agent Workbench</td><td>Tính năng AI Agent của ODC</td><td>Chạy các agent có prompt + danh sách tool đóng</td><td>Model cấu hình tên "ForHackaton" = gpt-5.4-mini. Agent không gọi agent khác; việc điều phối nằm ở AG-0.</td></tr>
+    <tr><td class="k">Lõi bảo hiểm</td><td>Dữ liệu seed</td><td>Hợp đồng, người được BH, cây quyền lợi</td><td>Sản phẩm HC-STD/PLS/PRM được seed sẵn. Thực tế sẽ nối core (InsureMO, hệ của khách), demo không khoá vào core nào.</td></tr>
+  </table></div>
+</section>
+
+
+<!-- ================= USE CASE ================= -->
+<section id="usecase">
+  <div class="num">04</div>
+  <h2>Use case: ai dùng hệ thống để làm gì</h2>
+  <p class="prose">Có bốn vai người dùng và mười tám việc. Khách chỉ dùng MyInsurance; ba vai nội bộ dùng Claim Console. Nhãn xanh <span class="idp-tag" style="pointer-events:none">IDP</span> là việc có BnK IDP tham gia, nhãn tím là việc có agent; việc không có nhãn là logic thường. Năm việc có nhãn cam UC-01…UC-05 có luồng chi tiết ngay bên dưới.</p>
+  <figure><svg class="d uc" viewBox="0 0 1168 520" style="flex:1;min-height:0;width:100%" role="img" aria-label="Sơ đồ use case: khách hàng dùng MyInsurance; cán bộ, người duyệt, vận hành dùng Claim Console">
+<rect x="112" y="8" width="368" height="504" rx="14" class="bnd"/>
+<text x="296" y="36" text-anchor="middle" class="tt tm">MyInsurance · cổng khách hàng</text>
+<line x1="50" y1="250" x2="135" y2="86" class="ln"/>
+<ellipse cx="300" cy="86" rx="165" ry="22" class="uc-o"/>
+<text x="300" y="91" text-anchor="middle" class="uct">Xem hợp đồng, quyền lợi, hạn mức</text>
+<line x1="50" y1="250" x2="135" y2="148" class="ln"/>
+<ellipse cx="300" cy="148" rx="165" ry="22" class="uc-o has"/>
+<text x="151" y="152" class="ucid">UC-01</text>
+<text x="286" y="153" text-anchor="middle" class="uct">Tạo hồ sơ, chụp chứng từ</text>
+<rect x="420.8" y="139" width="30" height="18" rx="5" class="tg-m"/><text x="436" y="152" text-anchor="middle" class="tgt">IDP</text>
+<line x1="50" y1="250" x2="135" y2="210" class="ln"/>
+<ellipse cx="300" cy="210" rx="165" ry="22" class="uc-o"/>
+<text x="300" y="215" text-anchor="middle" class="uct">Theo dõi tiến trình hồ sơ</text>
+<line x1="50" y1="250" x2="135" y2="272" class="ln"/>
+<ellipse cx="300" cy="272" rx="165" ry="22" class="uc-o"/>
+<text x="286" y="277" text-anchor="middle" class="uct">Xem kết quả và thư</text>
+<rect x="413.4" y="263" width="38" height="18" rx="5" class="tg-a"/><text x="432" y="276" text-anchor="middle" class="tgt">AG-5</text>
+<line x1="50" y1="250" x2="135" y2="334" class="ln"/>
+<ellipse cx="300" cy="334" rx="165" ry="22" class="uc-o has"/>
+<text x="151" y="338" class="ucid">UC-02</text>
+<text x="286" y="339" text-anchor="middle" class="uct">Bổ sung chứng từ còn thiếu</text>
+<rect x="420.8" y="325" width="30" height="18" rx="5" class="tg-m"/><text x="436" y="338" text-anchor="middle" class="tgt">IDP</text>
+<line x1="50" y1="250" x2="135" y2="396" class="ln"/>
+<ellipse cx="300" cy="396" rx="165" ry="22" class="uc-o"/>
+<text x="286" y="401" text-anchor="middle" class="uct">Hỏi trợ lý khách</text>
+<rect x="428.2" y="387" width="23" height="18" rx="5" class="tg-a"/><text x="440" y="400" text-anchor="middle" class="tgt">AI</text>
+<line x1="50" y1="250" x2="135" y2="458" class="ln"/>
+<ellipse cx="300" cy="458" rx="165" ry="22" class="uc-o"/>
+<text x="300" y="463" text-anchor="middle" class="uct">Nhận thông báo</text>
+<g class="actor "><circle cx="34" cy="232" r="10"/><line x1="34" y1="242" x2="34" y2="268"/><line x1="20" y1="252" x2="48" y2="252"/><line x1="34" y1="268" x2="23" y2="286"/><line x1="34" y1="268" x2="45" y2="286"/></g>
+<text x="34" y="304" text-anchor="middle" class="tt">Khách hàng</text>
+<text x="34" y="320" text-anchor="middle" class="sm">người được BH</text>
+<rect x="540" y="8" width="460" height="504" rx="14" class="bnd"/>
+<text x="770" y="36" text-anchor="middle" class="tt tm">Claim Console · ClaimMVP</text>
+<line x1="556" y1="306" x2="984" y2="306" class="ln-d"/>
+<line x1="556" y1="372" x2="984" y2="372" class="ln-d"/>
+<line x1="1084" y1="156" x2="975" y2="66" class="ln"/>
+<ellipse cx="770" cy="66" rx="205" ry="16" class="uc-o"/>
+<text x="770" y="71" text-anchor="middle" class="uct">Xem danh sách việc, mở hồ sơ</text>
+<line x1="1084" y1="156" x2="975" y2="102" class="ln"/>
+<ellipse cx="770" cy="102" rx="205" ry="16" class="uc-o"/>
+<text x="756" y="107" text-anchor="middle" class="uct">Xác minh dòng đọc được, xem bản gốc</text>
+<rect x="930.8" y="93" width="30" height="18" rx="5" class="tg-m"/><text x="946" y="106" text-anchor="middle" class="tgt">IDP</text>
+<line x1="1084" y1="156" x2="975" y2="138" class="ln"/>
+<ellipse cx="770" cy="138" rx="205" ry="16" class="uc-o has"/>
+<text x="581" y="142" class="ucid">UC-03</text>
+<text x="756" y="143" text-anchor="middle" class="uct">Xác nhận / bác đề xuất lâm sàng</text>
+<rect x="923.4" y="129" width="38" height="18" rx="5" class="tg-a"/><text x="942" y="142" text-anchor="middle" class="tgt">AG-3</text>
+<line x1="1084" y1="156" x2="975" y2="174" class="ln"/>
+<ellipse cx="770" cy="174" rx="205" ry="16" class="uc-o has"/>
+<text x="581" y="178" class="ucid">UC-03</text>
+<text x="756" y="179" text-anchor="middle" class="uct">Xử lý tín hiệu bất thường</text>
+<rect x="923.4" y="165" width="38" height="18" rx="5" class="tg-a"/><text x="942" y="178" text-anchor="middle" class="tgt">AG-4</text>
+<line x1="1084" y1="156" x2="975" y2="210" class="ln"/>
+<ellipse cx="770" cy="210" rx="205" ry="16" class="uc-o has"/>
+<text x="581" y="214" class="ucid">UC-03</text>
+<text x="770" y="215" text-anchor="middle" class="uct">Trả lời điểm kiểm điều khoản</text>
+<line x1="1084" y1="156" x2="975" y2="246" class="ln"/>
+<ellipse cx="770" cy="246" rx="205" ry="16" class="uc-o"/>
+<text x="756" y="251" text-anchor="middle" class="uct">Xem tính tiền, hỏi giải thích</text>
+<rect x="923.4" y="237" width="38" height="18" rx="5" class="tg-a"/><text x="942" y="250" text-anchor="middle" class="tgt">AG-2</text>
+<line x1="1084" y1="156" x2="975" y2="282" class="ln"/>
+<ellipse cx="770" cy="282" rx="205" ry="16" class="uc-o"/>
+<text x="756" y="287" text-anchor="middle" class="uct">Sửa và gửi thư cho khách</text>
+<rect x="923.4" y="273" width="38" height="18" rx="5" class="tg-a"/><text x="942" y="286" text-anchor="middle" class="tgt">AG-5</text>
+<g class="actor "><circle cx="1100" cy="138" r="10"/><line x1="1100" y1="148" x2="1100" y2="174"/><line x1="1086" y1="158" x2="1114" y2="158"/><line x1="1100" y1="174" x2="1089" y2="192"/><line x1="1100" y1="174" x2="1111" y2="192"/></g>
+<text x="1100" y="210" text-anchor="middle" class="tt">Cán bộ</text>
+<text x="1100" y="226" text-anchor="middle" class="sm">ClaimOfficer</text>
+<line x1="1084" y1="310" x2="975" y2="340" class="ln"/>
+<ellipse cx="770" cy="340" rx="205" ry="16" class="uc-o has"/>
+<text x="581" y="344" class="ucid">UC-04</text>
+<text x="770" y="345" text-anchor="middle" class="uct">Duyệt · từ chối theo mã · trả lại</text>
+<g class="actor "><circle cx="1100" cy="292" r="10"/><line x1="1100" y1="302" x2="1100" y2="328"/><line x1="1086" y1="312" x2="1114" y2="312"/><line x1="1100" y1="328" x2="1089" y2="346"/><line x1="1100" y1="328" x2="1111" y2="346"/></g>
+<text x="1100" y="364" text-anchor="middle" class="tt">Người duyệt</text>
+<text x="1100" y="380" text-anchor="middle" class="sm">≠ cán bộ (4 mắt)</text>
+<line x1="1084" y1="428" x2="975" y2="408" class="ln"/>
+<ellipse cx="770" cy="408" rx="205" ry="16" class="uc-o has"/>
+<text x="581" y="412" class="ucid">UC-05</text>
+<text x="756" y="413" text-anchor="middle" class="uct">Xử lý hàng đợi lỗi đọc chứng từ</text>
+<rect x="930.8" y="399" width="30" height="18" rx="5" class="tg-m"/><text x="946" y="412" text-anchor="middle" class="tgt">IDP</text>
+<line x1="1084" y1="428" x2="975" y2="446" class="ln"/>
+<ellipse cx="770" cy="446" rx="205" ry="16" class="uc-o"/>
+<text x="770" y="451" text-anchor="middle" class="uct">Theo dõi nhật ký, kết quả &amp; ROI</text>
+<line x1="1084" y1="428" x2="975" y2="484" class="ln"/>
+<ellipse cx="770" cy="484" rx="205" ry="16" class="uc-o"/>
+<text x="770" y="489" text-anchor="middle" class="uct">Quản trị ngưỡng tự duyệt, cấu hình</text>
+<g class="actor "><circle cx="1100" cy="410" r="10"/><line x1="1100" y1="420" x2="1100" y2="446"/><line x1="1086" y1="430" x2="1114" y2="430"/><line x1="1100" y1="446" x2="1089" y2="464"/><line x1="1100" y1="446" x2="1111" y2="464"/></g>
+<text x="1100" y="482" text-anchor="middle" class="tt">Vận hành</text>
+<text x="1100" y="498" text-anchor="middle" class="sm">ClaimOps</text>
+<text x="510" y="262" text-anchor="middle" class="sm" transform="rotate(-90 510 262)">cùng dữ liệu · service action</text>
+</svg>
+    <div class="legend"><span><i class="m">IDP</i>BnK IDP tham gia</span><span><i class="a">AG-x</i>agent đề xuất, soạn nháp, giải thích</span><span><i class="a">AI</i>trợ lý chỉ đọc</span><span><i class="u">UC-0x</i>có luồng chi tiết</span></div>
+    <figcaption>Người duyệt phải khác cán bộ thẩm định (bốn mắt, kiểm ở server). MyInsurance không có logic riêng: mọi việc của khách đi qua service action của ClaimMVP, nên khách và cán bộ nhìn cùng một dữ liệu.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Mã</th><th>Use case có luồng chi tiết</th><th>Nói một câu</th><th>Dùng BnK IDP</th></tr>
+    <tr><td class="c"><a href="#uc01">UC-01</a></td><td class="k">Tạo hồ sơ, chụp chứng từ</td><td>Đường chính: khách gửi ảnh, hệ thống tự chạy đến chi trả trong khoảng 4 phút.</td><td><a class="idp-tag" href="#idpmap">IDP ① ② ③</a></td></tr><tr><td class="c"><a href="#uc02">UC-02</a></td><td class="k">Bổ sung chứng từ còn thiếu</td><td>Thiếu chứng từ không phải lý do từ chối: hệ thống xin khách bổ sung đúng tờ còn thiếu.</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr><tr><td class="c"><a href="#uc03">UC-03</a></td><td class="k">Cán bộ xử lý hồ sơ không tự duyệt</td><td>Cán bộ xử lý đúng điều kiện cổng bị trượt; mọi quyết định kèm lý do.</td><td><a class="idp-tag" href="#idpmap">IDP ① ② ③ ④</a></td></tr><tr><td class="c"><a href="#uc04">UC-04</a></td><td class="k">Duyệt · từ chối theo mã · trả lại</td><td>Người duyệt quyết hồ sơ không qua cổng; server chặn người duyệt chính hồ sơ mình thẩm định.</td><td>Không gọi IDP</td></tr><tr><td class="c"><a href="#uc05">UC-05</a></td><td class="k">Xử lý hàng đợi lỗi đọc chứng từ</td><td>IDP lỗi không bao giờ thành từ chối: hồ sơ chờ vận hành thử lại.</td><td><a class="idp-tag" href="#idpmap">IDP ① ⑥</a></td></tr>
+  </table></div>
+
+  <h3 id="uc01">UC-01 · Tạo hồ sơ, chụp chứng từ</h3>
+  <p class="prose">Đường chính: khách gửi ảnh, hệ thống tự chạy đến chi trả trong khoảng 4 phút. Đọc từ trái sang phải; mỗi làn ngang là một bên tham gia, nhãn cam A1, A2… là chỗ rẽ sang luồng khác.</p>
+  <figure><svg class="d fl" viewBox="0 0 1168 338" style="flex:1;min-height:0;width:100%" role="img">
+<defs><marker id="uc01a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker><marker id="uc01m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+<rect x="0" y="4" width="1168" height="66" class="lane"/>
+<text x="12" y="42" class="ln-t">Khách hàng</text>
+<rect x="0" y="70" width="1168" height="66" class="lane alt"/>
+<text x="12" y="103" class="ln-t">MyInsurance</text>
+<text x="12" y="119" class="ln-s">cổng khách</text>
+<rect x="0" y="136" width="1168" height="66" class="lane"/>
+<text x="12" y="169" class="ln-t">BnK IDP</text>
+<text x="12" y="185" class="ln-s">REST</text>
+<rect x="0" y="202" width="1168" height="66" class="lane alt"/>
+<text x="12" y="235" class="ln-t">ClaimMVP</text>
+<text x="12" y="251" class="ln-s">AG-0, AG-1, chuỗi, cổng</text>
+<rect x="0" y="268" width="1168" height="66" class="lane"/>
+<text x="12" y="301" class="ln-t">Agent</text>
+<text x="12" y="317" class="ln-s">Agent Workbench</text>
+<line x1="124" y1="4" x2="124" y2="334" class="ln-sep"/>
+<path d="M236 37 H250" class="ed" marker-end="url(#uc01a)"/>
+<path d="M351 37 H358 V103 H365" class="ed" marker-end="url(#uc01a)"/>
+<path d="M466 103 H473 V235 H480" class="ed" marker-end="url(#uc01a)"/>
+<text x="476" y="230" text-anchor="end" class="ed-t">service action</text>
+<path d="M581 235 H588 V169 H595" class="ed" marker-end="url(#uc01a)"/>
+<text x="591" y="164" text-anchor="end" class="ed-t">POST /request</text>
+<path d="M695 169 H702 V235 H709" class="ed" marker-end="url(#uc01a)"/>
+<text x="705" y="230" text-anchor="end" class="ed-t">poll · result</text>
+<path d="M810 235 H817 V301 H824" class="ed" marker-end="url(#uc01a)"/>
+<path d="M875 277 V193" class="ed-d" marker-end="url(#uc01a)"/>
+<path d="M925 301 H932 V235 H939" class="ed" marker-end="url(#uc01a)"/>
+<text x="935" y="230" text-anchor="end" class="ed-t">đủ 2 track</text>
+<path d="M1040 235 H1054" class="ed-m" marker-end="url(#uc01m)"/>
+<path d="M1105 259 V277" class="ed" marker-end="url(#uc01a)"/>
+<path d="M1105 211 V61" class="ed-m" marker-end="url(#uc01m)"/>
+<rect x="135" y="13" width="101" height="48" rx="8" class="nd act"/>
+<text x="185" y="27" text-anchor="middle" class="nt b">Khai sự kiện</text>
+<text x="185" y="42" text-anchor="middle" class="nt">loại tổn thất,</text>
+<text x="185" y="56" text-anchor="middle" class="nt">ngày, cơ sở</text>
+<rect x="250" y="13" width="101" height="48" rx="8" class="nd act"/>
+<text x="300" y="27" text-anchor="middle" class="nt b">Chụp chứng từ</text>
+<text x="300" y="42" text-anchor="middle" class="nt">theo danh mục,</text>
+<text x="300" y="56" text-anchor="middle" class="nt">bấm Gửi</text>
+<rect x="365" y="79" width="101" height="48" rx="8" class="nd sys"/>
+<text x="415" y="100" text-anchor="middle" class="nt b">Tạo hồ sơ</text>
+<text x="415" y="115" text-anchor="middle" class="nt">"Đã gửi"</text>
+<rect x="480" y="211" width="101" height="48" rx="8" class="nd sys"/>
+<text x="530" y="225" text-anchor="middle" class="nt b">AG-1 nộp</text>
+<text x="530" y="240" text-anchor="middle" class="nt">chứng từ nền</text>
+<text x="530" y="254" text-anchor="middle" class="nt">name = số HS</text>
+<rect x="595" y="145" width="101" height="48" rx="8" class="nd idp"/>
+<text x="645" y="159" text-anchor="middle" class="nt b">Phân loại</text>
+<text x="645" y="174" text-anchor="middle" class="nt">+ bóc tách</text>
+<text x="645" y="188" text-anchor="middle" class="nt">≈ 24 s</text>
+<rect x="678" y="136" width="26" height="17" rx="8" class="altb"/><text x="691" y="148" text-anchor="middle" class="altt">A1</text>
+<rect x="709" y="211" width="101" height="48" rx="8" class="nd sys"/>
+<text x="760" y="225" text-anchor="middle" class="nt b">Tạo dòng</text>
+<text x="760" y="240" text-anchor="middle" class="nt">chi phí · R1–R9</text>
+<text x="760" y="254" text-anchor="middle" class="nt">"Đang thẩm định"</text>
+<rect x="793" y="202" width="26" height="17" rx="8" class="altb"/><text x="806" y="214" text-anchor="middle" class="altt">A2</text>
+<rect x="824" y="277" width="101" height="48" rx="8" class="nd ai"/>
+<text x="875" y="298" text-anchor="middle" class="nt b">AG-4 ‖ AG-3</text>
+<text x="875" y="313" text-anchor="middle" class="nt">chạy song song</text>
+<rect x="824" y="145" width="101" height="48" rx="8" class="nd idp"/>
+<text x="875" y="159" text-anchor="middle" class="nt b">Tra danh mục</text>
+<text x="875" y="174" text-anchor="middle" class="nt">+ thẩm định</text>
+<text x="875" y="188" text-anchor="middle" class="nt">chéo</text>
+<rect x="939" y="211" width="101" height="48" rx="8" class="nd sys"/>
+<text x="990" y="225" text-anchor="middle" class="nt b">Chuỗi 14 bước</text>
+<text x="990" y="240" text-anchor="middle" class="nt">→ cổng</text>
+<text x="990" y="254" text-anchor="middle" class="nt">C1–C4</text>
+<rect x="1023" y="202" width="26" height="17" rx="8" class="altb"/><text x="1036" y="214" text-anchor="middle" class="altt">A3</text>
+<rect x="1054" y="211" width="101" height="48" rx="8" class="nd ok"/>
+<text x="1105" y="232" text-anchor="middle" class="nt b">4/4: tự duyệt</text>
+<text x="1105" y="247" text-anchor="middle" class="nt">Đã chi trả</text>
+<rect x="1054" y="277" width="101" height="48" rx="8" class="nd ai"/>
+<text x="1105" y="298" text-anchor="middle" class="nt b">AG-5 soạn</text>
+<text x="1105" y="313" text-anchor="middle" class="nt">thư kết quả</text>
+<rect x="1054" y="13" width="101" height="48" rx="8" class="nd act"/>
+<text x="1105" y="34" text-anchor="middle" class="nt b">Xem kết quả,</text>
+<text x="1105" y="49" text-anchor="middle" class="nt">thư, hỏi trợ lý</text>
+</svg></figure>
+  <div class="ucspec">
+    <div><span class="h">Tác nhân · kích hoạt</span><b>Khách hàng</b> (chính) · BnK IDP, AG-1, AG-3, AG-4, AG-5 (hệ thống). <b>Kích hoạt:</b> khách bấm Gửi hồ sơ. <b>Tiền điều kiện:</b> đã đăng nhập, hợp đồng còn hiệu lực.</div>
+    <div><span class="h">Kết quả</span>Tự duyệt → <b>Đã chi trả</b>, có lệnh chi và thư nháp AG-5; mọi bước ghi AgentRun. Chạy thật: CLM-2026-0449, 4 phút 3 giây.</div>
+    <div class="alt"><span class="h">Luồng thay thế</span><ul><li><b>A1</b> IDP lỗi / quá giờ → "Lỗi xử lý tài liệu" → UC-05</li><li><b>A2</b> Thiếu chứng từ bắt buộc → "Chờ bổ sung" → UC-02</li><li><b>A3</b> Cổng trượt (tín hiệu, đề xuất, điểm kiểm, &gt; 2 triệu) → UC-03</li></ul></div>
+  </div>
+  <div class="say idp"><span class="lbl">BnK IDP trong luồng này</span><p><a class="idp-tag" href="#idpmap">IDP ①</a> AG-1 tạo nhóm cho hồ sơ, nộp từng file (<code>POST /request</code>, templates = 6090–6098, name = số hồ sơ), timer hỏi trạng thái rồi lấy kết quả; kết quả được copy một lần rồi chuyển thành dòng chi phí. <a class="idp-tag" href="#idpmap">IDP ③</a> AG-4 tìm tên cơ sở trong danh mục 322. <a class="idp-tag" href="#idpmap">IDP ②</a> AG-3 tạo và chạy workflow thẩm định, đọc khoảng 20 mục cảnh báo.</p></div>
+
+  <h3 id="uc02">UC-02 · Bổ sung chứng từ còn thiếu</h3>
+  <p class="prose">Thiếu chứng từ không phải lý do từ chối: hệ thống xin khách bổ sung đúng tờ còn thiếu. Đọc từ trái sang phải; mỗi làn ngang là một bên tham gia, nhãn cam A1, A2… là chỗ rẽ sang luồng khác.</p>
+  <figure><svg class="d fl" viewBox="0 0 1168 338" style="flex:1;min-height:0;width:100%" role="img">
+<defs><marker id="uc02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker><marker id="uc02m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+<rect x="0" y="4" width="1168" height="66" class="lane"/>
+<text x="12" y="37" class="ln-t">ClaimMVP</text>
+<text x="12" y="53" class="ln-s">R9 · trạng thái</text>
+<rect x="0" y="70" width="1168" height="66" class="lane alt"/>
+<text x="12" y="103" class="ln-t">Agent</text>
+<text x="12" y="119" class="ln-s">AG-5</text>
+<rect x="0" y="136" width="1168" height="66" class="lane"/>
+<text x="12" y="169" class="ln-t">Cán bộ</text>
+<text x="12" y="185" class="ln-s">ClaimOfficer</text>
+<rect x="0" y="202" width="1168" height="66" class="lane alt"/>
+<text x="12" y="235" class="ln-t">Khách hàng</text>
+<text x="12" y="251" class="ln-s">MyInsurance</text>
+<rect x="0" y="268" width="1168" height="66" class="lane"/>
+<text x="12" y="301" class="ln-t">BnK IDP</text>
+<text x="12" y="317" class="ln-s">REST</text>
+<line x1="124" y1="4" x2="124" y2="334" class="ln-sep"/>
+<path d="M269 37 H283" class="ed" marker-end="url(#uc02a)"/>
+<path d="M416 37 H423 V103 H430" class="ed" marker-end="url(#uc02a)"/>
+<path d="M564 103 H571 V169 H578" class="ed" marker-end="url(#uc02a)"/>
+<path d="M712 169 H719 V235 H726" class="ed" marker-end="url(#uc02a)"/>
+<path d="M860 235 H867 V301 H874" class="ed" marker-end="url(#uc02a)"/>
+<path d="M1007 301 H1014 V37 H1021" class="ed-m" marker-end="url(#uc02m)"/>
+<text x="1017" y="32" text-anchor="end" class="ed-t">R9 COMPLETE</text>
+<rect x="135" y="13" width="134" height="48" rx="8" class="nd sys"/>
+<text x="202" y="27" text-anchor="middle" class="nt b">R9: thiếu</text>
+<text x="202" y="42" text-anchor="middle" class="nt">chứng từ</text>
+<text x="202" y="56" text-anchor="middle" class="nt">bắt buộc</text>
+<rect x="283" y="13" width="134" height="48" rx="8" class="nd hold"/>
+<text x="350" y="34" text-anchor="middle" class="nt b">Hồ sơ</text>
+<text x="350" y="49" text-anchor="middle" class="nt">"Chờ bổ sung"</text>
+<rect x="430" y="79" width="134" height="48" rx="8" class="nd ai"/>
+<text x="497" y="93" text-anchor="middle" class="nt b">Soạn thư</text>
+<text x="497" y="108" text-anchor="middle" class="nt">ADDDOCS (nháp)</text>
+<text x="497" y="122" text-anchor="middle" class="nt">nêu đúng tờ thiếu</text>
+<rect x="578" y="145" width="134" height="48" rx="8" class="nd act"/>
+<text x="645" y="166" text-anchor="middle" class="nt b">Sửa nếu cần,</text>
+<text x="645" y="181" text-anchor="middle" class="nt">bấm Gửi thư</text>
+<rect x="726" y="211" width="134" height="48" rx="8" class="nd act"/>
+<text x="793" y="232" text-anchor="middle" class="nt b">Nhận thông báo</text>
+<text x="793" y="247" text-anchor="middle" class="nt">→ Tải lên → Gửi</text>
+<rect x="843" y="202" width="26" height="17" rx="8" class="altb"/><text x="856" y="214" text-anchor="middle" class="altt">A1</text>
+<rect x="874" y="277" width="134" height="48" rx="8" class="nd idp"/>
+<text x="940" y="298" text-anchor="middle" class="nt b">Đọc chứng từ</text>
+<text x="940" y="313" text-anchor="middle" class="nt">mới</text>
+<rect x="990" y="268" width="26" height="17" rx="8" class="altb"/><text x="1003" y="280" text-anchor="middle" class="altt">A2</text>
+<rect x="1021" y="13" width="134" height="48" rx="8" class="nd ok"/>
+<text x="1088" y="27" text-anchor="middle" class="nt b">Đủ hồ sơ →</text>
+<text x="1088" y="42" text-anchor="middle" class="nt">quay lại</text>
+<text x="1088" y="56" text-anchor="middle" class="nt">thẩm định</text>
+</svg></figure>
+  <div class="ucspec">
+    <div><span class="h">Tác nhân · kích hoạt</span><b>Khách hàng</b>, <b>cán bộ</b> · AG-5, BnK IDP. <b>Kích hoạt:</b> R9 báo thiếu chứng từ bắt buộc theo loại tổn thất (ví dụ ngoại trú thiếu phiếu khám).</div>
+    <div><span class="h">Kết quả</span>Đủ hồ sơ → hồ sơ tự quay lại thẩm định và đi tiếp như UC-01. Bộ mẫu: <code>03_thieu-phieu-kham</code> rồi <code>bo-sung</code>.</div>
+    <div class="alt"><span class="h">Luồng thay thế</span><ul><li><b>A1</b> Khách nộp sai loại (biên lai thay phiếu khám) → R9 vẫn thiếu, hồ sơ giữ "Chờ bổ sung"</li><li><b>A2</b> IDP lỗi khi đọc chứng từ mới → UC-05</li></ul></div>
+  </div>
+  <div class="say idp"><span class="lbl">BnK IDP trong luồng này</span><p><a class="idp-tag" href="#idpmap">IDP ①</a> Chứng từ bổ sung đi lại đúng đường nộp của UC-01: IDP phân loại và bóc tách, R9 kiểm lại đủ hồ sơ. Biên lai không có template trên tenant 177 nên không thay được phiếu khám.</p></div>
+
+  <h3 id="uc03">UC-03 · Cán bộ xử lý hồ sơ không tự duyệt</h3>
+  <p class="prose">Cán bộ xử lý đúng điều kiện cổng bị trượt; mọi quyết định kèm lý do. Đọc từ trái sang phải; mỗi làn ngang là một bên tham gia.</p>
+  <figure><svg class="d fl" viewBox="0 0 1168 320" style="flex:1;min-height:0;width:100%" role="img">
+<defs><marker id="uc03a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker><marker id="uc03m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+<rect x="0" y="4" width="1168" height="78" class="lane"/>
+<text x="12" y="43" class="ln-t">C2 · AG-3</text>
+<text x="12" y="59" class="ln-s">đề xuất chờ</text>
+<rect x="0" y="82" width="1168" height="78" class="lane alt"/>
+<text x="12" y="121" class="ln-t">C4 · AG-4</text>
+<text x="12" y="137" class="ln-s">tín hiệu mở</text>
+<rect x="0" y="160" width="1168" height="78" class="lane"/>
+<text x="12" y="199" class="ln-t">C3 · điều khoản</text>
+<text x="12" y="215" class="ln-s">điểm kiểm mở</text>
+<rect x="0" y="238" width="1168" height="78" class="lane alt"/>
+<text x="12" y="277" class="ln-t">C1 · số tiền</text>
+<text x="12" y="293" class="ln-s">&gt; 2 tr / bị cắt</text>
+<line x1="124" y1="4" x2="124" y2="316" class="ln-sep"/>
+<path d="M293 160 H307" class="ed" marker-end="url(#uc03a)"/>
+<path d="M466 160 H473 V43 H480" class="ed" marker-end="url(#uc03a)"/>
+<path d="M466 160 H473 V121 H480" class="ed" marker-end="url(#uc03a)"/>
+<path d="M466 160 H473 V199 H480" class="ed" marker-end="url(#uc03a)"/>
+<path d="M466 160 H473 V277 H480" class="ed" marker-end="url(#uc03a)"/>
+<path d="M638 43 H652" class="ed" marker-end="url(#uc03a)"/>
+<path d="M638 121 H652" class="ed" marker-end="url(#uc03a)"/>
+<path d="M638 199 H652" class="ed" marker-end="url(#uc03a)"/>
+<path d="M810 43 H817 V160 H824" class="ed" marker-end="url(#uc03a)"/>
+<path d="M810 121 H817 V160 H824" class="ed" marker-end="url(#uc03a)"/>
+<path d="M810 199 H817 V160 H824" class="ed" marker-end="url(#uc03a)"/>
+<path d="M638 277 H731 V160 H824" class="ed" marker-end="url(#uc03a)"/>
+<path d="M983 160 H990 V82 H997" class="ed-m" marker-end="url(#uc03m)"/>
+<path d="M983 160 H990 V238 H997" class="ed" marker-end="url(#uc03a)"/>
+<rect x="135" y="108" width="158" height="104" rx="8" class="nd act"/>
+<text x="214" y="157" text-anchor="middle" class="nt b">Mở hồ sơ từ</text>
+<text x="214" y="172" text-anchor="middle" class="nt">Danh sách việc</text>
+<rect x="307" y="108" width="158" height="104" rx="8" class="nd sys"/>
+<text x="387" y="143" text-anchor="middle" class="nt b">Đọc</text>
+<text x="387" y="157" text-anchor="middle" class="nt">"Việc cần làm"</text>
+<text x="387" y="172" text-anchor="middle" class="nt">và cổng: điều</text>
+<text x="387" y="186" text-anchor="middle" class="nt">kiện nào trượt</text>
+<rect x="480" y="13" width="158" height="60" rx="8" class="nd act"/>
+<text x="559" y="33" text-anchor="middle" class="nt b">Xác nhận /</text>
+<text x="559" y="48" text-anchor="middle" class="nt">Bác bỏ</text>
+<text x="559" y="62" text-anchor="middle" class="nt">(lý do bắt buộc)</text>
+<rect x="652" y="13" width="158" height="60" rx="8" class="nd sys"/>
+<text x="731" y="33" text-anchor="middle" class="nt b">Xác nhận: chuỗi</text>
+<text x="731" y="48" text-anchor="middle" class="nt">chạy lại · Bác:</text>
+<text x="731" y="62" text-anchor="middle" class="nt">tiền giữ nguyên</text>
+<rect x="480" y="91" width="158" height="60" rx="8" class="nd act"/>
+<text x="559" y="111" text-anchor="middle" class="nt b">Gỡ tín hiệu</text>
+<text x="559" y="126" text-anchor="middle" class="nt">(lý do ≥ 10 ký tự)</text>
+<text x="559" y="140" text-anchor="middle" class="nt">/ đề nghị giải trình</text>
+<rect x="652" y="91" width="158" height="60" rx="8" class="nd sys"/>
+<text x="731" y="111" text-anchor="middle" class="nt b">Gỡ: tín hiệu</text>
+<text x="731" y="126" text-anchor="middle" class="nt">"Đã xử lý" · Giải</text>
+<text x="731" y="140" text-anchor="middle" class="nt">trình: chờ khách</text>
+<rect x="480" y="169" width="158" height="60" rx="8" class="nd act"/>
+<text x="559" y="189" text-anchor="middle" class="nt b">Giữ nguyên /</text>
+<text x="559" y="204" text-anchor="middle" class="nt">Bỏ qua</text>
+<text x="559" y="218" text-anchor="middle" class="nt">(kèm lý do)</text>
+<rect x="652" y="169" width="158" height="60" rx="8" class="nd sys"/>
+<text x="731" y="189" text-anchor="middle" class="nt b">Giữ nguyên: từ</text>
+<text x="731" y="204" text-anchor="middle" class="nt">chối theo điều</text>
+<text x="731" y="218" text-anchor="middle" class="nt">khoản (trừ TBC-)</text>
+<rect x="480" y="247" width="158" height="60" rx="8" class="nd act"/>
+<text x="559" y="274" text-anchor="middle" class="nt b">Không có gì</text>
+<text x="559" y="289" text-anchor="middle" class="nt">để gỡ</text>
+<rect x="824" y="108" width="158" height="104" rx="8" class="nd sys"/>
+<text x="904" y="157" text-anchor="middle" class="nt b">Cổng chạy lại</text>
+<text x="904" y="172" text-anchor="middle" class="nt">C1–C4</text>
+<rect x="997" y="30" width="158" height="104" rx="8" class="nd ok"/>
+<text x="1076" y="79" text-anchor="middle" class="nt b">4/4 → tự duyệt,</text>
+<text x="1076" y="94" text-anchor="middle" class="nt">Đã chi trả</text>
+<rect x="997" y="186" width="158" height="104" rx="8" class="nd hold"/>
+<text x="1076" y="228" text-anchor="middle" class="nt b">Còn trượt →</text>
+<text x="1076" y="242" text-anchor="middle" class="nt">Trình phê duyệt</text>
+<text x="1076" y="257" text-anchor="middle" class="nt">(UC-04)</text>
+</svg></figure>
+  <div class="ucspec">
+    <div><span class="h">Tác nhân · kích hoạt</span><b>Cán bộ</b> (ClaimOfficer) · AG-3, AG-4. <b>Kích hoạt:</b> cổng không đạt 4/4; hồ sơ có nhãn "Bị chặn tự duyệt" hoặc "Chờ xác nhận đề xuất".</div>
+    <div><span class="h">Kết quả</span>Cổng chạy lại → tự duyệt; hoặc Trình phê duyệt → UC-04. Chạy thật: 0451 (trùng, C4), 0001 (đề xuất AG-3, C2).</div>
+    <div class="alt"><span class="h">Lưu ý</span><ul><li>Agent chỉ đề xuất: tiền chỉ đổi khi cán bộ xác nhận và chuỗi chạy lại</li><li>Khách không bao giờ được báo là "nghi trùng"</li><li>"Giữ nguyên" không có khi điều khoản còn mã tạm TBC-</li></ul></div>
+  </div>
+  <div class="say idp"><span class="lbl">BnK IDP trong luồng này</span><p>Cán bộ chủ yếu đọc lại kết quả IDP đã lưu trong hồ sơ: dòng IDP đọc và độ tin cậy <a class="idp-tag" href="#idpmap">IDP ①</a>, căn cứ của đề xuất AG-3 từ workflow thẩm định <a class="idp-tag" href="#idpmap">IDP ②</a>, mã cơ sở trong danh mục <a class="idp-tag" href="#idpmap">IDP ③</a>. Lời gọi IDP mới là khi mở chứng từ gốc lần đầu <a class="idp-tag" href="#idpmap">IDP ④</a>.</p></div>
+
+  <h3 id="uc04">UC-04 · Duyệt · từ chối theo mã · trả lại</h3>
+  <p class="prose">Người duyệt quyết hồ sơ không qua cổng; server chặn người duyệt chính hồ sơ mình thẩm định. Đọc từ trái sang phải; mỗi làn ngang là một bên tham gia, nhãn cam A1, A2… là chỗ rẽ sang luồng khác.</p>
+  <figure><svg class="d fl" viewBox="0 0 1168 284" style="flex:1;min-height:0;width:100%" role="img">
+<defs><marker id="uc04a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker><marker id="uc04m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+<rect x="0" y="4" width="1168" height="92" class="lane"/>
+<text x="12" y="55" class="ln-t">Duyệt</text>
+<rect x="0" y="96" width="1168" height="92" class="lane alt"/>
+<text x="12" y="142" class="ln-t">Từ chối</text>
+<text x="12" y="158" class="ln-s">theo mã</text>
+<rect x="0" y="188" width="1168" height="92" class="lane"/>
+<text x="12" y="239" class="ln-t">Trả lại</text>
+<line x1="124" y1="4" x2="124" y2="280" class="ln-sep"/>
+<path d="M269 142 H283" class="ed" marker-end="url(#uc04a)"/>
+<path d="M416 142 H430" class="ed" marker-end="url(#uc04a)"/>
+<path d="M564 142 H571 V50 H578" class="ed" marker-end="url(#uc04a)"/>
+<path d="M564 142 H578" class="ed" marker-end="url(#uc04a)"/>
+<path d="M564 142 H571 V234 H578" class="ed" marker-end="url(#uc04a)"/>
+<path d="M712 50 H726" class="ed" marker-end="url(#uc04a)"/>
+<path d="M860 50 H874" class="ed" marker-end="url(#uc04a)"/>
+<path d="M1007 50 H1021" class="ed-m" marker-end="url(#uc04m)"/>
+<path d="M712 142 H726" class="ed" marker-end="url(#uc04a)"/>
+<path d="M860 142 H874" class="ed" marker-end="url(#uc04a)"/>
+<path d="M1007 142 H1021" class="ed" marker-end="url(#uc04a)"/>
+<path d="M712 234 H726" class="ed" marker-end="url(#uc04a)"/>
+<rect x="135" y="90" width="134" height="104" rx="8" class="nd hold"/>
+<text x="202" y="139" text-anchor="middle" class="nt b">Hồ sơ</text>
+<text x="202" y="154" text-anchor="middle" class="nt">"Chờ phê duyệt"</text>
+<rect x="283" y="90" width="134" height="104" rx="8" class="nd act"/>
+<text x="350" y="132" text-anchor="middle" class="nt b">Người duyệt mở:</text>
+<text x="350" y="146" text-anchor="middle" class="nt">tiền, cổng,</text>
+<text x="350" y="161" text-anchor="middle" class="nt">lý do, đề xuất</text>
+<rect x="430" y="90" width="134" height="104" rx="8" class="nd sys"/>
+<text x="497" y="125" text-anchor="middle" class="nt b">Server kiểm:</text>
+<text x="497" y="139" text-anchor="middle" class="nt">người duyệt ≠ cán bộ,</text>
+<text x="497" y="154" text-anchor="middle" class="nt">không còn tín</text>
+<text x="497" y="168" text-anchor="middle" class="nt">hiệu mở</text>
+<rect x="547" y="81" width="26" height="17" rx="8" class="altb"/><text x="560" y="93" text-anchor="middle" class="altt">A1</text>
+<rect x="578" y="13" width="134" height="74" rx="8" class="nd ok"/>
+<text x="645" y="47" text-anchor="middle" class="nt b">Chốt sổ hạn mức</text>
+<text x="645" y="62" text-anchor="middle" class="nt">+ lệnh chi</text>
+<rect x="695" y="4" width="26" height="17" rx="8" class="altb"/><text x="708" y="16" text-anchor="middle" class="altt">A2</text>
+<rect x="726" y="13" width="134" height="74" rx="8" class="nd ai"/>
+<text x="793" y="47" text-anchor="middle" class="nt b">AG-5 soạn</text>
+<text x="793" y="62" text-anchor="middle" class="nt">thư RESULT</text>
+<rect x="874" y="13" width="134" height="74" rx="8" class="nd act"/>
+<text x="940" y="47" text-anchor="middle" class="nt b">Cán bộ</text>
+<text x="940" y="62" text-anchor="middle" class="nt">sửa, Gửi thư</text>
+<rect x="1021" y="13" width="134" height="74" rx="8" class="nd ok"/>
+<text x="1088" y="47" text-anchor="middle" class="nt b">Khách thấy</text>
+<text x="1088" y="62" text-anchor="middle" class="nt">kết quả + thư</text>
+<rect x="578" y="105" width="134" height="74" rx="8" class="nd act"/>
+<text x="645" y="132" text-anchor="middle" class="nt b">Chọn mã, xem</text>
+<text x="645" y="146" text-anchor="middle" class="nt">trước câu khách</text>
+<text x="645" y="161" text-anchor="middle" class="nt">sẽ đọc</text>
+<rect x="726" y="105" width="134" height="74" rx="8" class="nd ai"/>
+<text x="793" y="139" text-anchor="middle" class="nt b">AG-5 soạn</text>
+<text x="793" y="154" text-anchor="middle" class="nt">thư DECLINE</text>
+<rect x="874" y="105" width="134" height="74" rx="8" class="nd act"/>
+<text x="940" y="139" text-anchor="middle" class="nt b">Cán bộ</text>
+<text x="940" y="154" text-anchor="middle" class="nt">sửa, Gửi thư</text>
+<rect x="1021" y="105" width="134" height="74" rx="8" class="nd bad"/>
+<text x="1088" y="132" text-anchor="middle" class="nt b">Khách thấy</text>
+<text x="1088" y="146" text-anchor="middle" class="nt">lý do + đường</text>
+<text x="1088" y="161" text-anchor="middle" class="nt">khiếu nại</text>
+<rect x="578" y="197" width="134" height="74" rx="8" class="nd act"/>
+<text x="645" y="231" text-anchor="middle" class="nt b">Ghi lý do</text>
+<text x="645" y="246" text-anchor="middle" class="nt">trả lại</text>
+<rect x="726" y="197" width="134" height="74" rx="8" class="nd hold"/>
+<text x="793" y="224" text-anchor="middle" class="nt b">Về cán bộ</text>
+<text x="793" y="238" text-anchor="middle" class="nt">xem lại</text>
+<text x="793" y="253" text-anchor="middle" class="nt">(UC-03)</text>
+</svg></figure>
+  <div class="ucspec">
+    <div><span class="h">Tác nhân · kích hoạt</span><b>Người duyệt</b> (ClaimApprover) · AG-5, cán bộ. <b>Kích hoạt:</b> cán bộ bấm Trình phê duyệt, hồ sơ sang "Chờ phê duyệt".</div>
+    <div><span class="h">Kết quả</span>Duyệt → lệnh chi · Từ chối → thư DECLINE có lý do và đường khiếu nại · Trả lại → về cán bộ. Chạy thật: 0440 (duyệt), 0445 (từ chối kỳ chờ).</div>
+    <div class="alt"><span class="h">Luồng thay thế</span><ul><li><b>A1</b> Người duyệt là người đã thẩm định, hoặc còn tín hiệu mở → không duyệt được</li><li><b>A2</b> Lệnh chi chống chi trùng, chỉ chi vào tài khoản đã xác thực tên</li></ul></div>
+  </div>
+  <div class="say idp"><span class="lbl">BnK IDP trong luồng này</span><p>Không có bước nào gọi BnK IDP. Người duyệt xem dữ liệu đã lưu trong hồ sơ: bản copy kết quả đọc, kết quả thẩm định, mã cơ sở y tế.</p></div>
+
+  <h3 id="uc05">UC-05 · Xử lý hàng đợi lỗi đọc chứng từ</h3>
+  <p class="prose">IDP lỗi không bao giờ thành từ chối: hồ sơ chờ vận hành thử lại. Đọc từ trái sang phải; mỗi làn ngang là một bên tham gia.</p>
+  <figure><svg class="d fl" viewBox="0 0 1168 284" style="flex:1;min-height:0;width:100%" role="img">
+<defs><marker id="uc05a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker><marker id="uc05m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+<rect x="0" y="4" width="1168" height="92" class="lane"/>
+<text x="12" y="55" class="ln-t">Thử lại</text>
+<rect x="0" y="96" width="1168" height="92" class="lane alt"/>
+<text x="12" y="142" class="ln-t">Bỏ qua</text>
+<text x="12" y="158" class="ln-s">kèm lý do</text>
+<rect x="0" y="188" width="1168" height="92" class="lane"/>
+<text x="12" y="234" class="ln-t">Demo</text>
+<text x="12" y="250" class="ln-s">staging chậm</text>
+<line x1="124" y1="4" x2="124" y2="280" class="ln-sep"/>
+<path d="M269 142 H283" class="ed" marker-end="url(#uc05a)"/>
+<path d="M416 142 H430" class="ed" marker-end="url(#uc05a)"/>
+<path d="M564 142 H578" class="ed" marker-end="url(#uc05a)"/>
+<path d="M712 142 H719 V50 H726" class="ed" marker-end="url(#uc05a)"/>
+<path d="M712 142 H726" class="ed" marker-end="url(#uc05a)"/>
+<path d="M712 142 H719 V234 H726" class="ed" marker-end="url(#uc05a)"/>
+<path d="M860 50 H874" class="ed-m" marker-end="url(#uc05m)"/>
+<path d="M860 142 H874" class="ed" marker-end="url(#uc05a)"/>
+<path d="M860 234 H874" class="ed" marker-end="url(#uc05a)"/>
+<path d="M1007 50 H1014 V142 H1021" class="ed-d" marker-end="url(#uc05a)"/>
+<path d="M1007 142 H1021" class="ed-d" marker-end="url(#uc05a)"/>
+<path d="M1007 234 H1014 V142 H1021" class="ed-d" marker-end="url(#uc05a)"/>
+<rect x="135" y="90" width="134" height="104" rx="8" class="nd idp"/>
+<text x="202" y="132" text-anchor="middle" class="nt b">IDP lỗi, quá</text>
+<text x="202" y="146" text-anchor="middle" class="nt">giờ, hết quota</text>
+<text x="202" y="161" text-anchor="middle" class="nt">hoặc agent lỗi</text>
+<rect x="283" y="90" width="134" height="104" rx="8" class="nd bad"/>
+<text x="350" y="132" text-anchor="middle" class="nt b">Chứng từ lỗi →</text>
+<text x="350" y="146" text-anchor="middle" class="nt">hồ sơ "Lỗi xử lý</text>
+<text x="350" y="161" text-anchor="middle" class="nt">tài liệu"</text>
+<rect x="430" y="90" width="134" height="104" rx="8" class="nd sys"/>
+<text x="497" y="132" text-anchor="middle" class="nt b">Vào Hàng đợi</text>
+<text x="497" y="146" text-anchor="middle" class="nt">vận hành</text>
+<text x="497" y="161" text-anchor="middle" class="nt">(không từ chối)</text>
+<rect x="578" y="90" width="134" height="104" rx="8" class="nd act"/>
+<text x="645" y="139" text-anchor="middle" class="nt b">Vận hành</text>
+<text x="645" y="154" text-anchor="middle" class="nt">mở hàng đợi</text>
+<rect x="726" y="13" width="134" height="74" rx="8" class="nd act"/>
+<text x="793" y="47" text-anchor="middle" class="nt b">Bấm Thử lại:</text>
+<text x="793" y="62" text-anchor="middle" class="nt">gọi IDP lại</text>
+<rect x="874" y="13" width="134" height="74" rx="8" class="nd ok"/>
+<text x="940" y="40" text-anchor="middle" class="nt b">IDP đọc xong →</text>
+<text x="940" y="54" text-anchor="middle" class="nt">đi tiếp như</text>
+<text x="940" y="69" text-anchor="middle" class="nt">UC-01</text>
+<rect x="726" y="105" width="134" height="74" rx="8" class="nd act"/>
+<text x="793" y="139" text-anchor="middle" class="nt b">Bỏ qua,</text>
+<text x="793" y="154" text-anchor="middle" class="nt">nhập lý do</text>
+<rect x="874" y="105" width="134" height="74" rx="8" class="nd sys"/>
+<text x="940" y="139" text-anchor="middle" class="nt b">Mục lỗi đóng,</text>
+<text x="940" y="154" text-anchor="middle" class="nt">lý do được lưu</text>
+<rect x="726" y="197" width="134" height="74" rx="8" class="nd act"/>
+<text x="793" y="231" text-anchor="middle" class="nt b">Bật ReplayMode</text>
+<text x="793" y="246" text-anchor="middle" class="nt">(Quản trị)</text>
+<rect x="874" y="197" width="134" height="74" rx="8" class="nd sys"/>
+<text x="940" y="224" text-anchor="middle" class="nt b">Phát lại phản hồi</text>
+<text x="940" y="238" text-anchor="middle" class="nt">IDP đã ghi,</text>
+<text x="940" y="253" text-anchor="middle" class="nt">không tốn quota</text>
+<rect x="1021" y="90" width="134" height="104" rx="8" class="nd sys"/>
+<text x="1088" y="132" text-anchor="middle" class="nt b">Mọi lần thử</text>
+<text x="1088" y="146" text-anchor="middle" class="nt">ghi AgentRun ·</text>
+<text x="1088" y="161" text-anchor="middle" class="nt">Nhật ký kỹ thuật</text>
+</svg></figure>
+  <div class="ucspec">
+    <div><span class="h">Tác nhân · kích hoạt</span><b>Vận hành</b> (ClaimOps) · BnK IDP. <b>Kích hoạt:</b> IDP lỗi, quá thời gian, hết quota, hoặc agent lỗi.</div>
+    <div><span class="h">Kết quả</span>Thử lại thành công → hồ sơ đi tiếp như UC-01. Chạy thật: CLM-2026-0004.</div>
+    <div class="alt"><span class="h">Lưu ý</span><ul><li>ReplayMode chỉ dùng cho demo / staging; lượt phát lại được đánh dấu riêng</li><li>Lỗi kỹ thuật làm hồ sơ chậm lại, không làm hồ sơ bị từ chối</li></ul></div>
+  </div>
+  <div class="say idp"><span class="lbl">BnK IDP trong luồng này</span><p><a class="idp-tag" href="#idpmap">IDP ⑥</a> Thử lại là gọi lại đường <a class="idp-tag" href="#idpmap">IDP ①</a>. ReplayMode trả phản hồi IDP đã ghi sẵn (IdpReplay), không gọi IDP, không tốn quota. Lỗi hay gặp: quá thời gian, hết quota, HTTP 200 nhưng body báo lỗi, <code>templates_data</code> rỗng.</p></div>
+</section>
+
+<!-- ================= 4 LIFECYCLE ================= -->
+<section id="vongdoi">
+  <div class="num">05</div>
+  <h2>Vòng đời một hồ sơ</h2>
+  <p class="prose">Danh sách việc trên Claim Console có chip cho từng trạng thái. Hình dưới là đường đi chính; các nhánh rẽ là chỗ hệ thống dừng lại chờ người.</p>
+  <figure>
+    <svg viewBox="0 0 1000 300" role="img" aria-label="Trạng thái hồ sơ: Đã gửi, Đang xử lý tài liệu, Đang thẩm định, rồi hoặc tự duyệt sang Đã chi trả, hoặc Chờ phê duyệt; nhánh lỗi và chờ bổ sung">
+      <defs><marker id="b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker>
+      <marker id="b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+      <rect x="10" y="110" width="120" height="50" rx="10" class="bx"/><text x="70" y="140" text-anchor="middle" class="tt">Đã gửi</text>
+      <rect x="170" y="110" width="150" height="50" rx="10" class="bx-t"/><text x="245" y="132" text-anchor="middle" class="tt">Đang xử lý</text><text x="245" y="150" text-anchor="middle" class="sm">tài liệu · IDP đọc</text>
+      <rect x="360" y="110" width="150" height="50" rx="10" class="bx-t"/><text x="435" y="132" text-anchor="middle" class="tt">Đang thẩm định</text><text x="435" y="150" text-anchor="middle" class="sm">agent + chuỗi</text>
+      <rect x="560" y="30" width="150" height="50" rx="10" class="bx-m"/><text x="635" y="52" text-anchor="middle" class="tt tm">Tự duyệt</text><text x="635" y="70" text-anchor="middle" class="sm">cổng 4/4</text>
+      <rect x="560" y="190" width="150" height="50" rx="10" class="bx-w"/><text x="635" y="212" text-anchor="middle" class="tt">Chờ phê duyệt</text><text x="635" y="230" text-anchor="middle" class="sm">người duyệt ≠ cán bộ</text>
+      <rect x="760" y="110" width="110" height="50" rx="10" class="bx-m"/><text x="815" y="140" text-anchor="middle" class="tt tm">Đã chi trả</text>
+      <rect x="900" y="110" width="90" height="50" rx="10" class="bx"/><text x="945" y="140" text-anchor="middle" class="tt">Đã đóng</text>
+      <rect x="760" y="230" width="110" height="50" rx="10" class="bx-b"/><text x="815" y="260" text-anchor="middle" class="tt tb">Từ chối</text>
+      <rect x="170" y="230" width="150" height="50" rx="10" class="bx-b"/><text x="245" y="252" text-anchor="middle" class="tt tb">Lỗi xử lý tài liệu</text><text x="245" y="270" text-anchor="middle" class="sm">→ hàng đợi vận hành</text>
+      <rect x="360" y="230" width="150" height="50" rx="10" class="bx-w"/><text x="435" y="252" text-anchor="middle" class="tt">Chờ bổ sung</text><text x="435" y="270" text-anchor="middle" class="sm">thiếu chứng từ</text>
+      <line x1="130" y1="135" x2="166" y2="135" class="ln" marker-end="url(#b1)"/>
+      <line x1="320" y1="135" x2="356" y2="135" class="ln" marker-end="url(#b1)"/>
+      <path d="M510 125 L535 125 L535 55 L556 55" class="ln-m" marker-end="url(#b2)"/>
+      <path d="M510 145 L535 145 L535 215 L556 215" class="ln" marker-end="url(#b1)"/>
+      <path d="M710 55 L735 55 L735 125 L756 125" class="ln-m" marker-end="url(#b2)"/>
+      <path d="M710 205 L735 205 L735 145 L756 145" class="ln" marker-end="url(#b1)"/>
+      <text x="740" y="180" class="sm">Duyệt</text>
+      <path d="M710 225 L740 225 L740 255 L756 255" class="ln" marker-end="url(#b1)"/>
+      <line x1="870" y1="135" x2="896" y2="135" class="ln" marker-end="url(#b1)"/>
+      <line x1="245" y1="160" x2="245" y2="226" class="ln-d" marker-end="url(#b1)"/>
+      <line x1="435" y1="160" x2="435" y2="226" class="ln-d" marker-end="url(#b1)"/>
+      <path d="M360 262 L340 262 L340 190 L405 190 L405 164" class="ln-d" marker-end="url(#b1)"/>
+      <text x="345" y="205" class="sm">khách bổ sung</text>
+    </svg>
+    <figcaption>Đường xanh là đường tự động hoàn toàn (CLM-2026-0449). Ô "Đang xử lý tài liệu" là chặng BnK IDP đọc chứng từ <a class="idp-tag" href="#idpmap">IDP ①</a>. Nét đứt là nhánh rẽ: IDP lỗi thì hồ sơ vào hàng đợi vận hành; thiếu chứng từ thì chờ khách bổ sung, rồi IDP đọc lại và quay về thẩm định.</figcaption>
+  </figure>
+  <p class="prose">Trên MyInsurance, khách thấy cùng trạng thái nhưng bằng lời dễ hiểu và qua thanh tiến trình 4 mốc: <b>Đã gửi → Xử lý chứng từ → Đang thẩm định → Kết quả</b>. Khách không bao giờ thấy chữ "tín hiệu bất thường" hay "nghi trùng"; đó là kiểm soát nội bộ.</p>
+</section>
+
+<!-- ================= 5 WORKFLOW ================= -->
+<section id="workflow">
+  <div class="num">06</div>
+  <h2>Workflow từng bước, theo hồ sơ thật CLM-2026-0449</h2>
+  <p class="prose">Đây là hồ sơ nên kể khi thuyết trình, vì nó đi trọn đường tự động. Giờ lấy từ Nhật ký kỹ thuật ngày 05/10/2026. Khách Nguyễn Văn An khám họng ở Bệnh viện Vinmec ngày 02/10, chẩn đoán J02.9, tổng chi phí 400.000 ₫.</p>
+  <ol class="steps">
+    <li><div><h4>Khách nộp hồ sơ trên MyInsurance</h4>
+      <p>Bước 1 khai sự kiện: người được điều trị, loại tổn thất (Bệnh – ngoại trú), ngày, cơ sở khám, tài khoản nhận tiền. Bước 2 chụp chứng từ theo danh mục: bảng kê T1-01 và phiếu khám T1-03. Khách không cần gõ số tiền hay chẩn đoán.</p>
+      <div class="meta"><span>19:58:19</span><span>Portal_SubmitClaim</span><span>sự kiện CLAIM_SUBMITTED</span></div></div></li>
+    <li><div><h4>AG-1 gửi chứng từ sang BnK IDP</h4>
+      <p>Mỗi file được gửi IDP và đọc ở nền. Tên request chính là số hồ sơ, để đối chiếu hai bên. Một timer hỏi IDP định kỳ xem đọc xong chưa.</p>
+      <div class="meta"><span>19:58:22</span><span>POST /request</span><span>request 21492, 21493</span><a class="idp-tag" href="#idpmap">IDP ①</a></div></div></li>
+    <li><div><h4>IDP đọc xong, dòng chi phí xuất hiện trong hồ sơ</h4>
+      <p>Kết quả gốc của IDP được copy nguyên vào hồ sơ một lần (không bao giờ ghi đè). Bảng trong chứng từ được chuyển thành 3 dòng chi phí: Khám bệnh 200.000, Xét nghiệm nhanh liên cầu 150.000, Paracetamol 50.000. Hồ sơ chuyển sang "Đang thẩm định".</p>
+      <div class="meta"><span>19:58:46</span><span>≈ 24 giây</span><span>IdpApplyExtraction → ClaimLine</span><a class="idp-tag" href="#idpmap">IDP ①</a></div></div></li>
+    <li><div><h4>AG-0 mở hai track chạy song song</h4>
+      <p>Điều phối gửi việc cho AG-4 (kiểm bất thường) và AG-3 (lâm sàng), rồi đợi cả hai xong (<code>WaitForTracks</code>).</p>
+      <div class="meta"><span>19:58:50</span><span>DispatchFraudCheck · DispatchClinicalCheck</span></div></div></li>
+    <li><div><h4><span class="ai-t">AG-4</span> kiểm bất thường: không có tín hiệu</h4>
+      <p>Tra tên bệnh viện trong danh mục IDP: khớp "BỆNH VIỆN ĐA KHOA QUỐC TẾ VINMEC", mã 01161. Kiểm ngày hợp lệ. Tìm hồ sơ trùng người + cơ sở + ngày: không có.</p>
+      <div class="meta"><span>20:00:09</span><span>LookupProvider · ValidateDates · FindDuplicates</span><a class="idp-tag" href="#idpmap">IDP ③</a></div></div></li>
+    <li><div><h4><span class="ai-t">AG-3</span> thẩm định lâm sàng: không đề xuất</h4>
+      <p>AG-3 kích hoạt workflow thẩm định của IDP, đọc kết quả cùng 3 dòng chi phí, và kết luận không có khoản nào cần đề xuất từ chối (NOTREL/NOTCOV). Đánh giá 3/3 dòng, trạng thái HOÀN TẤT.</p>
+      <div class="meta"><span>20:02:21</span><span>PUT /workflow/request · result/json</span><a class="idp-tag" href="#idpmap">IDP ②</a></div></div></li>
+    <li><div><h4>Chuỗi 14 bước tính tiền</h4>
+      <p>Trước khi tính, AG-1 gán nhóm bệnh: J02.9 không thuộc danh sách bệnh đặc biệt nên là <b>bệnh thông thường (GEN)</b>, kỳ chờ 30 ngày. Chạy lần 1: 400.000 ₫ yêu cầu, bước 10 đồng chi trả 20% trừ 80.000 ₫, còn <b class="mint-t">320.000 ₫</b>. Ghi tạm vào sổ hạn mức.</p>
+      <div class="meta"><span>20:02:22</span><span>RunAdjudicationChain · ChainRun 364</span></div></div></li>
+    <li><div><h4>Cổng tự duyệt: đạt 4/4 → chi trả</h4>
+      <p>C1 số tiền ≤ 2.000.000 và không khoản nào bị cắt, C2 lâm sàng xong, C3 không có điểm kiểm mở, C4 không có tín hiệu. Hồ sơ đi qua Chờ phê duyệt → Đã duyệt → <b class="mint-t">Đã chi trả</b> trong cùng một giây, lệnh chi PAY-CLM-2026-0449.</p>
+      <div class="meta"><span>20:02:22</span><span>ApplyGate C1..C4 = True</span><span>4 phút 3 giây từ lúc nộp</span></div></div></li>
+    <li><div><h4><span class="ai-t">AG-5</span> soạn thư kết quả</h4>
+      <p>AG-5 lấy số liệu hồ sơ qua tool và soạn thư "Kết quả" bản nháp. Cán bộ đọc rồi mới gửi cho khách. Khách xem kết quả và thư ngay trên MyInsurance.</p>
+      <div class="meta"><span>20:03:07</span><span>letterType = RESULT · DRAFT</span></div></div></li>
+  </ol>
+  <div class="say warn">
+    <span class="lbl">Khi hồ sơ không sạch</span>
+    <p>Hồ sơ CLM-2026-0451 nộp cùng người, cùng bệnh viện, cùng ngày với 0449. Mọi bước giống hệt cho đến bước 5: AG-4 nêu tín hiệu <b>DUPLICATE (mức cao)</b>. Chuỗi vẫn tính ra 320.000 ₫, nhưng cổng chỉ đạt 3/4, nên hồ sơ dừng ở "Đang thẩm định" với nhãn "Bị chặn tự duyệt — tín hiệu AG-4". Cán bộ phải gỡ tín hiệu kèm lý do hoặc đề nghị khách giải trình. Không có lệnh chi nào được tạo.</p>
+  </div>
+</section>
+
+<!-- ================= 6 AGENTS ================= -->
+<section id="agent">
+  <div class="num">07</div>
+  <h2>Các agent phối hợp thế nào</h2>
+  <div class="prose">
+    <p>Điểm hay bị hỏi nhất: <b>agent có gọi nhau không?</b> Không. Kiến trúc sư OutSystems xác nhận Agent Workbench không cho agent gọi agent lồng nhau. Vì vậy việc phối hợp nằm ở <b>AG-0 Điều phối</b>, là server action chạy bằng timer. AG-0 gửi việc, chờ kết quả, quyết định bước tiếp theo, và ghi mọi lần bàn giao vào <code>AgentRun</code>. Cách này còn có lợi: một agent lỗi không kéo theo agent khác, và thứ tự bước luôn kiểm soát được.</p>
+  </div>
+  <figure>
+    <svg viewBox="0 0 1000 400" role="img" aria-label="Trình tự: AG-1 đọc chứng từ qua IDP, AG-0 chạy song song AG-4 và AG-3, chờ cả hai, rồi chạy chuỗi 14 bước, cổng, AG-5">
+      <defs><marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker>
+      <marker id="c2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-a"/></marker></defs>
+      <!-- lanes -->
+      <text x="10" y="44" class="tt">Khách</text>
+      <text x="10" y="104" class="tt">AG-1 + IDP</text>
+      <text x="10" y="164" class="tt">AG-0 Điều phối</text>
+      <text x="10" y="224" class="tt ta">AG-4</text>
+      <text x="10" y="284" class="tt ta">AG-3 + IDP</text>
+      <text x="10" y="344" class="tt">Chuỗi · Cổng · AG-5</text>
+      <line x1="140" y1="40" x2="990" y2="40" class="ln-d"/><line x1="140" y1="100" x2="990" y2="100" class="ln-d"/>
+      <line x1="140" y1="160" x2="990" y2="160" class="ln-d"/><line x1="140" y1="220" x2="990" y2="220" class="ln-d"/>
+      <line x1="140" y1="280" x2="990" y2="280" class="ln-d"/><line x1="140" y1="340" x2="990" y2="340" class="ln-d"/>
+      <!-- blocks -->
+      <rect x="150" y="26" width="90" height="28" rx="6" class="bx"/><text x="195" y="45" text-anchor="middle" class="sm">Gửi hồ sơ</text>
+      <rect x="250" y="86" width="140" height="28" rx="6" class="bx-m"/><text x="320" y="105" text-anchor="middle" class="sm">IDP đọc · 24 s</text>
+      <rect x="400" y="146" width="110" height="28" rx="6" class="bx"/><text x="455" y="165" text-anchor="middle" class="sm">Mở 2 track</text>
+      <rect x="520" y="206" width="160" height="28" rx="6" class="bx-a"/><text x="600" y="225" text-anchor="middle" class="sm">danh mục · ngày · trùng</text>
+      <rect x="520" y="266" width="270" height="28" rx="6" class="bx-a"/><text x="655" y="285" text-anchor="middle" class="sm">thẩm định IDP + 3 dòng chi phí</text>
+      <rect x="800" y="146" width="80" height="28" rx="6" class="bx"/><text x="840" y="165" text-anchor="middle" class="sm">Đủ 2 track</text>
+      <rect x="800" y="326" width="90" height="28" rx="6" class="bx-m"/><text x="845" y="345" text-anchor="middle" class="sm">14 bước · C1–C4</text>
+      <rect x="900" y="326" width="80" height="28" rx="6" class="bx-a"/><text x="940" y="345" text-anchor="middle" class="sm">AG-5 thư</text>
+      <!-- arrows -->
+      <line x1="240" y1="40" x2="262" y2="84" class="ln" marker-end="url(#c1)"/>
+      <line x1="390" y1="100" x2="410" y2="144" class="ln" marker-end="url(#c1)"/>
+      <line x1="500" y1="174" x2="530" y2="204" class="ln-a" marker-end="url(#c2)"/>
+      <line x1="470" y1="174" x2="530" y2="264" class="ln-a" marker-end="url(#c2)"/>
+      <line x1="680" y1="210" x2="806" y2="172" class="ln-a" marker-end="url(#c2)"/>
+      <line x1="790" y1="270" x2="820" y2="176" class="ln-a" marker-end="url(#c2)"/>
+      <line x1="840" y1="174" x2="842" y2="322" class="ln" marker-end="url(#c1)"/>
+      <line x1="890" y1="340" x2="898" y2="340" class="ln" marker-end="url(#c1)"/>
+      <text x="415" y="392" class="sm">Thời gian thật (0449): nộp 19:58:19 → IDP xong 19:58:46 → AG-4 xong 20:00:09 → AG-3 xong 20:02:21 → chi trả 20:02:22 → thư 20:03:07</text>
+    </svg>
+    <figcaption>AG-4 và AG-3 chạy song song, không phụ thuộc nhau. AG-0 chỉ đi tiếp khi cả hai đã trả kết quả, rồi gọi chuỗi tính tiền, cổng và AG-5 theo thứ tự cố định.</figcaption>
+  </figure>
+
+  <div class="agents">
+    <div class="agent sa"><div class="hd"><span class="id">AG-0</span><span class="pill p-t">server action</span></div><span class="nm">Điều phối · OrchestrateClaim</span>
+      <dl><dt>Làm gì</dt><dd>Nhận sự kiện của hồ sơ, gửi việc cho AG-3/AG-4, chờ đủ track, gọi chuỗi, gọi cổng, chuyển trạng thái, gửi việc cho AG-5.</dd>
+      <dt>Vì sao không phải agent</dt><dd>Thứ tự bước phải cố định và kiểm toán được; agent không gọi được agent.</dd>
+      <dt>30 ngày</dt><dd>351 lượt, trung bình 4,2 s</dd></dl></div>
+    <div class="agent sa"><div class="hd"><span class="id">AG-1</span><span class="pill p-t">server action</span></div><span class="nm">Tiếp nhận · BnK IDP</span>
+      <dl><dt>Làm gì</dt><dd>Nộp chứng từ cho IDP, poll kết quả, ghi bản copy, tạo dòng chi phí, tự gán nhóm bệnh theo ICD, gắn bộ quy tắc của sản phẩm.</dd>
+      <dt>Không làm</dt><dd>Không tự tạo dòng không có trong kết quả IDP; IDP lỗi thì báo lỗi, không đoán.</dd>
+      <dt>BnK IDP</dt><dd><a class="idp-tag" href="#idpmap">IDP ① ⑤</a> tạo nhóm, nộp file, hỏi trạng thái, lấy kết quả</dd>
+      <dt>30 ngày</dt><dd>79 lượt</dd></dl></div>
+    <div class="agent wb"><div class="hd"><span class="id">AG-2</span><span class="pill p-ai">Agent Workbench</span></div><span class="nm">CLM_AdjudicationAgent</span>
+      <dl><dt>Làm gì</dt><dd>Gọi chuỗi 14 bước như một tool rồi giải thích từng bước bằng lời cho cán bộ (nút "Tính và giải thích", "Hỏi AG-2 về hồ sơ").</dd>
+      <dt>Luật cứng</dt><dd>"Bạn không tự tính tiền." Mọi con số phải là số tool trả về nguyên văn.</dd>
+      <dt>30 ngày</dt><dd>108 lượt, trung bình 7,8 s</dd></dl></div>
+    <div class="agent wb"><div class="hd"><span class="id">AG-3</span><span class="pill p-ai">Agent Workbench</span></div><span class="nm">CLM_ClinicalAgent</span>
+      <dl><dt>Làm gì</dt><dd>Đọc kết quả workflow thẩm định của IDP và các dòng chi phí, đề xuất dòng nào không liên quan chẩn đoán hoặc không thuộc danh mục.</dd>
+      <dt>Luật cứng</dt><dd>Chỉ được đề xuất 2 mã NOTREL, NOTCOV, kèm bằng chứng. Tool ghi đề xuất từ chối mọi mã khác. Đề xuất chỉ có hiệu lực khi cán bộ xác nhận.</dd>
+      <dt>BnK IDP</dt><dd><a class="idp-tag" href="#idpmap">IDP ②</a> tạo, chạy, đọc kết quả workflow thẩm định</dd>
+      <dt>30 ngày</dt><dd>167 lượt, trung bình 5,6 s; 5/5 đề xuất được chấp nhận</dd></dl></div>
+    <div class="agent wb"><div class="hd"><span class="id">AG-4</span><span class="pill p-ai">Agent Workbench</span></div><span class="nm">CLM_FraudSignalAgent</span>
+      <dl><dt>Làm gì</dt><dd>Tra danh mục cơ sở y tế của IDP, kiểm ngày bất hợp lý, tìm hồ sơ trùng, đọc kết quả đối chiếu R1–R9, nêu tín hiệu kèm mức độ.</dd>
+      <dt>Luật cứng</dt><dd>Không kết luận gian lận, không từ chối, không tính tiền. Tín hiệu mở chặn tự duyệt.</dd>
+      <dt>BnK IDP</dt><dd><a class="idp-tag" href="#idpmap">IDP ③</a> tìm tên cơ sở trong danh mục 322</dd>
+      <dt>30 ngày</dt><dd>198 lượt, trung bình 14,1 s</dd></dl></div>
+    <div class="agent wb"><div class="hd"><span class="id">AG-5</span><span class="pill p-ai">Agent Workbench</span></div><span class="nm">CLM_CommsAgent</span>
+      <dl><dt>Làm gì</dt><dd>Soạn thư cho khách theo 3 loại: Kết quả (RESULT), Từ chối (DECLINE), Yêu cầu bổ sung (ADDDOCS).</dd>
+      <dt>Luật cứng</dt><dd>Chỉ soạn nháp, không gửi, không đổi trạng thái, không tính tiền. Cán bộ sửa, có thể bảo soạn lại, rồi gửi.</dd>
+      <dt>30 ngày</dt><dd>59 lượt</dd></dl></div>
+  </div>
+  <h3>Hai trợ lý chỉ đọc</h3>
+  <div class="two">
+    <div class="card"><h4><span class="ai-t">Trợ lý khách</span> · CLM_CustomerAssistantAgent</h4><p style="font-size:14.5px;margin:0">Khung chat trên MyInsurance. Có 2 tool chỉ đọc: thông tin hồ sơ và hạn mức, luôn giới hạn theo khách đang đăng nhập. Xưng "Quý khách", trả lời 2–4 câu, không hứa thời gian, không in mã kỹ thuật, trả lời theo ngôn ngữ khách hỏi.</p></div>
+    <div class="card"><h4><span class="ai-t">Trợ lý cán bộ</span> · CLM_StaffAssistantAgent</h4><p style="font-size:14.5px;margin:0">Nút "Hỏi trợ lý" trên Claim Console. Cùng 2 tool chỉ đọc, biết hồ sơ đang mở, trả lời tối đa 5 gạch đầu dòng với số cụ thể và chỉ chỗ thao tác trên màn hình.</p></div>
+  </div>
+  <h3>Rào chắn chung cho mọi agent</h3>
+  <div class="tbl"><table>
+    <tr><th>Rào chắn</th><th>Cách làm</th></tr>
+    <tr><td class="k">Danh sách tool đóng</td><td>Mỗi agent chỉ thấy vài server action được chỉ định. Không agent nào có tool ghi trường tiền.</td></tr>
+    <tr><td class="k">Kiểm ở tool, không chỉ ở prompt</td><td>Ví dụ tool ghi đề xuất của AG-3 từ chối mọi mã ngoài NOTREL/NOTCOV, kể cả khi model cố gửi.</td></tr>
+    <tr><td class="k">Đầu vào phẳng</td><td>Tool nhận tham số đơn giản (text, số), không cấu trúc lồng, để model không dựng sai JSON.</td></tr>
+    <tr><td class="k">Câu trả lời có khuôn</td><td>Đã ghi dữ liệu thì mở đầu "Action taken: …"; kết thúc bằng một dòng "Summary (EN)". Màn hình đọc các dòng này.</td></tr>
+    <tr><td class="k">Ngôn ngữ</td><td>Câu hỏi có dấu tiếng Việt thì trả lời tiếng Việt, không thì tiếng Anh (AG-2 tự nhận diện).</td></tr>
+    <tr><td class="k">Lỗi thì chuyển người</td><td>Agent lỗi hoặc quá thời gian: track đó coi như chưa đạt, cổng không qua, hồ sơ chờ người. Không bao giờ tự duyệt khi thiếu kết quả.</td></tr>
+    <tr><td class="k">Dấu vết</td><td>Mỗi lượt agent, mỗi tool call ghi <code>AgentRun</code>: ai, khi nào, tool gì, kết quả, thời gian chạy.</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= 7 CHAIN ================= -->
+<section id="chuoi">
+  <div class="num">08</div>
+  <h2>Chuỗi 14 bước tính tiền</h2>
+  <p class="prose">Chuỗi là "Track 1": logic thường viết trong OutSystems, đi qua 14 bước theo thứ tự cố định của đặc tả nghiệp vụ. Mỗi bước nhận số tiền còn lại từ bước trước, ghi rõ đã kiểm gì, và có thể giảm tiền kèm một mã lý do. Cột bên phải là hồ sơ 0449.</p>
+  <div class="tbl"><table>
+    <tr><th>#</th><th>Bước</th><th>Câu hỏi bước này trả lời</th><th>0449</th></tr>
+    <tr><td class="c">1</td><td class="k">Tư cách thành viên</td><td>Người này còn hiệu lực bảo hiểm vào ngày khám? Hợp đồng còn hiệu lực, đã đóng phí?</td><td>Đạt</td></tr>
+    <tr><td class="c">2</td><td class="k">Kỳ chờ</td><td>Đã qua kỳ chờ của nhóm bệnh chưa? (mã WAIT)</td><td>GEN 30 ngày, đủ điều kiện từ 31/01</td></tr>
+    <tr><td class="c">3</td><td class="k">Bệnh có sẵn</td><td>Nếu là bệnh có sẵn: đã qua 365 ngày chưa?</td><td>Không áp dụng</td></tr>
+    <tr><td class="c">4</td><td class="k">Loại trừ chung</td><td>Có điều khoản loại trừ nào của sản phẩm chạm vào? Xét tất cả, ghi kết quả từng điều khoản.</td><td>6 điều khoản xét, không thuộc phạm vi</td></tr>
+    <tr><td class="c">5</td><td class="k">Ánh xạ quyền lợi</td><td>Mỗi dòng chi phí thuộc quyền lợi nào? (khám → 200.1, thuốc → 200.2)</td><td>3 dòng → 200.1, 200.1, 200.2</td></tr>
+    <tr><td class="c">6</td><td class="k">Phạm vi từng dòng</td><td>Dòng nào không được bảo hiểm? (NOTCOV/NOTREL đã được xác nhận)</td><td>0 dòng bị loại</td></tr>
+    <tr><td class="c">7</td><td class="k">Điều khoản quyền lợi</td><td>Quyền lợi có điều kiện riêng không?</td><td>Sản phẩm không có, bước vẫn hiện</td></tr>
+    <tr><td class="c">8</td><td class="k">Trần lần/ngày/sự kiện</td><td>Vượt trần mỗi lần khám của quyền lợi con? Áp theo từng quyền lợi, không áp cho tổng hồ sơ.</td><td>350.000 &lt; 1.500.000, không cắt</td></tr>
+    <tr><td class="c">9</td><td class="k">Hạn mức lượt</td><td>Còn lượt/ngày không? (0 nghĩa là không giới hạn)</td><td>Không giới hạn</td></tr>
+    <tr><td class="c">10</td><td class="k">Đồng chi trả</td><td>Khách tự chịu bao nhiêu phần trăm?</td><td class="mint-t">20% → −80.000</td></tr>
+    <tr><td class="c">11</td><td class="k">Khấu trừ ngoài mạng lưới</td><td>Cơ sở ngoài mạng lưới có bị khấu trừ thêm?</td><td>Vinmec trong mạng lưới</td></tr>
+    <tr><td class="c">12</td><td class="k">Trần năm</td><td>Còn đủ hạn mức năm của quyền lợi cha không?</td><td>200 còn 19.360.000</td></tr>
+    <tr><td class="c">13</td><td class="k">Trần toàn plan</td><td>Có trần tổng cho cả hợp đồng không?</td><td>Không áp dụng</td></tr>
+    <tr><td class="c">14</td><td class="k">Ghi sổ tạm</td><td>Ghi tạm số tiền vào sổ hạn mức; chốt khi duyệt.</td><td class="mint-t">320.000 ₫</td></tr>
+  </table></div>
+  <div class="say">
+    <span class="lbl">Ví dụ đáng kể nhất: hồ sơ CLM-2026-0001</span>
+    <p>Chạy lần 1 ra 2.000.000 ₫. AG-3 đề xuất một khoản không liên quan chẩn đoán (NOTREL, 168.000 ₫), cán bộ xác nhận, chuỗi chạy lần 2 ra 1.880.000 ₫. Loại 168.000 ₫ nhưng tiền trả chỉ giảm 120.000 ₫, vì phần còn lại đã bị trần và đồng chi trả hấp thụ. Một phép trừ đơn giản sẽ ra 168.000; chỉ chuỗi chạy thật mới ra 120.000. Đây là câu trả lời tốt cho câu hỏi "số này có phải gõ cứng không".</p>
+  </div>
+  <p class="prose">Màn hình: tab <b>Tính tiền &amp; sổ hạn mức</b> trên chi tiết hồ sơ có biểu đồ <b>thác tiền</b> (chỉ các bước làm đổi tiền) và bảng 14 bước đầy đủ. Mỗi lần chạy lưu thành một <code>ChainRun</code> riêng, nên có thể so "trước/sau".</p>
+</section>
+
+<!-- ================= 8 GATE ================= -->
+<section id="cong">
+  <div class="num">09</div>
+  <h2>Cổng tự duyệt 4 điều kiện</h2>
+  <p class="prose">Sau khi chuỗi chạy, AG-0 gọi cổng. Mỗi điều kiện trả về Đạt/Không đạt kèm một câu lý do sinh từ dữ liệu. Đạt cả 4 thì tự duyệt và tạo lệnh chi. Thiếu 1 thì hồ sơ chuyển người duyệt.</p>
+  <div class="tbl"><table>
+    <tr><th>#</th><th>Điều kiện</th><th>Kiểm gì trong dữ liệu</th><th>Vì sao có điều kiện này</th></tr>
+    <tr><td class="c">C1</td><td class="k">Chi trả ≤ 2.000.000 ₫ và không khoản nào bị cắt</td><td>Lần chạy chuỗi mới nhất: tổng chi trả, số lần cắt hạn mức, số khoản bị từ chối</td><td>Hồ sơ lớn hoặc có tranh chấp về tiền cần người xem. Ngưỡng do quản trị cấu hình.</td></tr>
+    <tr><td class="c">C2</td><td class="k">Thẩm định lâm sàng xong, không còn đề xuất</td><td>Đánh giá mới nhất HOÀN TẤT, đủ số dòng, không đề xuất nào đang chờ</td><td>Có khuyến nghị của AI thì phải có người xác nhận.</td></tr>
+    <tr><td class="c">C3</td><td class="k">Không còn điểm kiểm điều khoản đang mở</td><td>Không có TermCheckpoint trạng thái OPEN</td><td>Điều khoản cần phán đoán (thẩm mỹ, rượu bia…) không được để máy tự quyết.</td></tr>
+    <tr><td class="c">C4</td><td class="k">Không có tín hiệu trùng lặp / bất thường mở</td><td>Không có FraudSignal OPEN của AG-4</td><td>Chặn chi trả trùng trước khi tiền ra khỏi công ty.</td></tr>
+  </table></div>
+  <div class="say warn">
+    <span class="lbl">Điều cố ý không có trong cổng</span>
+    <p>Độ tin cậy đọc chứng từ <b>không</b> phải điều kiện của cổng. Nó dùng để định tuyến: dòng tin cậy thấp được tô vàng để cán bộ xác minh. Lý do: điểm tin cậy của IDP hiện chưa đủ chính xác để làm ngưỡng tiền (xem phần IDP), và đặc tả nghiệp vụ cũng chốt như vậy.</p>
+  </div>
+  <p class="prose">Sau cổng, hồ sơ cần người duyệt đi qua quy tắc <b>bốn mắt</b>: người duyệt phải khác cán bộ thẩm định, kiểm ở server. Người duyệt có thể Duyệt, Từ chối theo mã (kèm xem trước câu khách sẽ đọc) hoặc Trả lại.</p>
+</section>
+
+<!-- ================= 9 CROSSCHECK ================= -->
+<section id="doichieu">
+  <div class="num">10</div>
+  <h2>Đối chiếu chéo R1–R9</h2>
+  <p class="prose">Sau khi IDP đọc xong, hệ thống so các chứng từ trong cùng hồ sơ với nhau. Không có gì bị tự sửa: mỗi quy tắc chỉ cho ra kết quả kèm chi tiết, gắn với chứng từ cụ thể. Màn hình: <b>Đối chiếu chứng từ</b> (CrossCheck), có nút chạy lại.</p>
+  <div class="tbl"><table>
+    <tr><th>Mã</th><th>Kiểm</th><th>So giữa</th><th>Kết quả có thể</th></tr>
+    <tr><td class="c">R1</td><td class="k">Tên bệnh nhân nhất quán</td><td>Bảng kê, đơn thuốc, phiếu khám, hồ sơ thành viên (không phân biệt dấu, hoa thường)</td><td><span class="pill p-ok">PASS</span> <span class="pill p-w">WARN</span></td></tr>
+    <tr><td class="c">R2</td><td class="k">Ngày sinh</td><td>Bảng kê, phiếu khám</td><td>Không có trường thì <span class="pill p-t">SKIPPED</span></td></tr>
+    <tr><td class="c">R3</td><td class="k">Cơ sở y tế</td><td>Mã số thuế nếu có, không thì tên</td><td></td></tr>
+    <tr><td class="c">R4</td><td class="k">Ngày dịch vụ trong kỳ điều trị</td><td>Ngày trên từng chứng từ với ngày khám đã khai</td><td></td></tr>
+    <tr><td class="c">R5</td><td class="k">Số học bảng kê</td><td>Cộng các dòng bằng tổng (±1 ₫)</td><td></td></tr>
+    <tr><td class="c">R6</td><td class="k">Hoá đơn khớp bảng kê</td><td>Hoá đơn XML với tổng bảng kê</td><td>Chưa có XML thì SKIPPED</td></tr>
+    <tr><td class="c">R7</td><td class="k">Thuốc kê đơn có trên bảng kê</td><td>Đơn thuốc với các dòng thuốc của bảng kê</td><td></td></tr>
+    <tr><td class="c">R8</td><td class="k">Chẩn đoán nhất quán</td><td>Mã ICD trên các chứng từ</td><td></td></tr>
+    <tr><td class="c">R9</td><td class="k">Đủ hồ sơ</td><td>Đủ chứng từ bắt buộc theo loại tổn thất</td><td><span class="pill p-ok">COMPLETE</span> / thiếu chứng từ</td></tr>
+  </table></div>
+  <p class="prose">Kết quả đối chiếu là đầu vào của AG-4: một cảnh báo về tên hoặc cơ sở có thể trở thành tín hiệu bất thường. 30 ngày qua hệ thống bắt được 13 cảnh báo trước khi chi (R1: 6, R3: 4, R5: 2, R2: 1).</p>
+</section>
+
+
+<!-- ================= IDP MAP ================= -->
+<section id="idpmap">
+  <div class="num">11</div>
+  <h2>Dùng BnK IDP ở đâu, API nào, dùng thế nào</h2>
+  <p class="prose">Hệ thống gọi BnK IDP ở sáu chỗ: bốn chỗ nghiệp vụ (① đọc chứng từ, ② thẩm định chéo, ③ danh mục cơ sở y tế, ④ bản gốc) và hai chỗ hỗ trợ (⑤ xác thực và cấu hình, ⑥ vận hành). Ký hiệu ①–⑥ dùng xuyên suốt sổ tay: thấy nhãn <a class="idp-tag" href="#idpmap">IDP ①</a> ở đâu là chỗ đó gọi BnK IDP; bấm vào nhãn để quay về đây.</p>
+  <div class="say pitch idp"><span class="lbl">Nói khi trình bày</span><p>"BnK IDP không chỉ là OCR. Hệ thống dùng bốn khả năng của IDP: đọc và phân loại chứng từ khi khách nộp, thẩm định chéo các chứng từ cho AG-3, tra danh mục cơ sở y tế cho AG-4, và lấy bản gốc cho cán bộ xác minh. Mọi lời gọi đi qua 15 server action có kiểm lỗi trong ClaimMVP; agent không gọi IDP trực tiếp."</p></div>
+  <figure><svg viewBox="0 0 1000 460" role="img" aria-label="Bản đồ dùng BnK IDP: ai gọi, qua server action nào, tới endpoint nào">
+<defs><marker id="im1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker></defs>
+<text x="6" y="18" class="tt">Ai gọi · ở đâu</text><text x="352" y="18" class="tt">Server action trong ClaimMVP</text><text x="692" y="18" class="tt tm">Khả năng · endpoint BnK IDP</text>
+<rect x="2" y="34" width="300" height="60" rx="9" class="bx-m"/>
+<text x="14" y="58" class="tt">① Khách nộp / bổ sung chứng từ</text><text x="38" y="78" class="sm">MyInsurance → AG-1 (server action)</text>
+<rect x="346" y="34" width="300" height="60" rx="9" class="bx"/>
+<text x="358" y="59" class="sm mono-s">IdpCreateGroup · IdpSubmitDocument</text><text x="358" y="78" class="sm mono-s">IdpCheckRequest · IdpGetResult</text>
+<rect x="688" y="34" width="308" height="60" rx="9" class="bx-m"/>
+<text x="700" y="54" class="tt tm" style="font-size:12.5px">Phân loại + bóc tách</text><text x="700" y="71" class="sm mono-s">POST /request/group · POST /request</text><text x="700" y="86" class="sm mono-s">GET …/check-status · GET …/result</text>
+<line x1="303" y1="64.0" x2="342" y2="64.0" class="ln-m" marker-end="url(#im1)"/><line x1="647" y1="64.0" x2="684" y2="64.0" class="ln-m" marker-end="url(#im1)"/>
+<rect x="2" y="104" width="300" height="60" rx="9" class="bx-a"/>
+<text x="14" y="128" class="tt">② AG-3 thẩm định lâm sàng</text><text x="38" y="148" class="sm">Agent Workbench, sau khi đọc xong</text>
+<rect x="346" y="104" width="300" height="60" rx="9" class="bx"/>
+<text x="358" y="129" class="sm mono-s">IdpStartAssessment · IdpRunAssessment</text><text x="358" y="148" class="sm mono-s">IdpGetAssessmentStatus · IdpGetAssessment</text>
+<rect x="688" y="104" width="308" height="60" rx="9" class="bx-m"/>
+<text x="700" y="124" class="tt tm" style="font-size:12.5px">Workflow thẩm định (Langflow)</text><text x="700" y="141" class="sm mono-s">PUT /workflow/request · run-workflow-request</text><text x="700" y="156" class="sm mono-s">GET /workflow/request/{id} · result/json</text>
+<line x1="303" y1="134.0" x2="342" y2="134.0" class="ln-m" marker-end="url(#im1)"/><line x1="647" y1="134.0" x2="684" y2="134.0" class="ln-m" marker-end="url(#im1)"/>
+<rect x="2" y="174" width="300" height="60" rx="9" class="bx-a"/>
+<text x="14" y="198" class="tt">③ AG-4 kiểm bất thường · tra cứu</text><text x="38" y="218" class="sm">Agent Workbench · màn Tra danh mục</text>
+<rect x="346" y="174" width="300" height="60" rx="9" class="bx"/>
+<text x="358" y="199" class="sm mono-s">IdpSearchHospital</text><text x="358" y="218" class="sm mono-s">LookupProvider (chọn điểm cao nhất)</text>
+<rect x="688" y="174" width="308" height="60" rx="9" class="bx-m"/>
+<text x="700" y="194" class="tt tm" style="font-size:12.5px">Danh mục 13.328 cơ sở y tế</text><text x="700" y="211" class="sm mono-s">GET /metadata/opensearch/table/322/search</text><text x="700" y="226" class="sm mono-s"></text>
+<line x1="303" y1="204.0" x2="342" y2="204.0" class="ln-m" marker-end="url(#im1)"/><line x1="647" y1="204.0" x2="684" y2="204.0" class="ln-m" marker-end="url(#im1)"/>
+<rect x="2" y="244" width="300" height="60" rx="9" class="bx-t"/>
+<text x="14" y="268" class="tt">④ Cán bộ xem chứng từ gốc</text><text x="38" y="288" class="sm">Tab Trích xuất · màn Chứng từ gốc</text>
+<rect x="346" y="244" width="300" height="60" rx="9" class="bx"/>
+<text x="358" y="269" class="sm mono-s">IdpGetRawFile · GetOriginalZip</text><text x="358" y="288" class="sm mono-s">lưu cache, mở lần 2 không gọi IDP</text>
+<rect x="688" y="244" width="308" height="60" rx="9" class="bx-m"/>
+<text x="700" y="264" class="tt tm" style="font-size:12.5px">Lưu bản gốc</text><text x="700" y="281" class="sm mono-s">GET /request/{id}/raw-file (ZIP)</text><text x="700" y="296" class="sm mono-s"></text>
+<line x1="303" y1="274.0" x2="342" y2="274.0" class="ln-m" marker-end="url(#im1)"/><line x1="647" y1="274.0" x2="684" y2="274.0" class="ln-m" marker-end="url(#im1)"/>
+<rect x="2" y="314" width="300" height="60" rx="9" class="bx-t"/>
+<text x="14" y="338" class="tt">⑤ Đăng nhập, kiểm cấu hình</text><text x="38" y="358" class="sm">Mọi lời gọi · khi khởi tạo</text>
+<rect x="346" y="314" width="300" height="60" rx="9" class="bx"/>
+<text x="358" y="339" class="sm mono-s">IdpGetToken · IdpRefreshIdentity</text><text x="358" y="358" class="sm mono-s">IdpGetTemplateCsv</text>
+<rect x="688" y="314" width="308" height="60" rx="9" class="bx-m"/>
+<text x="700" y="334" class="tt tm" style="font-size:12.5px">Xác thực · bộ chứng từ</text><text x="700" y="351" class="sm mono-s">POST /auth/login · GET /user/me</text><text x="700" y="366" class="sm mono-s">GET /template/document-set</text>
+<line x1="303" y1="344.0" x2="342" y2="344.0" class="ln-m" marker-end="url(#im1)"/><line x1="647" y1="344.0" x2="684" y2="344.0" class="ln-m" marker-end="url(#im1)"/>
+<rect x="2" y="384" width="300" height="60" rx="9" class="bx-w"/>
+<text x="14" y="408" class="tt">⑥ Vận hành: thử lại, phát lại</text><text x="38" y="428" class="sm">Hàng đợi vận hành · Quản trị</text>
+<rect x="346" y="384" width="300" height="60" rx="9" class="bx"/>
+<text x="358" y="409" class="sm mono-s">Thử lại = gọi lại đường ①</text><text x="358" y="428" class="sm mono-s">ReplayMode: IdpReplay, không gọi IDP</text>
+<rect x="688" y="384" width="308" height="60" rx="9" class="bx-m"/>
+<text x="700" y="404" class="tt tm" style="font-size:12.5px">Như ① (hoặc không gọi)</text><text x="700" y="421" class="sm mono-s">dùng lại endpoint của ①</text><text x="700" y="436" class="sm mono-s"></text>
+<line x1="303" y1="414.0" x2="342" y2="414.0" class="ln-m" marker-end="url(#im1)"/><line x1="647" y1="414.0" x2="684" y2="414.0" class="ln-m" marker-end="url(#im1)"/>
+</svg><figcaption>Cột trái là ai gọi và ở đâu, cột giữa là server action bọc lời gọi, cột phải là khả năng và endpoint của BnK IDP. Agent không bao giờ gọi IDP trực tiếp: AG-3 và AG-4 dùng tool là server action của ClaimMVP.</figcaption></figure>
+  <div class="ipcs"><div class="ipc" id="idp1"><div class="ipc-hd"><span class="no">①</span><b>Đọc chứng từ</b><span class="where">MyInsurance → Tạo hồ sơ (bước 2) và Bổ sung chứng từ · AG-1 chạy nền</span></div>
+  <div class="ipc-bd"><div class="ep"><div>POST /request/group <span>IdpCreateGroup</span></div><div>POST /request <span>IdpSubmitDocument</span></div><div>POST /request/sync <span>IdpSubmitSync · chứng từ ít trang</span></div><div>GET …/check-status <span>IdpCheckRequest · IdpGetGroupStatus (timer)</span></div><div>GET /request/{id}/result <span>IdpGetResult</span></div></div>
+  <dl><dt>Gửi</dt><dd>File ảnh/PDF · <code>templates</code> = "6090,…,6098" (chuỗi CSV) · <code>name</code> = số hồ sơ</dd><dt>Nhận · dùng</dt><dd>Template IDP chọn, các trường <code>k, v, c</code>, bảng ở khoá <code>data</code>. Copy nguyên kết quả một lần (RawExtractionJson) → IdpTables + IdpFieldMap → dòng chi phí và độ tin cậy. R1–R9 chạy trên dữ liệu này.</dd><dt>Quy tắc</dt><dd><code>templates_data</code> rỗng = lỗi cấu hình; luôn đọc <code>errorCode</code> dù HTTP 200; quá giờ → "Lỗi xử lý tài liệu".</dd></dl></div></div><div class="ipc" id="idp2"><div class="ipc-hd"><span class="no">②</span><b>Thẩm định chéo</b><span class="where">AG-3, sau khi mọi chứng từ của hồ sơ đã Completed</span></div>
+  <div class="ipc-bd"><div class="ep"><div>PUT /workflow/request <span>IdpStartAssessment</span></div><div>GET /workflow/run-workflow-request/{id} <span>IdpRunAssessment</span></div><div>GET /workflow/request/{id} <span>IdpGetAssessmentStatus</span></div><div>GET …/result/json <span>IdpGetAssessment</span></div></div>
+  <dl><dt>Gửi</dt><dd>Danh sách requestId đã đọc xong · workflowId ghim <code>5ed8e4fc</code></dd><dt>Nhận · dùng</dt><dd>Khoảng 20 mục cảnh báo tiếng Việt ở cấp hồ sơ. AG-3 đọc cùng các dòng chi phí → đề xuất NOTREL / NOTCOV theo từng dòng, kèm bằng chứng. Hiện ở thẻ "Đánh giá lâm sàng (AG-3)"; điều kiện C2 cần thẩm định HOÀN TẤT.</dd><dt>Quy tắc</dt><dd>Luôn gọi run (autoStart không chạy), lần đầu hay trả 400 nên thử lại; kết quả <code>{}</code> = hỏng, không phải "không có cảnh báo".</dd></dl></div></div><div class="ipc" id="idp3"><div class="ipc-hd"><span class="no">③</span><b>Danh mục cơ sở y tế</b><span class="where">AG-4 kiểm bất thường · màn Tra danh mục cơ sở y tế</span></div>
+  <div class="ipc-bd"><div class="ep"><div>GET /metadata/opensearch/table/322/search <span>IdpSearchHospital · LookupProvider</span></div></div>
+  <dl><dt>Gửi</dt><dd>Tên cơ sở trên chứng từ</dd><dt>Nhận · dùng</dt><dd>Kết quả có điểm, ví dụ Vinmec → mã 01161, điểm 85,27. Chọn điểm cao nhất → nhãn "trong mạng lưới" hoặc "Khớp một phần"; không khớp → tín hiệu AG-4. Bước 11 của chuỗi dựa vào đây.</dd><dt>Quy tắc</dt><dd>Không lấy mã bệnh viện từ workflow thẩm định (có lúc trả 00000, có lúc tự điền 01001).</dd></dl></div></div><div class="ipc" id="idp4"><div class="ipc-hd"><span class="no">④</span><b>Bản gốc</b><span class="where">Tab Trích xuất &amp; chi phí → "Xem chứng từ gốc (IDP)" · màn Chứng từ gốc (IDP)</span></div>
+  <div class="ipc-bd"><div class="ep"><div>GET /request/{id}/raw-file <span>IdpGetRawFile · GetOriginalZip</span></div></div>
+  <dl><dt>Gửi</dt><dd>requestId của chứng từ</dd><dt>Nhận · dùng</dt><dd>File ZIP khách đã nộp, giải nén ngay trên trình duyệt, hiện cạnh dữ liệu IDP đã đọc để cán bộ xác minh.</dd><dt>Quy tắc</dt><dd>Lưu cache sau lần đầu, mở lần 2 không gọi IDP; hồ sơ mẫu không có bản gốc thì báo rõ.</dd></dl></div></div><div class="ipc" id="idp5"><div class="ipc-hd"><span class="no">⑤</span><b>Xác thực, cấu hình</b><span class="where">Mọi lời gọi · khi khởi tạo và kiểm tra cấu hình</span></div>
+  <div class="ipc-bd"><div class="ep"><div>POST /auth/login <span>IdpGetToken</span></div><div>GET /user/me <span>IdpRefreshIdentity</span></div><div>GET /template/document-set <span>IdpGetTemplateCsv</span></div></div>
+  <dl><dt>Gửi</dt><dd>Tài khoản tích hợp (tenant 177, vai Tenant)</dd><dt>Nhận · dùng</dt><dd>JWT có cache, gặp 401 thì đăng nhập lại; kiểm đúng vai Tenant; lấy danh sách template của bộ 198, báo nếu bộ thiếu.</dd><dt>Quy tắc</dt><dd>Thiếu header User-Agent kiểu trình duyệt → Cloudflare chặn 403.</dd></dl></div></div><div class="ipc" id="idp6"><div class="ipc-hd"><span class="no">⑥</span><b>Vận hành</b><span class="where">Hàng đợi vận hành (Thử lại) · Quản trị (ReplayMode)</span></div>
+  <div class="ipc-bd"><div class="ep"><div>Thử lại = gọi lại đường ①</div><div>ReplayMode <span>IdpReplay, không gọi IDP</span></div></div>
+  <dl><dt>Gửi</dt><dd>—</dd><dt>Nhận · dùng</dt><dd>Hồ sơ lỗi đọc xong thì đi tiếp như UC-01. Khi demo mà staging chậm hoặc hết quota, phát lại phản hồi đã ghi; lượt phát lại đánh dấu riêng trong AgentRun.</dd><dt>Quy tắc</dt><dd>Không bao giờ từ chối hồ sơ vì lỗi kỹ thuật.</dd></dl></div></div></div>
+  <div class="say warn"><span class="lbl">Những gì của IDP cố ý không dùng</span>
+    <p><code>PUT /request/{id}/result</code> (sửa kết quả gốc, mất bản kiểm toán) · tuỳ chọn <code>autoStart</code> của workflow (không chạy) · <code>HospitalCode</code>, <code>PlaceOfTreatment</code>, <code>SurgeryCodes</code> do workflow trả (giá trị giữ chỗ hoặc tự điền) · điểm tin cậy làm điều kiện tự duyệt (trường rỗng vẫn chấm 1) · <code>warning_level</code> làm ngưỡng (là trung bình cộng).</p></div>
+  <h3>Theo hồ sơ thật 0449: IDP được gọi lúc nào</h3>
+  <div class="tbl"><table>
+    <tr><th>Giờ</th><th>Chỗ</th><th>Việc</th><th>Kết quả</th></tr>
+    <tr><td class="c">19:58:22</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td><td>AG-1 nộp bảng kê và phiếu khám</td><td>request 21492, 21493</td></tr>
+    <tr><td class="c">19:58:46</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td><td>Timer thấy Completed, lấy kết quả</td><td>3 dòng chi phí, 400.000 ₫ · tin cậy 94%, 99%, 99%</td></tr>
+    <tr><td class="c">20:00:09</td><td><a class="idp-tag" href="#idpmap">IDP ③</a></td><td>AG-4 tra danh mục</td><td>Vinmec → 01161, điểm 85,27</td></tr>
+    <tr><td class="c">20:02:21</td><td><a class="idp-tag" href="#idpmap">IDP ②</a></td><td>AG-3 xong workflow thẩm định</td><td>3/3 dòng, không đề xuất</td></tr>
+    <tr><td class="c">khi mở</td><td><a class="idp-tag" href="#idpmap">IDP ④</a></td><td>Cán bộ bấm "Xem chứng từ gốc"</td><td>ZIP, lưu cache</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= 10 IDP ================= -->
+<section id="idp">
+  <div class="num">12</div>
+  <h2>Tích hợp BnK IDP</h2>
+  <div class="prose">
+    <h3>IDP làm gì cho hệ thống này</h3>
+    <p>BnK IDP (Intelligent Document Processing) nhận ảnh hoặc PDF, <b>phân loại</b> đó là loại chứng từ gì, rồi <b>bóc tách</b> các trường và bảng theo một <b>template</b>. Mỗi trường trả về giá trị và độ tin cậy. Ngoài ra IDP có <b>workflow thẩm định</b> (chạy trên Langflow, so các chứng từ với nhau và sinh cảnh báo bằng tiếng Việt), <b>danh mục cơ sở y tế</b> 13.328 dòng tìm kiếm được, và <b>lưu bản gốc</b> của file đã nộp.</p>
+    <p>Hệ thống dùng IDP ở <b>bốn chỗ nghiệp vụ</b> (①–④) cộng hai chỗ hỗ trợ (⑤ xác thực, ⑥ vận hành); bản đồ từng chỗ ở <a href="#idpmap">mục 11</a>. Mục này đi vào chi tiết kỹ thuật: cấu hình, trình tự gọi, 15 endpoint và những điểm khác thường.</p>
+    <h3>Cấu hình đang dùng</h3>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Mục</th><th>Giá trị</th><th>Giải thích</th></tr>
+    <tr><td class="k">Môi trường</td><td><code>idp-api.idpstg.bnksolution.com</code></td><td>Staging của BnK IDP</td></tr>
+    <tr><td class="k">Tenant · vai</td><td>177 · vai Tenant</td><td>Chỉ vai Tenant được gọi <code>/request/*</code>; vai Partner bị 403</td></tr>
+    <tr><td class="k">Bộ chứng từ</td><td>198 <code>HEALTH_CLAIM_OS_V1</code></td><td>Danh sách template gửi kèm mỗi lần nộp; IDP tự chọn template khớp</td></tr>
+    <tr><td class="k">Template</td><td>6090–6098, tự dựng</td><td>Tenant 177 ban đầu không có template y tế, đội tự tạo 9 template (bảng kê, đơn thuốc, phiếu khám, giấy ra viện…). Phân loại đúng 9/9 sau khi tinh chỉnh mô tả.</td></tr>
+    <tr><td class="k">Flow thẩm định</td><td><code>5ed8e4fc-…</code> "Workflow Claim 28/8"</td><td>Flow trả JSON chuẩn; IDP cam kết giữ nguyên đến 08/10</td></tr>
+    <tr><td class="k">Correlate</td><td>Trường <code>name</code> = số hồ sơ</td><td>Cách duy nhất để IDP mang định danh của hệ thống claim</td></tr>
+  </table></div>
+
+  <h3>Luồng gọi API khi khách nộp chứng từ</h3>
+  <figure>
+    <svg viewBox="0 0 1000 380" role="img" aria-label="Trình tự gọi BnK IDP: đăng nhập lấy JWT, tạo nhóm, nộp file, timer poll trạng thái, lấy kết quả, chuyển bảng thành dòng chi phí, tải bản gốc khi cán bộ mở">
+      <defs><marker id="d1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah-m"/></marker>
+      <marker id="d2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
+      <rect x="20" y="10" width="200" height="34" rx="8" class="bx-t"/><text x="120" y="32" text-anchor="middle" class="tt">ClaimMVP (adapter)</text>
+      <rect x="780" y="10" width="200" height="34" rx="8" class="bx-m"/><text x="880" y="32" text-anchor="middle" class="tt tm">BnK IDP</text>
+      <line x1="120" y1="44" x2="120" y2="370" class="ln-d"/><line x1="880" y1="44" x2="880" y2="370" class="ln-d"/>
+      <line x1="124" y1="72" x2="874" y2="72" class="ln-m" marker-end="url(#d1)"/><text x="500" y="66" text-anchor="middle" class="sm">① POST /auth/login → JWT (cache, 401 thì đăng nhập lại)</text>
+      <line x1="124" y1="110" x2="874" y2="110" class="ln-m" marker-end="url(#d1)"/><text x="500" y="104" text-anchor="middle" class="sm">② POST /request/group → groupId (một hồ sơ = một nhóm)</text>
+      <line x1="124" y1="148" x2="874" y2="148" class="ln-m" marker-end="url(#d1)"/><text x="500" y="142" text-anchor="middle" class="sm">③ POST /request (multipart: file, templates = CSV của bộ 198, name = CLM-…) → requestId</text>
+      <line x1="124" y1="186" x2="874" y2="186" class="ln-m" marker-end="url(#d1)"/><text x="500" y="180" text-anchor="middle" class="sm">④ timer: GET /request/{id}/check-status … đến Completed</text>
+      <line x1="874" y1="224" x2="124" y2="224" class="ln" marker-end="url(#d2)"/><text x="500" y="218" text-anchor="middle" class="sm">⑤ kết quả: templates_data[].data.fields (k, v, c) + tables</text>
+      <rect x="140" y="240" width="330" height="60" rx="8" class="bx"/>
+      <text x="152" y="262" class="sm">⑥ Copy RawExtractionJson một lần, không ghi đè</text>
+      <text x="152" y="280" class="sm">   IdpFieldMap: tên cột → trường ClaimLine</text>
+      <text x="152" y="296" class="sm">   tạo dòng chi phí, chấm Confidence/Completeness</text>
+      <line x1="124" y1="340" x2="874" y2="340" class="ln-m" marker-end="url(#d1)"/><text x="500" y="334" text-anchor="middle" class="sm">⑦ khi cán bộ bấm "Xem chứng từ gốc": GET /request/{id}/raw-file (ZIP, lưu cache)</text>
+    </svg>
+    <figcaption>Nộp nền (bất đồng bộ) để màn hình khách không bị treo: IDP mất khoảng 16–19 giây mỗi trang. Kết quả gốc được copy ngay, vì IDP cho phép sửa kết quả về sau và hệ thống claim cần bản bất biến để kiểm toán.</figcaption>
+  </figure>
+
+  <h3>Luồng thẩm định lâm sàng (AG-3)</h3>
+  <ol class="steps">
+    <li><div><h4>Tạo yêu cầu thẩm định</h4><p><code>PUT /workflow/request</code> với danh sách requestId đã đọc xong và workflowId đã ghim. Hệ thống tự kiểm mọi request đều Completed trước, vì IDP không kiểm.</p></div></li>
+    <li><div><h4>Kích hoạt chạy</h4><p><code>GET /workflow/run-workflow-request/{id}</code>. Bắt buộc gọi vì tuỳ chọn tự chạy (autoStart) của IDP không hoạt động. Lần đầu hay trả 400, nên có thử lại; đây là ngoại lệ duy nhất của quy tắc "không thử lại lỗi 4xx".</p></div></li>
+    <li><div><h4>Chờ và lấy kết quả</h4><p>Timer poll <code>GET /workflow/request/{id}</code> đến trạng thái xong, rồi <code>…/result/json</code> lấy khoảng 20 mục cảnh báo/trích xuất bằng tiếng Việt cho cả hồ sơ.</p></div></li>
+    <li><div><h4>AG-3 lấp phần IDP chưa có</h4><p>Kết quả IDP ở cấp hồ sơ, chưa có mã lý do, chưa gắn với từng dòng, chưa có bằng chứng. AG-3 đọc nó cùng các dòng chi phí và tự đưa ra đề xuất theo dòng (NOTREL/NOTCOV + bằng chứng). Đây chính là giá trị agent thêm vào IDP.</p></div></li>
+  </ol>
+
+  <h3>15 endpoint đang dùng</h3>
+  <div class="tbl"><table>
+    <tr><th>Endpoint</th><th>Server action trong ClaimMVP</th><th>Dùng để</th><th>Chỗ</th></tr>
+    <tr><td class="c">POST /auth/login</td><td>IdpGetToken</td><td>Lấy JWT, cache, tự đăng nhập lại khi hết hạn</td><td><a class="idp-tag" href="#idpmap">IDP ⑤</a></td></tr>
+    <tr><td class="c">GET /user/me</td><td>IdpRefreshIdentity</td><td>Kiểm đúng tenant và vai</td><td><a class="idp-tag" href="#idpmap">IDP ⑤</a></td></tr>
+    <tr><td class="c">GET /template/document-set</td><td>IdpGetTemplateCsv</td><td>Lấy danh sách template của bộ 198; báo nếu bộ bị thiếu</td><td><a class="idp-tag" href="#idpmap">IDP ⑤</a></td></tr>
+    <tr><td class="c">POST /request/group</td><td>IdpCreateGroup</td><td>Tạo nhóm cho một hồ sơ</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr>
+    <tr><td class="c">POST /request</td><td>IdpSubmitDocument</td><td>Nộp file, đọc nền</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr>
+    <tr><td class="c">POST /request/sync</td><td>IdpSubmitSync</td><td>Nộp và chờ kết quả trong một lời gọi (chứng từ ít trang)</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr>
+    <tr><td class="c">GET /request/{id}/check-status</td><td>IdpCheckRequest</td><td>Hỏi trạng thái một request</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr>
+    <tr><td class="c">GET /request/group/{id}/check-status</td><td>IdpGetGroupStatus</td><td>Hỏi trạng thái cả nhóm</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr>
+    <tr><td class="c">GET /request/{id}/result</td><td>IdpGetResult</td><td>Lấy kết quả bóc tách</td><td><a class="idp-tag" href="#idpmap">IDP ①</a></td></tr>
+    <tr><td class="c">GET /request/{id}/raw-file</td><td>IdpGetRawFile · GetOriginalZip</td><td>Bản gốc dạng ZIP, giải nén ngay trên trình duyệt</td><td><a class="idp-tag" href="#idpmap">IDP ④</a></td></tr>
+    <tr><td class="c">PUT /workflow/request</td><td>IdpStartAssessment</td><td>Tạo yêu cầu thẩm định</td><td><a class="idp-tag" href="#idpmap">IDP ②</a></td></tr>
+    <tr><td class="c">GET /workflow/run-workflow-request/{id}</td><td>IdpRunAssessment</td><td>Kích hoạt chạy, có thử lại</td><td><a class="idp-tag" href="#idpmap">IDP ②</a></td></tr>
+    <tr><td class="c">GET /workflow/request/{id}</td><td>IdpGetAssessmentStatus</td><td>Trạng thái thẩm định</td><td><a class="idp-tag" href="#idpmap">IDP ②</a></td></tr>
+    <tr><td class="c">GET /workflow/request/{id}/result/json</td><td>IdpGetAssessment</td><td>Các mục cảnh báo của flow</td><td><a class="idp-tag" href="#idpmap">IDP ②</a></td></tr>
+    <tr><td class="c">GET /metadata/opensearch/table/322/search</td><td>IdpSearchHospital · LookupProvider</td><td>Tìm cơ sở y tế trong 13.328 dòng, lấy mã</td><td><a class="idp-tag" href="#idpmap">IDP ③</a></td></tr>
+  </table></div>
+
+  <h3>Những điểm khác thường của IDP mà adapter đã xử lý</h3>
+  <p class="prose">Phần này rất đáng nói nếu khán giả là người kỹ thuật, vì nó cho thấy tích hợp thật chứ không phải gọi thử.</p>
+  <div class="tbl"><table>
+    <tr><th>Hiện tượng</th><th>Nếu không xử lý</th><th>Cách xử lý</th></tr>
+    <tr><td>Thiếu header <code>User-Agent</code> kiểu trình duyệt</td><td>Cloudflare chặn 403</td><td>Gắn User-Agent cho mọi lời gọi</td></tr>
+    <tr><td><code>templates</code> phải là chuỗi "6090,6091,…"</td><td>Gửi mảng thì lỗi 400</td><td>Ghép CSV từ bộ chứng từ</td></tr>
+    <tr><td>HTTP 200 nhưng body báo lỗi, hoặc <code>templates_data</code> rỗng</td><td>Hồ sơ trôi qua im lặng, vẫn trừ quota</td><td>Luôn đọc <code>errorCode</code>; rỗng = lỗi cấu hình</td></tr>
+    <tr><td>Tiền bị đọc thiếu ba số 0 (300.000 → 300)</td><td>Sai tiền bồi thường</td><td>Mô tả trường tiền trong template: "chỉ lấy chữ số, bỏ dấu phân cách"</td></tr>
+    <tr><td>Dòng bảng nằm ở khoá <code>data</code>, không phải <code>rows</code></td><td>Mất hết dòng chi phí, không báo lỗi</td><td>Thư viện <code>IdpTables</code> (C#) đọc đúng</td></tr>
+    <tr><td><code>autoStart</code> của workflow không chạy</td><td>Thẩm định nằm im</td><td>Luôn gọi run-workflow-request, thử lại</td></tr>
+    <tr><td><code>{}</code> từ result/json</td><td>Tưởng "không có cảnh báo"</td><td>Coi là hỏng</td></tr>
+    <tr><td>Flow tự điền mã bệnh viện khi không tìm thấy</td><td>Mã sai trông như đúng</td><td>Không dùng mã từ flow; tra bảng 322 trực tiếp</td></tr>
+    <tr><td>Điểm tin cậy trường rỗng vẫn bằng 1</td><td>Chứng từ đọc kém trông như đọc tốt</td><td>Không dùng tin cậy làm điều kiện tự duyệt</td></tr>
+    <tr><td>IDP cho sửa kết quả gốc (<code>PUT /request/{id}/result</code>)</td><td>Mất bản kiểm toán</td><td>Copy ngay lần đầu; cấm gọi endpoint này</td></tr>
+  </table></div>
+  <div class="say">
+    <span class="lbl">Chế độ phát lại (ReplayMode)</span>
+    <p>Site setting <code>ReplayMode</code> cho phép trả lại phản hồi IDP đã ghi sẵn (entity <code>IdpReplay</code>) thay vì gọi thật. Dùng khi staging IDP chậm hoặc hết quota lúc demo. Lượt chạy phát lại được đánh dấu riêng trong AgentRun.</p>
+  </div>
+</section>
+
+<!-- ================= 11 SCREENS ================= -->
+<section id="manhinh">
+  <div class="num">13</div>
+  <h2>Bản đồ màn hình</h2>
+  <div class="two">
+    <div class="card"><h4>MyInsurance (khách)</h4><ul>
+      <li><b>Bảo hiểm của tôi</b>: hợp đồng, hạn mức còn lại, hồ sơ gần đây</li>
+      <li><b>Quyền lợi</b>: hạn mức từng nhóm</li>
+      <li><b>Tạo hồ sơ</b>: 4 bước, chụp chứng từ theo danh mục <a class="idp-tag" href="#idpmap">IDP ①</a></li>
+      <li><b>Hồ sơ &amp; tiến trình</b>: danh sách, trạng thái</li>
+      <li><b>Kết quả hồ sơ</b>: bảo hiểm trả / tự chịu, lý do từng khoản, thư, nút hỏi trợ lý</li>
+      <li><b>Bổ sung chứng từ</b>: tải chứng từ còn thiếu <a class="idp-tag" href="#idpmap">IDP ①</a></li>
+      <li><b>Thông báo</b>: có badge chưa đọc</li>
+    </ul></div>
+    <div class="card"><h4>ClaimMVP (cán bộ)</h4><ul>
+      <li><b>Danh sách việc</b>, <b>Tổng quan</b>, <b>Hàng đợi vận hành</b> <a class="idp-tag" href="#idpmap">IDP ⑥</a>, <b>Hàng đợi điểm kiểm</b></li>
+      <li><b>Chi tiết hồ sơ</b>: thẻ "AI đã làm gì" + 8 tab (Chung, Chứng từ, Trích xuất &amp; chi phí, Sự kiện &amp; phạm vi, Tính tiền &amp; sổ hạn mức, Phương án bồi thường, Phê duyệt &amp; chi trả, Lịch sử &amp; nhật ký) · tab Trích xuất <a class="idp-tag" href="#idpmap">IDP ① ② ④</a></li>
+      <li><b>Đối chiếu chứng từ</b> R1–R9 (trên dữ liệu <a class="idp-tag" href="#idpmap">IDP ①</a>), <b>Chứng từ gốc (IDP)</b> <a class="idp-tag" href="#idpmap">IDP ④</a></li>
+      <li><b>Hợp đồng &amp; quyền lợi</b>, <b>Sổ điều khoản</b>, <b>Sổ hạn mức</b>, <b>Tra danh mục cơ sở y tế</b> <a class="idp-tag" href="#idpmap">IDP ③</a></li>
+      <li><b>Nhật ký kỹ thuật</b>, <b>Sơ đồ tác nhân</b>, <b>Kết quả &amp; ROI</b>, <b>Kiểm thử chuỗi</b>, <b>Quản trị</b></li>
+    </ul></div>
+  </div>
+  <p class="prose">Kịch bản demo có sẵn trong app: thêm <code>?demo=1</code> vào bất kỳ URL nào để hiện thẻ tím 9 bước, dùng phím →/← để chuyển màn; <code>?demo=0</code> để tắt. Thẻ nhớ bước khi nhảy giữa hai app.</p>
+</section>
+
+<!-- ================= 12 NUMBERS ================= -->
+<section id="solieu">
+  <div class="num">14</div>
+  <h2>Số liệu được phép nói, và cách nói</h2>
+  <div class="tbl"><table>
+    <tr><th>Số</th><th>Nói thế nào</th><th>Nguồn</th></tr>
+    <tr><td class="k">4 phút 3 giây</td><td>Hồ sơ thật 0449 từ lúc nộp đến chi trả, không ai chạm tay</td><td>Nhật ký kỹ thuật</td></tr>
+    <tr><td class="k">≈ 24 giây</td><td>IDP đọc 2 chứng từ của 0449; staging đo 16–19 giây/trang</td><td>Nhật ký kỹ thuật, đặc tả IDP</td></tr>
+    <tr><td class="k">9/9 dòng</td><td>Dòng cán bộ đã xác minh không phải sửa. <i>Nói rõ: mẫu còn nhỏ.</i></td><td>Kết quả &amp; ROI</td></tr>
+    <tr><td class="k">9/9 phân loại</td><td>Phân loại đúng 9 loại chứng từ trên template tự dựng</td><td>Lần test 17/09</td></tr>
+    <tr><td class="k">6,8% (4/59)</td><td>Tỷ lệ tự duyệt 30 ngày, <i>tính cả hồ sơ mẫu và thử nghiệm có lỗi cố ý</i></td><td>Kết quả &amp; ROI</td></tr>
+    <tr><td class="k">1.108 lượt, 2,2% lỗi</td><td>Lượt agent 30 ngày; lỗi thì hồ sơ chuyển người</td><td>Kết quả &amp; ROI</td></tr>
+    <tr><td class="k">13 cảnh báo</td><td>Lỗi đối chiếu bắt được trước khi chi trong 30 ngày</td><td>Kết quả &amp; ROI</td></tr>
+    <tr><td class="k">46/46 · 5/5</td><td>Ca kiểm thử chuỗi tính tiền và cổng đều đạt</td><td>Kiểm thử chuỗi, 05/10</td></tr>
+  </table></div>
+  <div class="say bad">
+    <span class="lbl">Không nên nói</span>
+    <p>Không nói ROI bằng tiền: màn ROI chưa đủ tham số đo thật (chưa bấm giờ xử lý tay). Không dùng số 83,49% / 41,67% của dự án MBAL: đo trên bộ template khác. Không nói "phát hiện gian lận": AG-4 chỉ nêu tín hiệu. Không nói hệ thống tự từ chối theo điều khoản loại trừ: 10 điều khoản còn mã tạm <code>TBC-</code>, nên hiện chỉ tạo điểm kiểm cho người quyết.</p>
+  </div>
+</section>
+
+<!-- ================= 13 Q&A ================= -->
+<section id="hoidap">
+  <div class="num">15</div>
+  <h2>Hỏi đáp khi thuyết trình</h2>
+  <p class="prose">Bấm vào câu hỏi để xem câu trả lời gợi ý.</p>
+  <details><summary>AI có tự quyết định trả tiền không?</summary><div><p>Không. Tiền do chuỗi 14 bước tính, là logic thường, chạy lại ra cùng kết quả. Quyết định tự duyệt do cổng 4 điều kiện, cũng là logic thường. AI chỉ đọc, kiểm, đề xuất và giải thích. Không agent nào có tool ghi tiền.</p></div></details>
+  <details><summary>Nếu AI trả lời sai thì sao?</summary><div><p>Đề xuất của AG-3 chỉ có hiệu lực khi cán bộ xác nhận. Tín hiệu của AG-4 có thể gỡ kèm lý do. Thư của AG-5 là nháp đến khi cán bộ gửi. Nếu agent lỗi hoặc hết thời gian, cổng không qua và hồ sơ chờ người. Sai lầm của AI làm hồ sơ chậm lại, không làm tiền đi sai.</p></div></details>
+  <details><summary>Các agent nói chuyện với nhau thế nào?</summary><div><p>Không nói trực tiếp. AG-0 là bộ điều phối (server action + timer): gửi việc cho AG-3 và AG-4 chạy song song, chờ cả hai xong, rồi gọi chuỗi, cổng, AG-5. Mỗi lần bàn giao ghi vào AgentRun, xem được ở Nhật ký kỹ thuật. OutSystems xác nhận Agent Workbench không hỗ trợ agent gọi agent lồng nhau, và cách này cũng dễ kiểm soát hơn.</p></div></details>
+  <details><summary>Hệ thống dùng BnK IDP ở những chỗ nào?</summary><div><p>Sáu chỗ (xem <a href="#idpmap">mục 11</a>): ① đọc chứng từ khi khách nộp hoặc bổ sung (AG-1), ② thẩm định chéo cho AG-3, ③ tra danh mục cơ sở y tế cho AG-4 và màn tra cứu, ④ lấy bản gốc cho cán bộ, ⑤ xác thực và cấu hình, ⑥ thử lại hoặc phát lại khi IDP lỗi. Tổng cộng 15 endpoint, mỗi cái bọc trong một server action có kiểm lỗi.</p></div></details>
+  <details><summary>BnK IDP khác OCR thường ở đâu?</summary><div><p>IDP không chỉ ra chữ: nó phân loại chứng từ, bóc tách thành trường và bảng có cấu trúc theo template, chấm độ tin cậy từng trường, chạy workflow so các chứng từ với nhau, và có danh mục cơ sở y tế để chuẩn hoá tên. Hệ thống dùng cả bốn khả năng này.</p></div></details>
+  <details><summary>Độ chính xác đọc chứng từ là bao nhiêu?</summary><div><p>Trả lời thẳng: phân loại đúng 9/9 loại chứng từ; 9/9 dòng chi phí cán bộ đã đối chiếu không phải sửa. Mẫu còn nhỏ. Bước tiếp theo là chạy công cụ so sánh của IDP (<code>POST /request/compare</code>) với 10–20 chứng từ có đáp án để ra con số chính thức.</p></div></details>
+  <details><summary>Nếu IDP chậm hoặc sập lúc vận hành?</summary><div><p>Nộp chứng từ là bất đồng bộ nên khách không phải chờ. Quá thời gian thì hồ sơ vào "Lỗi xử lý tài liệu" trên hàng đợi vận hành, có thể thử lại. Không bao giờ từ chối hồ sơ vì lỗi kỹ thuật. Khi demo có ReplayMode phát lại phản hồi đã ghi.</p></div></details>
+  <details><summary>Làm sao biết số tiền không phải gõ cứng?</summary><div><p>Mở tab Tính tiền &amp; sổ hạn mức: mỗi bước ghi rõ đầu vào và lý do. Ví dụ hồ sơ 0001: loại khoản 168.000 ₫ nhưng tiền trả chỉ giảm 120.000 ₫, vì trần và đồng chi trả đã hấp thụ một phần. Phép trừ thẳng không ra được con số đó.</p></div></details>
+  <details><summary>Hồ sơ trùng được chặn thế nào?</summary><div><p>AG-4 tìm hồ sơ khác cùng người, cùng cơ sở, cùng ngày. Thấy thì nêu tín hiệu DUPLICATE mức cao. Tín hiệu mở làm điều kiện C4 của cổng không đạt, nên hồ sơ không tự chi. Ví dụ thật: 0451 trùng với 0449. Khách không bao giờ được báo là bị nghi trùng.</p></div></details>
+  <details><summary>Tại sao tỷ lệ tự duyệt chỉ 6,8%?</summary><div><p>Con số tính cả hồ sơ mẫu và hồ sơ thử nghiệm được tạo ra để kiểm các nhánh lỗi (kỳ chờ, trùng, thiếu chứng từ). Cổng được thiết kế thận trọng: chỉ hồ sơ nhỏ và sạch hoàn toàn mới tự duyệt. Trên hồ sơ thật sạch như 0447, 0448, 0449, hệ thống tự chạy đến chi trả trong vài phút.</p></div></details>
+  <details><summary>Dữ liệu bệnh nhân có gửi cho AI ngoài không?</summary><div><p>Agent gọi model qua Agent Workbench của OutSystems (đang cấu hình gpt-5.4-mini). Hệ thống giới hạn những gì model thấy: tool chỉ trả dữ liệu cần cho việc của agent, trợ lý khách chỉ đọc được hồ sơ của khách đang đăng nhập, AG-3 không nhận tên hay ngày sinh. Token và JSON thô của IDP không ghi vào log. Chứng từ demo là dữ liệu mẫu. Nơi lưu và xử lý dữ liệu của model khi triển khai thật cần trả lời theo chính sách của OutSystems và yêu cầu của khách; nên hứa sẽ xác nhận sau thay vì khẳng định tại chỗ.</p></div></details>
+  <details><summary>Khách thấy gì khi hồ sơ bị giảm tiền?</summary><div><p>Trang Kết quả hồ sơ hiện số bảo hiểm trả, số khách tự chịu, từng khoản bị giảm với số gốc gạch ngang và lý do bằng lời, cùng thư kết quả. Khách có thể hỏi trợ lý ngay trên trang.</p></div></details>
+  <details><summary>Hệ thống nối với core bảo hiểm thế nào?</summary><div><p>Trong demo, hợp đồng và quyền lợi được seed vào entity của ClaimMVP (sản phẩm HC-STD/PLS/PRM). Khi triển khai, phần này thay bằng tích hợp với core của khách; chuỗi tính tiền chỉ cần hợp đồng, thành viên và cây quyền lợi, không khoá vào core nào.</p></div></details>
+  <details><summary>Còn thiếu gì trước khi cho khách thử?</summary><div><p>Đo độ chính xác chính thức bằng bộ đáp án; bấm giờ xử lý để tính ROI; nghiệp vụ cần cung cấp số điều khoản thật để thay mã tạm <code>TBC-</code>; mẫu hoá đơn điện tử XML; service account riêng và quota phù hợp phía IDP.</p></div></details>
+</section>
+
+<!-- ================= 14 CHECKLIST ================= -->
+<section id="truocdemo">
+  <div class="num">16</div>
+  <h2>Checklist trước giờ demo</h2>
+  <ul class="checks">
+    <li><span>Đăng nhập sẵn MyInsurance và ClaimMVP trên hai tab. Tải lại trang ngay trước khi bắt đầu (mỗi lần publish app, trang đang mở sẽ tự nạp lại).</span></li>
+    <li><span>Mở sẵn các hồ sơ: 0449 (tự duyệt), 0451 (trùng bị chặn), 0440 (kết quả cho khách), 0001 (đề xuất AG-3).</span></li>
+    <li><span>Bật thẻ kịch bản bằng <code>?demo=1</code> nếu muốn đi theo 9 bước; nhớ tắt bằng <code>?demo=0</code> sau buổi.</span></li>
+    <li><span>Nếu demo nộp hồ sơ mới: hiểu rằng mỗi lần sẽ gọi IDP thật (mất khoảng nửa phút đến vài phút, trừ quota) và tạo hồ sơ mới. Có thể chỉ trình bày bước 2 mà không bấm Gửi.</span></li>
+    <li><span>Không bấm "Tính và giải thích" (AG-2) quá nhiều lần trên cùng hồ sơ: mỗi lần tạo thêm một lần chạy chuỗi.</span></li>
+    <li><span>Trợ lý trả lời mất khoảng 20–30 giây; nói trước để người xem không tưởng bị treo.</span></li>
+    <li><span>Mở sẵn bộ slide và trang này để tra nhanh khi bị hỏi.</span></li>
+  </ul>
+  <p class="prose" style="color:var(--soft);font-size:14px;margin-top:28px">Nguồn: tài liệu dự án Hackaton (build-00 đến build-06, tổng kết 05/10, agents 06/10, kịch bản U16), các màn Nhật ký kỹ thuật, Sơ đồ tác nhân, Kết quả &amp; ROI trên tenant ngày 07/10/2026.</p>
+</section>
+</main>
+</div>
+
+<button id="pm" type="button" aria-pressed="false">Chế độ trình bày (P)</button>
+<script>
+(function(){
+  var pm=document.getElementById('pm');
+  function tg(){var on=document.body.classList.toggle('present');pm.setAttribute('aria-pressed',String(on));pm.textContent=on?'Thoát trình bày (P)':'Chế độ trình bày (P)';}
+  pm.addEventListener('click',tg);
+  document.addEventListener('keydown',function(e){if((e.key==='p'||e.key==='P')&&!e.ctrlKey&&!e.metaKey&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName))tg();});
+})();
+(function(){
+  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ links.forEach(function(l){l.classList.remove('on')}); var a=map[e.target.id]; if(a)a.classList.add('on'); } });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('main section[id]').forEach(function(s){io.observe(s)});
+})();
+</script>

@@ -1,0 +1,25 @@
+# Backups and scratch
+*.bak
+*.bak-*
+*.bak.md
+*~
+~$*
+.DS_Store
+Thumbs.db
+
+# .NET build output
+bin/
+obj/
+publish/
+*.dll
+*.pdb
+
+# Large media (keep the demo video outside git, link it instead)
+*.mp4
+*.mov
+*.zip
+
+# Secrets
+*.env
+.env*
+secrets*.json

@@ -1,0 +1,14 @@
+# Prompt lượt L2 — RunChainTests: Mode CONFIRM_RERUN / RUNTWICE + ServerRequestTimeout
+
+Turn L2 — extend RunChainTests (harness runner) with two modes and set the wrapper's timeout. Nothing in A5Step01…14 changes.
+
+RunChainTests today: ForEachTest over ChainTest where Status = "RUNNABLE" → GetClaim by FixtureClaimNo → A5Chain_DryRun → ChainTest_FindStep(AssertStep) → ChainTest_Assert → UpdateChainTest. Add a Switch on ChainTest.Mode right after GetClaim (inside the same ForEach, with every branch converging on the existing single Join before the back-edge):
+
+- "DRYRUN" (and empty): unchanged.
+- "CONFIRM_RERUN": helper ChainTest_ConfirmRerun(ClaimId) → outputs TotalA, TotalB, RunNoA, RunNoB, Log. Inside (no loop over Ctx lists; it may loop Recommendation rows once): call RunAdjudicationChain(ClaimId, "test") → TotalA, ChainRunIdA; aggregate Recommendation where ClaimId = ClaimId and Code = "NOTREL" → one loop setting Decision = "Confirmed", DecidedBy = "test", DecidedOn = CurrDateTime() (UpdateRecommendation); call RunAdjudicationChain(ClaimId, "test") again → TotalB, ChainRunIdB; read RunNo of both ChainRun rows; Log = "run " + RunNoA + " = " + TotalA + "; xác nhận NOTREL; run " + RunNoB + " = " + TotalB + "; chênh " + (TotalA − TotalB). Back in the runner: Pass = (TotalA = AssertAmountBefore) and (TotalB = AssertAmount) and (RunNoB = RunNoA + 1); LastOutcome = "RERUN", LastAmount = TotalB, LastLog = Log (prefixed "[FAIL: …] " with the failing condition when not Pass, same style as ChainTest_Assert).
+- "RUNTWICE": helper ChainTest_RunTwice(ClaimId) → outputs TotalA, TotalB, HashSame Boolean, StepsSame Boolean, Log. Call RunAdjudicationChain twice ("test"); aggregate ChainRun where ClaimId = ClaimId sorted RunNo desc max 2 → rows B (newest) and A; HashSame = A.InputsHash = B.InputsHash; StepsSame = A.StepOutputsJson = B.StepOutputsJson; Log = "run " + A.RunNo + "/" + B.RunNo + ": InputsHash " + If(HashSame, "giống nhau", "KHÁC") + "; StepOutputsJson " + If(StepsSame, "giống nhau", "KHÁC") + "; tổng " + TotalA + " / " + TotalB + "; hash = " + Substr(B.InputsHash, 0, 120). Pass = HashSame and StepsSame and TotalA = TotalB and (not AssertAmountSet or TotalB = AssertAmount); LastOutcome = "SAME"/"DIFF", LastAmount = TotalB.
+Both helpers must not be called while any ForEach over a Structure list is open (they are called from the ForEach over the ChainTest aggregate only — that is fine).
+
+Timeout: set the Server Request Timeout of RunAdjudicationChain explicitly to 60 seconds (report where the property lives in ODC — app level or action level — and what it was; if it is only app-level, set it there and say so). Also set the same on RunChainTests (it runs up to 44 dry-runs plus 4 real runs; report its current value).
+
+Report: the Switch wiring, both helper node sequences, the timeout property before/after, validation error count.
