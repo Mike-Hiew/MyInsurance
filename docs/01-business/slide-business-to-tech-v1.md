@@ -2,7 +2,6 @@
 
 **File:** `E:\Hackaton\BnK_Agentic_Health_Claim_Business_to_Tech_v1.0.pptx` (27 slide, 16:9, tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh). Đối tượng: Ban lãnh đạo + đội dự án BnK.
 
-**Style:** sao chép từ `C:\Users\Admin\Desktop\Proposal\Raffles_WoW_CMCstyle_v1.1.pptx` — palette teal (0B4F53 / 0E7C7B / 9AD9C8 / EAF4F1), tiêu đề Cambria "Mục | Tiêu đề", thân Calibri, card nhạt + một card teal đậm, số liệu lớn, divider nền teal đậm với số mục + vòng tròn, footer "BnK Solution | … | …" + số trang. Nguồn sinh: pptxgenjs (`/home/claude/deck/build.js` trong session; đã validate + render QA).
 
 ## Cấu trúc
 1. Bìa · 2. Nội dung (6 mục)

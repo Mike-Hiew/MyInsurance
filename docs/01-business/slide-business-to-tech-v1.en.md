@@ -4,7 +4,6 @@
 
 **File:** `E:\Hackaton\BnK_Agentic_Health_Claim_Business_to_Tech_v1.0.pptx` (27 slides, 16:9, Vietnamese, technical terms kept in English). Audience: BnK leadership + the project team.
 
-**Style:** copied from `C:\Users\Admin\Desktop\Proposal\Raffles_WoW_CMCstyle_v1.1.pptx` — teal palette (0B4F53 / 0E7C7B / 9AD9C8 / EAF4F1), Cambria titles "Section | Title", Calibri body, light cards + one dark teal card, large figures, dark teal divider backgrounds with section number + circle, footer "BnK Solution | … | …" + page number. Generated with pptxgenjs (`/home/claude/deck/build.js` in the session; validated + render QA).
 
 ## Structure
 1. Cover · 2. Contents (6 sections)
